@@ -12,16 +12,30 @@ class ViewController: UIViewController {
     
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
+    
+    var chatDefaultFrame = CGRectNull;
+    var streamDefaultFrame = CGRectNull;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         //set up the gesture recognition
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: "OnSwipeGesture:");
+        swipeRight.direction = UISwipeGestureRecognizerDirection.Right;
+        self.view.addGestureRecognizer(swipeRight);
         
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: "OnSwipeGesture:")
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.Left;
+        self.view.addGestureRecognizer(swipeLeft);
         
         //set up the stream and chat embeds
         embedStream();
         embedChat();
+        
+        //initialize default frames
+        chatDefaultFrame = myChatWebView.frame;
+        streamDefaultFrame = myStreamWebView.frame;
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,5 +54,36 @@ class ViewController: UIViewController {
         let url = NSURL(string: "https://www.destiny.gg/embed/chat");
         let requestObj = NSURLRequest(URL: url!);
         myChatWebView.loadRequest(requestObj);
+    }
+    
+    //when a swipe is detected, resize the webviews depending on direction
+    func OnSwipeGesture(gesture: UIGestureRecognizer)
+    {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
+            switch swipeGesture.direction{
+                case UISwipeGestureRecognizerDirection.Right:
+                    print("Swiped right");
+                    //resize the chat web view
+                    //save the current frame size
+                    chatDefaultFrame = myChatWebView.frame;
+                    //the new frame has a width of 0, everything else stays the same
+                    let newFrame = CGRectMake(chatDefaultFrame.origin.x, chatDefaultFrame.origin.y, 0, chatDefaultFrame.size.height);
+                    myChatWebView.frame = newFrame;
+                
+                    //fill the empty space left by the chat web view
+                    //set default frame
+                    streamDefaultFrame = myStreamWebView.frame;
+                    //change the width to match the width of the original frame + the default frame width of the chat
+                    let newStreamFrame = CGRectMake(streamDefaultFrame.origin.x, streamDefaultFrame.origin.y, streamDefaultFrame.size.width + chatDefaultFrame.size.width, streamDefaultFrame.size.height);
+                    myStreamWebView.frame = newStreamFrame;
+                case UISwipeGestureRecognizerDirection.Left:
+                    print("swiped left");
+                    //set the web view frames back to the defaults
+                    myChatWebView.frame = chatDefaultFrame;
+                    myStreamWebView.frame = streamDefaultFrame;
+                default:
+                    break;
+            }
+        }
     }
 }
