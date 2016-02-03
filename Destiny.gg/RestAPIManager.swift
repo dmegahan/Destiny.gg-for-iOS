@@ -24,13 +24,13 @@ class RestAPIManager: NSObject {
         let isOnlineURL = baseURL + "streams/" + streamer;
         var isOnline = false;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
-        var semaphore = dispatch_semaphore_create(0);
+        let semaphore = dispatch_semaphore_create(0);
 
         //make the request for the stream info
         makeHTTPGetRequest(isOnlineURL) { json in
             //we have the json dict, now we get the online status and return it
             //if the stream object is null, the streamer is offline
-            print(json["stream"]);
+//          //print(json["stream"]);
             if(json["stream"] is NSNull){
                 isOnline = false;
             }else{
