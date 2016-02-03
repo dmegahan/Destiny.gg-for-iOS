@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8CE226B21C5EB14E00EEA569 /* StoryboardIphone5.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CE226B11C5EB14E00EEA569 /* StoryboardIphone5.storyboard */; };
+		8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE226B31C625FB700EEA569 /* RestAPIManager.swift */; };
 		8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */; };
 		8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */; };
 		8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		8CE226B11C5EB14E00EEA569 /* StoryboardIphone5.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardIphone5.storyboard; sourceTree = "<group>"; };
+		8CE226B31C625FB700EEA569 /* RestAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
 		8CF9C9511C5E79C8007C2CF6 /* Destiny.gg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Destiny.gg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -104,8 +106,9 @@
 				8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */,
 				8CF9C95B1C5E79C8007C2CF6 /* Assets.xcassets */,
 				8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */,
-				8CF9C9601C5E79C8007C2CF6 /* Info.plist */,
 				8CE226B11C5EB14E00EEA569 /* StoryboardIphone5.storyboard */,
+				8CF9C9601C5E79C8007C2CF6 /* Info.plist */,
+				8CE226B31C625FB700EEA569 /* RestAPIManager.swift */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
+				8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */,
 				8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

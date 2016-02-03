@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+//inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
+class ViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
@@ -29,8 +30,15 @@ class ViewController: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizerDirection.Left;
         self.view.addGestureRecognizer(swipeLeft);
         
-        //set up the stream and chat embeds
-        embedStream();
+        var streamOnline = RestAPIManager.sharedInstance.isStreamOnline("destiny");
+        print (streamOnline);
+        if(streamOnline){
+            //if online, send request for stream.
+            embedStream();
+        }else{
+            //will eventually display splash image and label that says offline
+        }
+        //embed chat whether or not stream is online
         embedChat();
         
         //initialize default frames
@@ -78,5 +86,9 @@ class ViewController: UIViewController {
                     break;
             }
         }
+    }
+    
+    func webView(webView: UIWebView, didFailLoadWithError error: NSError?){
+        print("Webview fail with error \(error)");
     }
 }
