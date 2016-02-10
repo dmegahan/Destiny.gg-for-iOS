@@ -39,7 +39,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let panSwipe = UIPanGestureRecognizer(target: self, action: "OnPanSwipe:");
         self.view.addGestureRecognizer(panSwipe);
         
-        let streamer = "Nightblue3";
+        let streamer = "destiny";
         
         let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
         if(streamOnline){
