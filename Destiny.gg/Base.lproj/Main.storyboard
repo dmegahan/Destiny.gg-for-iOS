@@ -13,14 +13,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" id="fPX-Ha-yd1">
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" id="fPX-Ha-yd1">
                                 <rect key="frame" x="705" y="0.0" width="319" height="768"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
-                            <webView contentMode="scaleToFill" id="Pge-yQ-1Sh" userLabel="myWebView">
+                            <webView autoresizesSubviews="NO" contentMode="scaleToFill" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
                                 <rect key="frame" x="0.0" y="0.0" width="708" height="768"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>

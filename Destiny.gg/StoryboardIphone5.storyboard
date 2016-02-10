@@ -5,32 +5,39 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Iphone View Controller-->
         <scene sceneID="LUU-u4-Luf">
             <objects>
-                <viewController id="fQS-NC-dqd" sceneMemberID="viewController">
+                <viewController autoresizesArchivedViewToFullSize="NO" modalPresentationStyle="currentContext" id="fQS-NC-dqd" customClass="iphoneViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IeH-2R-Prj"/>
                         <viewControllerLayoutGuide type="bottom" id="DCh-dq-7mf"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CnE-Sa-C8v">
+                    <view key="view" autoresizesSubviews="NO" contentMode="scaleToFill" id="CnE-Sa-C8v">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7xn-jT-XjV" userLabel="myWebView">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" mediaPlaybackAllowsAirPlay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKm-JM-7Eh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="fQS-NC-dqd" id="bEg-BQ-rLJ"/>
-                                </connections>
+                            </webView>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" mediaPlaybackAllowsAirPlay="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ydn-vw-DDs">
+                                <rect key="frame" x="0.0" y="1" width="320" height="5"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="568"/>
+                    <connections>
+                        <outlet property="myChatWebView" destination="nKm-JM-7Eh" id="M3e-Ih-e38"/>
+                        <outlet property="myStreamWebView" destination="ydn-vw-DDs" id="nQ6-5K-f36"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kK0-Kw-FGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="468" y="272"/>
+            <point key="canvasLocation" x="465" y="216"/>
         </scene>
     </scenes>
 </document>

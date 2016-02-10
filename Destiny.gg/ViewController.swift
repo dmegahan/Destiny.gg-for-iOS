@@ -39,19 +39,23 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let panSwipe = UIPanGestureRecognizer(target: self, action: "OnPanSwipe:");
         self.view.addGestureRecognizer(panSwipe);
         
-        let streamOnline = RestAPIManager.sharedInstance.isStreamOnline("destiny");
+        let streamer = "Nightblue3";
+        
+        let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
         if(streamOnline){
             //if online, send request for stream.
-            embedStream();
+            embedStream(streamer);
         }else{
             //will eventually display splash image and label that says offline
         }
         //embed chat whether or not stream is online
         embedChat();
         
+        print("We in the ipad viewControler");
+        
         //initialize default frames
         chatDefaultFrame = myChatWebView.frame;
-        streamDefaultFrame = myStreamWebView.frame;
+        //streamDefaultFrame = myStreamWebView.frame;
     }
 
     override func didReceiveMemoryWarning() {
@@ -59,8 +63,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func embedStream(){
-        let url = NSURL(string: "http://player.twitch.tv/?channel=destiny");
+    func embedStream(streamer: String){
+        let url = NSURL(string: "http://player.twitch.tv/?channel=" + streamer);
         let requestObj = NSURLRequest(URL: url!);
         myStreamWebView.loadRequest(requestObj);
     }
