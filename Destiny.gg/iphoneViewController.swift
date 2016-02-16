@@ -47,6 +47,7 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         let streamer = "destiny";
         
         let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
+    
         
         self.defaultPortraitChatFrame = self.myChatWebView.frame;
         self.defaultPortraitStreamFrame = self.myStreamWebView.frame;
@@ -63,7 +64,7 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         
         self.myStreamWebView.allowsInlineMediaPlayback = true;
         
-        //print("We in iphone view control");
+        print("We in iphone view control");
     }
 
     override func didReceiveMemoryWarning() {
@@ -211,7 +212,6 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
             let newChatFrame = CGRectMake(myChatWebView.frame.origin.x, myChatWebView.frame.origin.y + UIScreen.mainScreen().bounds.height,
                 UIScreen.mainScreen().bounds.width, 0);
             myChatWebView.frame = newChatFrame;
-            myChatWebView.hidden = true;
             
             //max out the height so it becomes full screened
             let newStreamFrame = CGRectMake(0, 0,
@@ -225,24 +225,18 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
             print("portraitmode");
             //try putting delay on when to resize
-            let seconds = 3.0;
-            let delay = seconds * Double(NSEC_PER_SEC);
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                print("DISPATCHING");
-                //set height to 0, we want it to be hidden at the start
-                self.myStreamWebView.frame = self.defaultPortraitStreamFrame;
+            //set height to 0, we want it to be hidden at the start
+            self.myStreamWebView.frame = self.defaultPortraitStreamFrame;
                 
-                //minimize the stream web view and make the chat web view full screen
-                self.myChatWebView.frame = self.defaultPortraitChatFrame;
+            //minimize the stream web view and make the chat web view full screen
+            self.myChatWebView.frame = self.defaultPortraitChatFrame;
                 
-                self.isChatFullScreen = true;
-                //self.myStreamWebView.mediaPlaybackRequiresUserAction = false;                
-                //self.myChatWebView.reload();
-                print("finished dispatch");
-            })
+            self.isChatFullScreen = true;
+            //self.myStreamWebView.mediaPlaybackRequiresUserAction = false;
+            //self.myChatWebView.reload();
             
-            self.myStreamWebView.hidden = true;
+            //self.myChatWebView.reload()
+            self.myStreamWebView.reload()
         }
     }
     
