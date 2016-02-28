@@ -14,8 +14,38 @@ class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
     
-    var chatDefaultFrame = CGRectNull;
-    var streamDefaultFrame = CGRectNull;
+    /*
+        We want the chat landscape frame to be on the right side of the screen, and take up relatively little space
+        compared to the stream frame. Here we are setting the x origin to the screen height times 2/3. Height is used
+        here because when a rotation from portrait to landscape happens (or vice versa), UIScreen still thinks its in
+        portrait mode, so the height of the portrait screen ends up equaling the width of the landscape screen. And we
+        multiply the height (really the width) by 2/3 because we want the origin to be on the right side of the screen.
+        The Y origin remains 0. We set the width to the height (width) times 1/3, because we want the chat to fill
+        the rest of the spoace on the right side. We set the height of the chat to the width (height of the portrait
+        screen)
+    
+    */
+    var chatDefaultLandscapeFrame = CGRectMake(UIScreen.mainScreen().bounds.height * (2/3), 0,
+                                    UIScreen.mainScreen().bounds.height * (1/3),
+                                    UIScreen.mainScreen().bounds.width);
+    /*
+        For the stream landscape frame, we keep the origin at (0,0) but make the width fill 2/3 of the screen, starting
+        from the left
+    */
+    var streamDefaultLandscapeFrame = CGRectMake(0, 0,
+                                        UIScreen.mainScreen().bounds.height * (2/3),
+                                        UIScreen.mainScreen().bounds.width);
+    
+    /*
+        Pretty much the same logic as above, except the height/width switch that happens doesnt apply here. 
+        height = height, width = width
+    */
+    var chatDefaultPortraitFrame = CGRectMake(0, UIScreen.mainScreen().bounds.height * (1/3),
+                                    UIScreen.mainScreen().bounds.width,
+                                    UIScreen.mainScreen().bounds.height * (2/3));
+    var streamDefaultPortraitFrame = CGRectMake(0, 0,
+                                        UIScreen.mainScreen().bounds.width,
+                                        UIScreen.mainScreen().bounds.height * (1/3));;
     
     //startPanLocation keeps track of where the pan started
     var startPanLocation = CGPoint();
@@ -39,7 +69,14 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let panSwipe = UIPanGestureRecognizer(target: self, action: "OnPanSwipe:");
         self.view.addGestureRecognizer(panSwipe);
         
-        let streamer = "destiny";
+        //allow pan swipes to be recognized when panning inside a UIWebView
+        [myChatWebView.scrollView.panGestureRecognizer .requireGestureRecognizerToFail(panSwipe)];
+        [myStreamWebView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(panSwipe)];
+        
+        //embed chat whether or not stream is online
+        embedChat();
+        
+        let streamer = "LIRIK";
         
         let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
         if(streamOnline){
@@ -48,13 +85,11 @@ class ViewController: UIViewController, UIWebViewDelegate {
         }else{
             //will eventually display splash image and label that says offline
         }
-        //embed chat whether or not stream is online
-        embedChat();
         
         print("We in the ipad viewControler");
         
         //initialize default frames
-        chatDefaultFrame = myChatWebView.frame;
+        //chatDefaultFrame = myChatWebView.frame;
         //streamDefaultFrame = myStreamWebView.frame;
     }
 
@@ -129,6 +164,50 @@ class ViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation){
+        //were going to do some lazy programming here. We're going to take the web views that we have
+        //and resize them based on the orientation, rather than use a different storyboard
+        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+            //let newChatFrame = CGRectMake(UIScreen.mainScreen().bounds.width * (2/3), myChatWebView.frame.origin.y,
+            //    , UIScreen.mainScreen().bounds.height);
+            //myChatWebView.frame = newChatFrame;
+            
+            myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
+                UIViewAutoresizing.FlexibleBottomMargin]
+            myChatWebView.frame = chatDefaultLandscapeFrame;
+            
+            //max out the height so it becomes full screened
+            //let newStreamFrame = CGRectMake(0, 0,
+            //    UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
+            //myStreamWebView.frame = newStreamFrame;
+            
+            myStreamWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight,UIViewAutoresizing.FlexibleWidth,
+                                                UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleBottomMargin]
+            myStreamWebView.frame = streamDefaultLandscapeFrame;
+        }
+        else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
+            //try putting delay on when to resize
+            //set height to 0, we want it to be hidden at the start
+            //self.myStreamWebView.frame = self.defaultPortraitStreamFrame;
+            
+            //minimize the stream web view and make the chat web view full screen
+            //self.myChatWebView.frame = self.defaultPortraitChatFrame;
+
+            //self.myStreamWebView.mediaPlaybackRequiresUserAction = false;
+            //self.myChatWebView.reload();
+            
+            //self.myChatWebView.reload()
+            //self.myStreamWebView.reload()
+            
+            myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
+                UIViewAutoresizing.FlexibleBottomMargin, UIViewAutoresizing.FlexibleLeftMargin]
+            
+            myChatWebView.frame = chatDefaultPortraitFrame;
+            
+            myStreamWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
+            myStreamWebView.frame = streamDefaultPortraitFrame;
+        }
+    }
     func webView(webView: UIWebView, didFailLoadWithError error: NSError?){
         print("Webview fail with error \(error)");
     }
