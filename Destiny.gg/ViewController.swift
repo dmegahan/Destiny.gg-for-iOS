@@ -135,7 +135,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 myChatWebView.frame.width - distanceX, myChatWebView.frame.height)
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
-                if(myChatWebView.frame.origin.x + distanceX >= 1 &&
+                if(myChatWebView.frame.origin.x + distanceX >= 0 &&
                     myChatWebView.frame.origin.x + distanceX <= UIScreen.mainScreen().bounds.width){
                         myChatWebView.frame = newChatFrame;
                 }
@@ -143,7 +143,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
                     myStreamWebView.frame.width + distanceX, myStreamWebView.frame.height)
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
-                if(myStreamWebView.frame.width + distanceX > -1 &&
+                if(myStreamWebView.frame.width + distanceX >= 0 &&
                     myStreamWebView.frame.width + distanceX <= UIScreen.mainScreen().bounds.width){
                         myStreamWebView.frame = newStreamFrame;
                 }
@@ -157,7 +157,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                     myChatWebView.frame.width, myChatWebView.frame.height - distanceY)
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
-                if(myChatWebView.frame.origin.y + distanceY >= 1 &&
+                if(myChatWebView.frame.origin.y + distanceY >= 0 &&
                     myChatWebView.frame.origin.y + distanceY <= UIScreen.mainScreen().bounds.width){
                         myChatWebView.frame = newChatFrame;
                 }
@@ -165,7 +165,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
                     myStreamWebView.frame.width, myStreamWebView.frame.height + distanceY)
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
-                if(myStreamWebView.frame.height + distanceY > -1 &&
+                if(myStreamWebView.frame.height + distanceY >= 0 &&
                     myStreamWebView.frame.height + distanceY <= UIScreen.mainScreen().bounds.width){
                         myStreamWebView.frame = newStreamFrame;
                 }
