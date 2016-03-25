@@ -128,11 +128,14 @@ class ViewController: UIViewController, UIWebViewDelegate {
             if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
             
                 let currentPanLocation = gesture.translationInView(self.view)
-                let distanceX = currentPanLocation.x - startPanLocation.x;
+                //We ceil distanceX (and some properties in the below chat frame creation) to avoid the frames getting out of sync with each other
+                //in terms of length and origins. Fixes a bug where a black space was being created because they frames weren't matching up
+                //correctly
+                let distanceX = ceil(currentPanLocation.x - startPanLocation.x);
             
                 //once we have the moved distance, we edit the frames (cant edit width directly, need to create a new frame)
-                let newChatFrame = CGRectMake(myChatWebView.frame.origin.x + distanceX, myChatWebView.frame.origin.y,
-                myChatWebView.frame.width - distanceX, myChatWebView.frame.height)
+                let newChatFrame = CGRectMake(ceil(myChatWebView.frame.origin.x + distanceX), myChatWebView.frame.origin.y,
+                ceil(myChatWebView.frame.width - distanceX), myChatWebView.frame.height)
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.x + distanceX >= 0 &&
@@ -141,7 +144,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 }
             
                 let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
-                    myStreamWebView.frame.width + distanceX, myStreamWebView.frame.height)
+                    ceil(myStreamWebView.frame.width + distanceX), myStreamWebView.frame.height)
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.width + distanceX >= 0 &&
                     myStreamWebView.frame.width + distanceX <= UIScreen.mainScreen().bounds.width){
@@ -153,8 +156,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 let distanceY = currentPanLocation.y - startPanLocation.y
                 
                 //once we have the moved distance, we edit the frames (cant edit width directly, need to create a new frame)
-                let newChatFrame = CGRectMake(myChatWebView.frame.origin.x, myChatWebView.frame.origin.y + distanceY,
-                    myChatWebView.frame.width, myChatWebView.frame.height - distanceY)
+                let newChatFrame = CGRectMake(myChatWebView.frame.origin.x, ceil(myChatWebView.frame.origin.y + distanceY),
+                    myChatWebView.frame.width, ceil(myChatWebView.frame.height - distanceY))
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.y + distanceY >= 0 &&
@@ -163,7 +166,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 }
                 
                 let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
-                    myStreamWebView.frame.width, myStreamWebView.frame.height + distanceY)
+                    myStreamWebView.frame.width, ceil(myStreamWebView.frame.height + distanceY))
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.height + distanceY >= 0 &&
                     myStreamWebView.frame.height + distanceY <= UIScreen.mainScreen().bounds.width){
