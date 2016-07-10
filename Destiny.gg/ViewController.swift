@@ -41,12 +41,19 @@ class ViewController: UIViewController, UIWebViewDelegate {
         Pretty much the same logic as above, except the height/width switch that happens doesnt apply here. 
         height = height, width = width
     */
-    var chatDefaultPortraitFrame = CGRectMake(0, UIScreen.mainScreen().bounds.height * (1/3),
-                                    UIScreen.mainScreen().bounds.width,
-                                    UIScreen.mainScreen().bounds.height * (2/3));
-    var streamDefaultPortraitFrame = CGRectMake(0, 0,
-                                        UIScreen.mainScreen().bounds.width,
-                                        UIScreen.mainScreen().bounds.height * (1/3));;
+    var chatDefaultPortraitFrame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.height * (1/3),
+                                            width: UIScreen.mainScreen().bounds.width,
+                                            height: UIScreen.mainScreen().bounds.height * (2/3));
+    var streamDefaultPortraitFrame = CGRect(x: 0, y: 0,
+                                        width: UIScreen.mainScreen().bounds.width,
+                                        height: UIScreen.mainScreen().bounds.height * (1/3));;
+    
+    //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
+    var chatCurrentLandscapeFrame = CGRect();
+    var streamCurrentLandscapeFrame = CGRect();
+    
+    var chatCurrentPortraitFrame = CGRect();
+    var streamCurrentPortraitFrame = CGRect();
     
     //startPanLocation keeps track of where the pan started
     var startPanLocation = CGPoint();
@@ -64,10 +71,12 @@ class ViewController: UIViewController, UIWebViewDelegate {
         [myChatWebView.scrollView.panGestureRecognizer .requireGestureRecognizerToFail(panSwipe)];
         [myStreamWebView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(panSwipe)];
         
+        initializeCurrentFrames();
+        
         //embed chat whether or not stream is online
         embedChat();
         
-        let streamer = "LIRIK";
+        let streamer = "Destiny";
         
         let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
         if(streamOnline){
@@ -94,6 +103,16 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let url = NSURL(string: "https://www.destiny.gg/embed/chat");
         let requestObj = NSURLRequest(URL: url!);
         myChatWebView.loadRequest(requestObj);
+    }
+    
+    func initializeCurrentFrames(){
+        //initialize the current frames for stream and chat
+        //variables for saving your frame layout when you switch between portrait and landscape mode;
+        chatCurrentLandscapeFrame = chatDefaultLandscapeFrame;
+        streamCurrentLandscapeFrame = streamDefaultLandscapeFrame;
+        
+        chatCurrentPortraitFrame = chatDefaultPortraitFrame;
+        streamCurrentPortraitFrame = streamDefaultPortraitFrame;
     }
     
     //when a swipe is detected, resize the webviews depending on direction
@@ -123,6 +142,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     */
     func OnPanSwipe(gesture: UIPanGestureRecognizer){
         if (gesture.state == UIGestureRecognizerState.Began){
+            //initialize our start location - this is where teh user first started panning from (finger location)
             startPanLocation = gesture.translationInView(self.view);
         }else if (gesture.state == UIGestureRecognizerState.Changed){
             if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
