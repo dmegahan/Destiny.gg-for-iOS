@@ -9,99 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Destiny.gg/ViewController.swift"
-            timestampString = "476225366.338824"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
-            landmarkName = "ViewController"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Destiny_gg.ViewController.webView.getter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIWebView&gt;"
-                  moduleName = "Destiny.gg"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielmegahan/Desktop/Destiny.gg/Destiny.gg/ViewController.swift"
-                  timestampString = "475969942.263199"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "18">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Destiny_gg.ViewController.webView.setter : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIWebView&gt;"
-                  moduleName = "Destiny.gg"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielmegahan/Desktop/Destiny.gg/Destiny.gg/ViewController.swift"
-                  timestampString = "475969942.263577"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "26">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Destiny_gg.ViewController.webView.materializeForSet : Swift.ImplicitlyUnwrappedOptional&lt;__ObjC.UIWebView&gt;"
-                  moduleName = "Destiny.gg"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielmegahan/Desktop/Destiny.gg/Destiny.gg/ViewController.swift"
-                  timestampString = "475969942.263885"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "28">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Destiny_gg.ViewController.init (Destiny_gg.ViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.NSBundle&gt;) -&gt; Destiny_gg.ViewController"
-                  moduleName = "Destiny.gg"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielmegahan/Desktop/Destiny.gg/Destiny.gg/ViewController.swift"
-                  timestampString = "475969942.264108"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "114">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Destiny_gg.ViewController.init (Destiny_gg.ViewController.Type)(coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Destiny_gg.ViewController&gt;"
-                  moduleName = "Destiny.gg"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/danielmegahan/Desktop/Destiny.gg/Destiny.gg/ViewController.swift"
-                  timestampString = "475969942.264313"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Destiny.gg/RestAPIManager.swift"
             timestampString = "476221550.615089"
             startingColumnNumber = "9223372036854775807"
@@ -135,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Destiny.gg/iphoneViewController.swift"
-            timestampString = "476825840.52482"
+            timestampString = "477592207.542758"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
+            startingLineNumber = "228"
+            endingLineNumber = "228"
             landmarkName = "didRotateFromInterfaceOrientation(_:)"
             landmarkType = "5">
          </BreakpointContent>
