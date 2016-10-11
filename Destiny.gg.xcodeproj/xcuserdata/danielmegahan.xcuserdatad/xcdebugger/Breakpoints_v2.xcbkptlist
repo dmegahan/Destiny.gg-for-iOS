@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Destiny.gg/iphoneViewController.swift"
-            timestampString = "497479189.037717"
+            timestampString = "497842528.615188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "didRotate(from:)"
             landmarkType = "7">
          </BreakpointContent>

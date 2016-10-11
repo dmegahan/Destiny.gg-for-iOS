@@ -14,6 +14,9 @@ class ViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
+    @IBOutlet var myToolBar: UIToolbar!
+    @IBOutlet var ChangeStreamButton: UIBarButtonItem!
+    @IBOutlet var LockFramesButton: UIBarButtonItem!
     
     /*
         We want the chat landscape frame to be on the right side of the screen, and take up relatively little space
@@ -59,6 +62,10 @@ class ViewController: UIViewController, UIWebViewDelegate {
     var startPanLocation = CGPoint();
     //these will be used to find the difference between start and 
     //current pan locations, and modify the chat/stream boxes accordingly
+    
+    //keeps track of whether the frame (The chat frame and stream frame) should be locked
+    //in their current position
+    var isLocked = false;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -224,5 +231,17 @@ class ViewController: UIViewController, UIWebViewDelegate {
     }
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIBarButtonItem) {
+        switch sender.tag {
+        case 0: //ChangeStream button
+            print("Change stream pressed");
+        case 1: //LockFrames button
+            print("Lock frames pressed");
+            isLocked = !isLocked;
+        default:
+            print("Default invoked");
+        }
     }
 }
