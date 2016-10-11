@@ -26,27 +26,27 @@ class ViewController: UIViewController, UIWebViewDelegate {
         screen)
     
     */
-    var chatDefaultLandscapeFrame = CGRectMake(UIScreen.mainScreen().bounds.height * (2/3), 0,
-                                    UIScreen.mainScreen().bounds.height * (1/3),
-                                    UIScreen.mainScreen().bounds.width);
+    var chatDefaultLandscapeFrame = CGRect(x: UIScreen.main.bounds.height * (2/3), y: 0,
+                                    width: UIScreen.main.bounds.height * (1/3),
+                                    height: UIScreen.main.bounds.width);
     /*
         For the stream landscape frame, we keep the origin at (0,0) but make the width fill 2/3 of the screen, starting
         from the left
     */
-    var streamDefaultLandscapeFrame = CGRectMake(0, 0,
-                                        UIScreen.mainScreen().bounds.height * (2/3),
-                                        UIScreen.mainScreen().bounds.width);
+    var streamDefaultLandscapeFrame = CGRect(x: 0, y: 0,
+                                        width: UIScreen.main.bounds.height * (2/3),
+                                        height: UIScreen.main.bounds.width);
     
     /*
         Pretty much the same logic as above, except the height/width switch that happens doesnt apply here. 
         height = height, width = width
     */
-    var chatDefaultPortraitFrame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.height * (1/3),
-                                            width: UIScreen.mainScreen().bounds.width,
-                                            height: UIScreen.mainScreen().bounds.height * (2/3));
+    var chatDefaultPortraitFrame = CGRect(x: 0, y: UIScreen.main.bounds.height * (1/3),
+                                            width: UIScreen.main.bounds.width,
+                                            height: UIScreen.main.bounds.height * (2/3));
     var streamDefaultPortraitFrame = CGRect(x: 0, y: 0,
-                                        width: UIScreen.mainScreen().bounds.width,
-                                        height: UIScreen.mainScreen().bounds.height * (1/3));;
+                                        width: UIScreen.main.bounds.width,
+                                        height: UIScreen.main.bounds.height * (1/3));;
     
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
@@ -64,12 +64,12 @@ class ViewController: UIViewController, UIWebViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let panSwipe = UIPanGestureRecognizer(target: self, action: "OnPanSwipe:");
+        let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
         self.view.addGestureRecognizer(panSwipe);
         
         //allow pan swipes to be recognized when panning inside a UIWebView
-        [myChatWebView.scrollView.panGestureRecognizer .requireGestureRecognizerToFail(panSwipe)];
-        [myStreamWebView.scrollView.panGestureRecognizer.requireGestureRecognizerToFail(panSwipe)];
+        myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
+        myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
         
         initializeCurrentFrames();
         
@@ -92,16 +92,16 @@ class ViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func embedStream(streamer: String){
-        let url = NSURL(string: "http://player.twitch.tv/?channel=" + streamer);
-        let requestObj = NSURLRequest(URL: url!);
+    func embedStream(_ streamer: String){
+        let url = URL(string: "http://player.twitch.tv/?channel=" + streamer);
+        let requestObj = URLRequest(url: url!);
         myStreamWebView.loadRequest(requestObj);
     }
     
     func embedChat(){
         //chat embed URL
-        let url = NSURL(string: "https://www.destiny.gg/embed/chat");
-        let requestObj = NSURLRequest(URL: url!);
+        let url = URL(string: "https://www.destiny.gg/embed/chat");
+        let requestObj = URLRequest(url: url!);
         myChatWebView.loadRequest(requestObj);
     }
     
@@ -140,56 +140,56 @@ class ViewController: UIViewController, UIWebViewDelegate {
         }
     }
     */
-    func OnPanSwipe(gesture: UIPanGestureRecognizer){
-        if (gesture.state == UIGestureRecognizerState.Began){
+    func OnPanSwipe(_ gesture: UIPanGestureRecognizer){
+        if (gesture.state == UIGestureRecognizerState.began){
             //initialize our start location - this is where teh user first started panning from (finger location)
-            startPanLocation = gesture.translationInView(self.view);
-        }else if (gesture.state == UIGestureRecognizerState.Changed){
-            if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+            startPanLocation = gesture.translation(in: self.view);
+        }else if (gesture.state == UIGestureRecognizerState.changed){
+            if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             
-                let currentPanLocation = gesture.translationInView(self.view)
+                let currentPanLocation = gesture.translation(in: self.view)
                 //We ceil distanceX (and some properties in the below chat frame creation) to avoid the frames getting out of sync with each other
                 //in terms of length and origins. Fixes a bug where a black space was being created because they frames weren't matching up
                 //correctly
                 let distanceX = ceil(currentPanLocation.x - startPanLocation.x);
             
                 //once we have the moved distance, we edit the frames (cant edit width directly, need to create a new frame)
-                let newChatFrame = CGRectMake(ceil(myChatWebView.frame.origin.x + distanceX), myChatWebView.frame.origin.y,
-                ceil(myChatWebView.frame.width - distanceX), myChatWebView.frame.height)
+                let newChatFrame = CGRect(x: ceil(myChatWebView.frame.origin.x + distanceX), y: myChatWebView.frame.origin.y,
+                width: ceil(myChatWebView.frame.width - distanceX), height: myChatWebView.frame.height)
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.x + distanceX >= 0 &&
-                    myChatWebView.frame.origin.x + distanceX <= UIScreen.mainScreen().bounds.width){
+                    myChatWebView.frame.origin.x + distanceX <= UIScreen.main.bounds.width){
                         myChatWebView.frame = newChatFrame;
                 }
             
-                let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
-                    ceil(myStreamWebView.frame.width + distanceX), myStreamWebView.frame.height)
+                let newStreamFrame = CGRect(x: myStreamWebView.frame.origin.x, y: myStreamWebView.frame.origin.y,
+                    width: ceil(myStreamWebView.frame.width + distanceX), height: myStreamWebView.frame.height)
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.width + distanceX >= 0 &&
-                    myStreamWebView.frame.width + distanceX <= UIScreen.mainScreen().bounds.width){
+                    myStreamWebView.frame.width + distanceX <= UIScreen.main.bounds.width){
                         myStreamWebView.frame = newStreamFrame;
                 }
                 startPanLocation = currentPanLocation;
-            }else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
-                let currentPanLocation = gesture.translationInView(self.view)
+            }else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
+                let currentPanLocation = gesture.translation(in: self.view)
                 let distanceY = currentPanLocation.y - startPanLocation.y
                 
                 //once we have the moved distance, we edit the frames (cant edit width directly, need to create a new frame)
-                let newChatFrame = CGRectMake(myChatWebView.frame.origin.x, ceil(myChatWebView.frame.origin.y + distanceY),
-                    myChatWebView.frame.width, ceil(myChatWebView.frame.height - distanceY))
+                let newChatFrame = CGRect(x: myChatWebView.frame.origin.x, y: ceil(myChatWebView.frame.origin.y + distanceY),
+                    width: myChatWebView.frame.width, height: ceil(myChatWebView.frame.height - distanceY))
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.y + distanceY >= 0 &&
-                    myChatWebView.frame.origin.y + distanceY <= UIScreen.mainScreen().bounds.width){
+                    myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.width){
                         myChatWebView.frame = newChatFrame;
                 }
                 
-                let newStreamFrame = CGRectMake(myStreamWebView.frame.origin.x, myStreamWebView.frame.origin.y,
-                    myStreamWebView.frame.width, ceil(myStreamWebView.frame.height + distanceY))
+                let newStreamFrame = CGRect(x: myStreamWebView.frame.origin.x, y: myStreamWebView.frame.origin.y,
+                    width: myStreamWebView.frame.width, height: ceil(myStreamWebView.frame.height + distanceY))
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.height + distanceY >= 0 &&
-                    myStreamWebView.frame.height + distanceY <= UIScreen.mainScreen().bounds.width){
+                    myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.width){
                         myStreamWebView.frame = newStreamFrame;
                 }
                 startPanLocation = currentPanLocation;
@@ -197,10 +197,10 @@ class ViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation){
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation){
         //were going to do some lazy programming here. We're going to take the web views that we have
         //and resize them based on the orientation, rather than use a different storyboard
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+        if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             
             
             //myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
@@ -212,7 +212,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
             //                                    UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleBottomMargin]
             myStreamWebView.frame = streamDefaultLandscapeFrame;
         }
-        else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
+        else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
             //myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
               //  UIViewAutoresizing.FlexibleBottomMargin, UIView	Autoresizing.FlexibleLeftMargin]
             
@@ -222,7 +222,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
             myStreamWebView.frame = streamDefaultPortraitFrame;
         }
     }
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?){
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
     }
 }

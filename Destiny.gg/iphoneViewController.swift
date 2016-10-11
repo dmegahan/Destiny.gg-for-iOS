@@ -7,21 +7,22 @@
 //
 
 import UIKit
-
+import WebKit
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
 class iphoneViewController: UIViewController, UIWebViewDelegate {
-    
-    @IBOutlet var myChatWebView: UIWebView!
+
+    @IBOutlet var myChatWebView: WKWebView!
     @IBOutlet var myStreamWebView: UIWebView!
     
     //When a double tap gesture is done, this will be used to determine how we should change the chat and stream frames
     var isChatFullScreen = true;
     
-    var defaultPortraitChatFrame = CGRectNull;
-    var defaultPortraitStreamFrame = CGRectNull;
+    var defaultPortraitChatFrame = CGRect.null;
+    var defaultPortraitStreamFrame = CGRect.null;
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         //set up the gesture recognition
@@ -46,12 +47,13 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         
         let streamer = "destiny";
         
-        let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
+        //let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
     
         
         self.defaultPortraitChatFrame = self.myChatWebView.frame;
         self.defaultPortraitStreamFrame = self.myStreamWebView.frame;
         
+        /*
         if(streamOnline){
             //if online, send request for stream.
             embedStream(streamer);
@@ -59,10 +61,9 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
             embedStream(streamer);
             //will eventually display splash image and label that says offline
         }
+ */
         //embed chat whether or not stream is online
         embedChat();
-        
-        self.myStreamWebView.allowsInlineMediaPlayback = true;
         
         print("We in iphone view control");
     }
@@ -72,9 +73,9 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    func embedStream(streamer : String){
-        let url = NSURL(string: "http://player.twitch.tv/?channel=" + streamer);
-        let requestObj = NSURLRequest(URL: url!);
+    func embedStream(_ streamer : String){
+        let url = URL(string: "http://player.twitch.tv/?channel=" + streamer);
+        let requestObj = URLRequest(url: url!);
         myStreamWebView.loadRequest(requestObj);
         
         self.myStreamWebView.allowsInlineMediaPlayback = true;
@@ -85,9 +86,10 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
     
     func embedChat(){
         //chat embed URL
-        let url = NSURL(string: "https://www.destiny.gg/embed/chat");
-        let requestObj = NSURLRequest(URL: url!);
-        myChatWebView.loadRequest(requestObj);
+        let url = URL(string: "https://www.destiny.gg/embed/chat");
+        let requestObj = URLRequest(url: url!);
+        let connectionObj = NSURLConnection(request: requestObj, delegate: self)!
+        myChatWebView.load(requestObj);
     }
     
     /*
@@ -201,28 +203,28 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
         }
     }
     */
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation){
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation){
         //were going to do some lazy programming here. We're going to take the web views that we have 
         //and resize them based on the orientation, rather than use a different storyboard
-        if(UIDeviceOrientationIsLandscape(UIDevice.currentDevice().orientation)){
+        if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             //minimize the chat web view and make the stream web view full screen
             //new chat frame will have a height of 0, and a width to match the screen size (so we can bring it up using
             //a swipe easily if we want to)
             //We also construct a new origin.y, so the chat frame is at the bottom of the screen, instead of at the top
-            let newChatFrame = CGRectMake(myChatWebView.frame.origin.x, myChatWebView.frame.origin.y + UIScreen.mainScreen().bounds.height,
-                UIScreen.mainScreen().bounds.width, 0);
+            let newChatFrame = CGRect(x: myChatWebView.frame.origin.x, y: myChatWebView.frame.origin.y + UIScreen.main.bounds.height,
+                width: UIScreen.main.bounds.width, height: 0);
             myChatWebView.frame = newChatFrame;
             
             //max out the height so it becomes full screened
-            let newStreamFrame = CGRectMake(0, 0,
-                UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height)
+            let newStreamFrame = CGRect(x: 0, y: 0,
+                width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
             myStreamWebView.frame = newStreamFrame;
             
             isChatFullScreen = false;
             //unhide it if it is hidden
-            myStreamWebView.hidden = false;
+            myStreamWebView.isHidden = false;
         }
-        else if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)){
+        else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
             print("portraitmode");
             //try putting delay on when to resize
             //set height to 0, we want it to be hidden at the start
@@ -236,11 +238,11 @@ class iphoneViewController: UIViewController, UIWebViewDelegate {
             //self.myChatWebView.reload();
             
             //self.myChatWebView.reload()
-            self.myStreamWebView.reload()
+            //self.myStreamWebView.reload()
         }
     }
     
-    func webView(webView: UIWebView, didFailLoadWithError error: NSError?){
+    func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
     }
 }

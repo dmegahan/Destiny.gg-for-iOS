@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum JSONError: String, ErrorType {
+enum JSONError: String, Error {
     case NoData = "ERROR: no data"
     case ConversionFailed = "ERROR: conversion from JSON failed"
 }
@@ -19,12 +19,12 @@ class RestAPIManager: NSObject {
     let baseURL = "https://api.twitch.tv/kraken/";
     
     
-    func isStreamOnline(streamer: String) -> (Bool){
+    func isStreamOnline(_ streamer: String) -> (Bool){
         //construct REST api url
         let isOnlineURL = baseURL + "streams/" + streamer;
         var isOnline = false;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
-        let semaphore = dispatch_semaphore_create(0);
+        let semaphore = DispatchSemaphore(value: 0);
 
         //make the request for the stream info
         makeHTTPGetRequest(isOnlineURL) { json in
@@ -36,20 +36,20 @@ class RestAPIManager: NSObject {
             }else{
                 isOnline = true;
             }
-            dispatch_semaphore_signal(semaphore);
+            semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER)
+        semaphore.wait(timeout: DispatchTime.distantFuture)
         return isOnline;
     }
     
-    func makeHTTPGetRequest(path: String, completionHandler: (myJson: NSDictionary) -> ()){
-        let request = NSMutableURLRequest(URL: NSURL(string: path)!);
-        NSURLSession.sharedSession().dataTaskWithRequest(request) { (data, response, error) -> Void in
+    func makeHTTPGetRequest(_ path: String, completionHandler: @escaping (_ myJson: NSDictionary) -> ()){
+        let request = URLRequest(url: URL(string: path)!);
+        URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             do {
                 guard let dat = data else { throw JSONError.NoData }
-                guard let json = try NSJSONSerialization.JSONObjectWithData(dat, options: []) as? NSDictionary else {throw JSONError.ConversionFailed }
-                completionHandler(myJson: json);
+                guard let json = try JSONSerialization.jsonObject(with: dat, options: []) as? NSDictionary else {throw JSONError.ConversionFailed }
+                completionHandler(json);
             }catch let error as JSONError {
                 print(error.rawValue)
             }catch {
