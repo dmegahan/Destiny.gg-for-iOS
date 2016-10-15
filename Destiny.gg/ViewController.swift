@@ -124,16 +124,18 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.x + distanceX >= 0 &&
-                    myChatWebView.frame.origin.x + distanceX <= UIScreen.main.bounds.width){
-                        myChatWebView.frame = newChatFrame;
+                myChatWebView.frame.origin.x + distanceX <= UIScreen.main.bounds.width){
+                    myChatWebView.frame = newChatFrame;
+                    chatCurrentLandscapeFrame = newChatFrame;
                 }
             
                 let newStreamFrame = CGRect(x: myStreamWebView.frame.origin.x, y: myStreamWebView.frame.origin.y,
                     width: ceil(myStreamWebView.frame.width + distanceX), height: myStreamWebView.frame.height)
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.width + distanceX >= 0 &&
-                    myStreamWebView.frame.width + distanceX <= UIScreen.main.bounds.width){
-                        myStreamWebView.frame = newStreamFrame;
+                myStreamWebView.frame.width + distanceX <= UIScreen.main.bounds.width){
+                    myStreamWebView.frame = newStreamFrame;
+                    streamCurrentLandscapeFrame = newStreamFrame;
                 }
                 startPanLocation = currentPanLocation;
             }else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
@@ -146,16 +148,18 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.y + distanceY >= 0 &&
-                    myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.height){
-                        myChatWebView.frame = newChatFrame;
+                myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.height){
+                    myChatWebView.frame = newChatFrame;
+                    chatCurrentPortraitFrame = newChatFrame;
                 }
                 
                 let newStreamFrame = CGRect(x: myStreamWebView.frame.origin.x, y: myStreamWebView.frame.origin.y,
                     width: myStreamWebView.frame.width, height: ceil(myStreamWebView.frame.height + distanceY))
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.height + distanceY >= 0 &&
-                    myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.height){
-                        myStreamWebView.frame = newStreamFrame;
+                myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.height){
+                    myStreamWebView.frame = newStreamFrame;
+                    streamCurrentPortraitFrame = newStreamFrame;
                 }
                 startPanLocation = currentPanLocation;
             }
@@ -164,7 +168,25 @@ class ViewController: UIViewController, UIWebViewDelegate {
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation){
-        initializeConstraints();
+        if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
+            if(chatCurrentPortraitFrame != CGRect() && streamCurrentPortraitFrame != CGRect()){
+                //saved frames aren't uninitialized, use them to resize the frames 
+                myChatWebView.frame = chatCurrentPortraitFrame;
+                myStreamWebView.frame = streamCurrentPortraitFrame;
+            }else{
+                //use constraints instead
+                initializeConstraints();
+            }
+        }else if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
+            if(chatCurrentLandscapeFrame != CGRect() && streamCurrentLandscapeFrame != CGRect()){
+                //saved frames aren't uninitialized, use them to resize the frames
+                myChatWebView.frame = chatCurrentLandscapeFrame;
+                myStreamWebView.frame = streamCurrentLandscapeFrame;
+            }else{
+                //use constraints instead
+                initializeConstraints();
+            }
+        }
     }
     
     func addAllConstraintsToView(){
