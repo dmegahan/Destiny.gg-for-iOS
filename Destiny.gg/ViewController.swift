@@ -17,40 +17,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var myToolBar: UIToolbar!
     @IBOutlet var ChangeStreamButton: UIBarButtonItem!
     @IBOutlet var LockFramesButton: UIBarButtonItem!
-    
-    /*
-        We want the chat landscape frame to be on the right side of the screen, and take up relatively little space
-        compared to the stream frame. Here we are setting the x origin to the screen height times 2/3. Height is used
-        here because when a rotation from portrait to landscape happens (or vice versa), UIScreen still thinks its in
-        portrait mode, so the height of the portrait screen ends up equaling the width of the landscape screen. And we
-        multiply the height (really the width) by 2/3 because we want the origin to be on the right side of the screen.
-        The Y origin remains 0. We set the width to the height (width) times 1/3, because we want the chat to fill
-        the rest of the spoace on the right side. We set the height of the chat to the width (height of the portrait
-        screen)
-    
-    */
-    var chatDefaultLandscapeFrame = CGRect(x: UIScreen.main.bounds.height * (2/3), y: 0,
-                                    width: UIScreen.main.bounds.height * (1/3),
-                                    height: UIScreen.main.bounds.width);
-    /*
-        For the stream landscape frame, we keep the origin at (0,0) but make the width fill 2/3 of the screen, starting
-        from the left
-    */
-    var streamDefaultLandscapeFrame = CGRect(x: 0, y: 0,
-                                        width: UIScreen.main.bounds.height * (2/3),
-                                        height: UIScreen.main.bounds.width);
-    
-    /*
-        Pretty much the same logic as above, except the height/width switch that happens doesnt apply here. 
-        height = height, width = width
-    */
-    var chatDefaultPortraitFrame = CGRect(x: 0, y: UIScreen.main.bounds.height * (1/3),
-                                            width: UIScreen.main.bounds.width,
-                                            height: UIScreen.main.bounds.height * (2/3));
-    var streamDefaultPortraitFrame = CGRect(x: 0, y: 0,
-                                        width: UIScreen.main.bounds.width,
-                                        height: UIScreen.main.bounds.height * (1/3));;
-    
+
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
     var streamCurrentLandscapeFrame = CGRect();
@@ -67,31 +34,33 @@ class ViewController: UIViewController, UIWebViewDelegate {
     //in their current position
     var isLocked = false;
     
+    var currentConstraints = [NSLayoutConstraint]();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.automaticallyAdjustsScrollViewInsets = false;
         
-        let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
-        self.view.addGestureRecognizer(panSwipe);
-        
-        //allow pan swipes to be recognized when panning inside a UIWebView
-        myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
-        myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
-        
-        initializeCurrentFrames();
+        self.initializeConstraints();
         
         //embed chat whether or not stream is online
         embedChat();
         
         let streamer = "Destiny";
         
-        let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
-        if(streamOnline){
-            //if online, send request for stream.
-            embedStream(streamer);
-        }else{
-            //will eventually display splash image and label that says offline
-        }
+        //let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
+        embedStream(streamer);
+
+        let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
+        self.view.addGestureRecognizer(panSwipe);
+        
+        //allow pan swipes to be recognized when panning inside a UIWebView
+        myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
+        myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        print("Web view did finish load");
+        webView.gapBetweenPages = 0;
     }
 
     override func didReceiveMemoryWarning() {
@@ -111,17 +80,6 @@ class ViewController: UIViewController, UIWebViewDelegate {
         let requestObj = URLRequest(url: url!);
         myChatWebView.loadRequest(requestObj);
     }
-    
-    func initializeCurrentFrames(){
-        //initialize the current frames for stream and chat
-        //variables for saving your frame layout when you switch between portrait and landscape mode;
-        chatCurrentLandscapeFrame = chatDefaultLandscapeFrame;
-        streamCurrentLandscapeFrame = streamDefaultLandscapeFrame;
-        
-        chatCurrentPortraitFrame = chatDefaultPortraitFrame;
-        streamCurrentPortraitFrame = streamDefaultPortraitFrame;
-    }
-    
     //when a swipe is detected, resize the webviews depending on direction
     /*
     func OnSwipeGesture(gesture: UIGestureRecognizer)
@@ -180,7 +138,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 startPanLocation = currentPanLocation;
             }else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
                 let currentPanLocation = gesture.translation(in: self.view)
-                let distanceY = currentPanLocation.y - startPanLocation.y
+                let distanceY = ceil(currentPanLocation.y - startPanLocation.y);
                 
                 //once we have the moved distance, we edit the frames (cant edit width directly, need to create a new frame)
                 let newChatFrame = CGRect(x: myChatWebView.frame.origin.x, y: ceil(myChatWebView.frame.origin.y + distanceY),
@@ -188,7 +146,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
                 if(myChatWebView.frame.origin.y + distanceY >= 0 &&
-                    myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.width){
+                    myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.height){
                         myChatWebView.frame = newChatFrame;
                 }
                 
@@ -196,38 +154,113 @@ class ViewController: UIViewController, UIWebViewDelegate {
                     width: myStreamWebView.frame.width, height: ceil(myStreamWebView.frame.height + distanceY))
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
                 if(myStreamWebView.frame.height + distanceY >= 0 &&
-                    myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.width){
+                    myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.height){
                         myStreamWebView.frame = newStreamFrame;
                 }
                 startPanLocation = currentPanLocation;
             }
         }
+        
     }
     
     override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation){
-        //were going to do some lazy programming here. We're going to take the web views that we have
-        //and resize them based on the orientation, rather than use a different storyboard
+        initializeConstraints();
+    }
+    
+    func addAllConstraintsToView(){
+        for constraint in currentConstraints {
+            view.addConstraint(constraint);
+        }
+    }
+    
+    func initializeConstraints(){
+        //needs to be turned off to give way for our custom constraints
+        myChatWebView.translatesAutoresizingMaskIntoConstraints = false;
+        myStreamWebView.translatesAutoresizingMaskIntoConstraints = false;
+        
         if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
+            //constant = space inbetween 2 objects (usually 0 for us)
             
+            //Constraint for the streams right (trailing) border - line up with the chats left border
+            let streamTrailingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .trailing, relatedBy: .equal, toItem: myChatWebView, attribute: .leading, multiplier: 1.0, constant: 0);
+            //streams upper border - line up with the bottom of the toolbar
+            let streamTopConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .top, relatedBy: .equal, toItem: myToolBar, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //streams bottom border - line up with the bottom of the devices screen
+            let streamBottomConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //streams left border - line up with the devices left side
+            let streamLeadingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
+            //initialize stream height to at least 300 - this is so both the stream and chat are visible on launch
+            let streamWidthConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
             
-            //myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
-            //    UIViewAutoresizing.FlexibleBottomMargin]
-            myChatWebView.frame = chatDefaultLandscapeFrame;
+            //chat right border - line up with right side of screen
+            let chatTrailingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);
+            //chat top border - line up with toolbar bottom
+            let chatTopConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .top, relatedBy: .equal, toItem: myToolBar, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //chat bottom border - line up with bottom of screen
+            let chatBottomConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //chat left border - line up with right of stream
+            let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: myStreamWebView, attribute: .trailing, multiplier: 1.0, constant: 0);
+            //initialize chat height at at least 300
+            let chatWidthConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
             
-
-            //myStreamWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight,UIViewAutoresizing.FlexibleWidth,
-            //                                    UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleBottomMargin]
-            myStreamWebView.frame = streamDefaultLandscapeFrame;
+            //remove current constraints so that there's not conflicting constraints
+            view.removeConstraints(currentConstraints);
+            currentConstraints.removeAll();
+            
+            //add all constraints to list then add all constraints in list to view
+            currentConstraints.append(streamTrailingConstraint);
+            currentConstraints.append(streamTopConstraint);
+            currentConstraints.append(streamBottomConstraint);
+            currentConstraints.append(streamLeadingConstraint);
+            currentConstraints.append(streamWidthConstraint);
+            
+            currentConstraints.append(chatTrailingConstraint);
+            currentConstraints.append(chatTopConstraint);
+            currentConstraints.append(chatBottomConstraint);
+            currentConstraints.append(chatLeadingConstraint);
+            currentConstraints.append(chatWidthConstraint);
+        }else{
+            
+            //stream right border - line up with right side of screen
+            let streamTrailingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);
+            //stream top border - line up with bottom of toolbar
+            let streamTopConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .top, relatedBy: .equal, toItem: myToolBar, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //stream bottom border - line up with top of chat
+            let streamBottomConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .bottom, relatedBy: .equal, toItem: myChatWebView, attribute: .top, multiplier: 1.0, constant: 0);
+            //stream left border - line up with left side of screen
+            let streamLeadingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
+            //stream height - initialize it to at least 300 so both stream and chat show up
+            let streamHeightConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            
+            //chat right border - line up with right side of screen
+            let chatTrailingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);
+            //chat top border - line up with bottom of stream
+            let chatTopConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .top, relatedBy: .equal, toItem: myStreamWebView, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //chat bottom border - line up with bottom of screen
+            let chatBottomConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1.0, constant: 0);
+            //chat left border - line up with left side of screen
+            let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
+            //initialize chat height to at least 300, so both stream and chat show up
+            let chatHeightConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            
+            //remove all constraints so no conflicts
+            view.removeConstraints(currentConstraints);
+            currentConstraints.removeAll();
+            
+            //add all constraints to list and then to view
+            currentConstraints.append(streamTrailingConstraint);
+            currentConstraints.append(streamTopConstraint);
+            currentConstraints.append(streamBottomConstraint);
+            currentConstraints.append(streamLeadingConstraint);
+            currentConstraints.append(streamHeightConstraint);
+            
+            currentConstraints.append(chatTrailingConstraint);
+            currentConstraints.append(chatTopConstraint);
+            currentConstraints.append(chatBottomConstraint);
+            currentConstraints.append(chatLeadingConstraint);
+            currentConstraints.append(chatHeightConstraint);
         }
-        else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
-            //myChatWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleRightMargin, UIViewAutoresizing.FlexibleTopMargin,
-              //  UIViewAutoresizing.FlexibleBottomMargin, UIView	Autoresizing.FlexibleLeftMargin]
-            
-            myChatWebView.frame = chatDefaultPortraitFrame;
-            
-            //myStreamWebView.autoresizingMask = [UIViewAutoresizing.FlexibleHeight, UIViewAutoresizing.FlexibleLeftMargin, UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleTopMargin, UIViewAutoresizing.FlexibleRightMargin]
-            myStreamWebView.frame = streamDefaultPortraitFrame;
-        }
+        addAllConstraintsToView();
     }
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
