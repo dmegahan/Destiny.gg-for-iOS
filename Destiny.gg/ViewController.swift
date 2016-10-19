@@ -318,6 +318,12 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text;
         
-        embedStream(searchText!);
+        print("Search clicked: " + searchText!);
+        
+        if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
+            embedStream(searchText!);
+        }
+        
+        RestAPIManager.sharedInstance.isStreamOnline(searchText!);
     }
 }
