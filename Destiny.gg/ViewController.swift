@@ -10,12 +10,11 @@
 import UIKit
 
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
-class ViewController: UIViewController, UIWebViewDelegate {
+class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
     @IBOutlet var myToolBar: UIToolbar!
-    @IBOutlet var ChangeStreamButton: UIBarButtonItem!
     @IBOutlet var LockFramesButton: UIBarButtonItem!
     @IBOutlet var TwitchSearchBar: UISearchBar!
 
@@ -42,6 +41,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
         self.automaticallyAdjustsScrollViewInsets = false;
         
         self.initializeConstraints();
+        
+        self.TwitchSearchBar.delegate = self;
         
         //embed chat whether or not stream is online
         embedChat();
@@ -291,12 +292,9 @@ class ViewController: UIViewController, UIWebViewDelegate {
     
     @IBAction func buttonPressed(_ sender: UIBarButtonItem) {
         switch sender.tag {
-        case 0: //ChangeStream button
-            print("Change stream pressed");
-        case 1: //LockFrames button
+        case 0: //LockFrames button
             isLocked = !isLocked;
             if(isLocked){
-                
                 //remove all recognized gestures (currently only a pan swipe is used, so effectively only removing that)
                 self.view.gestureRecognizers?.removeAll();
             }else{
@@ -315,5 +313,11 @@ class ViewController: UIViewController, UIWebViewDelegate {
         default:
             print("Default invoked");
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let searchText = searchBar.text;
+        
+        embedStream(searchText!);
     }
 }

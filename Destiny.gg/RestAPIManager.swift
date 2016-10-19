@@ -14,10 +14,8 @@ enum JSONError: String, Error {
 }
 
 class RestAPIManager: NSObject {
-    //for now, this object will only be used to get destiny's stream information
     static let sharedInstance = RestAPIManager();
     let baseURL = "https://api.twitch.tv/kraken/";
-    
     
     func isStreamOnline(_ streamer: String) -> (Bool){
         //construct REST api url
@@ -31,6 +29,7 @@ class RestAPIManager: NSObject {
             //we have the json dict, now we get the online status and return it
             //if the stream object is null, the streamer is offline
 //          //print(json["stream"]);
+            print(json);
             if(json["stream"] is NSNull){
                 isOnline = false;
             }else{

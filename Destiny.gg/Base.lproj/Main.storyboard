@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
-                                <frame key="frameInset" minX="-7" minY="25" height="44"/>
+                                <frame key="frameInset" minX="-5" minY="25" height="44" maxX="-2"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <barButtonItem width="150" style="plain" id="HTL-DH-58p">
@@ -29,7 +29,7 @@
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         </searchBar>
                                     </barButtonItem>
-                                    <barButtonItem tag="1" title="Lock Frames" width="138" id="DCh-o9-EB7">
+                                    <barButtonItem title="Lock Frames" width="138" id="DCh-o9-EB7">
                                         <connections>
                                             <action selector="buttonPressed:" destination="BYZ-38-t0r" id="TG9-PG-uba"/>
                                         </connections>
@@ -37,12 +37,12 @@
                                 </items>
                             </toolbar>
                             <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
-                                <frame key="frameInset" minX="21" height="49.26%" maxX="-4" maxY="8"/>
+                                <frame key="frameInset" minX="21" height="49.19%" maxX="-4" maxY="6"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minX="134" minY="195" height="53.20%" maxX="-145"/>
+                                <frame key="frameInset" minX="134" minY="193" height="53.28%" maxX="-143"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
