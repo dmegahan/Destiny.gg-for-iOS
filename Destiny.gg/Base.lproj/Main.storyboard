@@ -19,13 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
-                                <frame key="frameInset" minX="-3" minY="25" height="44" maxX="1"/>
+                                <frame key="frameInset" minX="-7" minY="25" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <barButtonItem title="Change Stream" id="boJ-ui-5GR">
-                                        <connections>
-                                            <action selector="buttonPressed:" destination="BYZ-38-t0r" id="UWQ-Yy-3u9"/>
-                                        </connections>
+                                    <barButtonItem width="150" style="plain" id="HTL-DH-58p">
+                                        <searchBar key="customView" contentMode="redraw" barStyle="black" text="Destiny" placeholder="twitch stream" id="Ljx-bf-wNV">
+                                            <rect key="frame" x="20" y="0.0" width="150" height="44"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                        </searchBar>
                                     </barButtonItem>
                                     <barButtonItem tag="1" title="Lock Frames" width="138" id="DCh-o9-EB7">
                                         <connections>
@@ -34,25 +36,25 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
+                                <frame key="frameInset" minX="21" height="49.26%" maxX="-4" maxY="8"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minX="-3" minY="67" height="47.58%" maxX="-4"/>
+                                <frame key="frameInset" minX="134" minY="195" height="53.20%" maxX="-145"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
                                 </connections>
                             </webView>
-                            <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
-                                <frame key="frameInset" minX="22" height="49.19%" maxX="-4" maxY="8"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
-                        <outlet property="ChangeStreamButton" destination="boJ-ui-5GR" id="S9K-SA-NMs"/>
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
+                        <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
                         <outlet property="myToolBar" destination="wbc-Yh-wzI" id="oWh-wJ-cT5"/>

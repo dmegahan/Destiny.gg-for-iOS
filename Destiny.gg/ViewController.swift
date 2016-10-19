@@ -17,6 +17,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet var myToolBar: UIToolbar!
     @IBOutlet var ChangeStreamButton: UIBarButtonItem!
     @IBOutlet var LockFramesButton: UIBarButtonItem!
+    @IBOutlet var TwitchSearchBar: UISearchBar!
 
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
