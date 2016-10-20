@@ -29,7 +29,7 @@
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         </searchBar>
                                     </barButtonItem>
-                                    <barButtonItem title="Lock Frames" width="138" id="DCh-o9-EB7">
+                                    <barButtonItem title="LF" width="50" id="DCh-o9-EB7">
                                         <connections>
                                             <action selector="buttonPressed:" destination="BYZ-38-t0r" id="TG9-PG-uba"/>
                                         </connections>
@@ -42,7 +42,7 @@
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minX="134" minY="193" height="53.28%" maxX="-143"/>
+                                <frame key="frameInset" minX="132" minY="191" height="53.19%" maxX="-141"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
