@@ -42,7 +42,7 @@
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minX="132" minY="191" height="53.19%" maxX="-141"/>
+                                <frame key="frameInset" minX="132" minY="191" height="53.36%" maxX="-141"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>

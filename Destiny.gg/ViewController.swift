@@ -286,6 +286,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         }
         addAllConstraintsToView();
     }
+    
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
     }
@@ -294,6 +295,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         switch sender.tag {
         case 0: //LockFrames button
             isLocked = !isLocked;
+            
             if(isLocked){
                 //remove all recognized gestures (currently only a pan swipe is used, so effectively only removing that)
                 self.view.gestureRecognizers?.removeAll();
@@ -323,7 +325,5 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
             embedStream(searchText!);
         }
-        
-        RestAPIManager.sharedInstance.isStreamOnline(searchText!);
     }
 }
