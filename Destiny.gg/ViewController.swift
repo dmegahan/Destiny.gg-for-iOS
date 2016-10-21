@@ -202,6 +202,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         myChatWebView.translatesAutoresizingMaskIntoConstraints = false;
         myStreamWebView.translatesAutoresizingMaskIntoConstraints = false;
         
+        let minWidth = CGFloat(200);
+        let minHeight = CGFloat(200);
+        
         if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             //constant = space inbetween 2 objects (usually 0 for us)
             
@@ -214,7 +217,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             //streams left border - line up with the devices left side
             let streamLeadingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
             //initialize stream height to at least 300 - this is so both the stream and chat are visible on launch
-            let streamWidthConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            let streamWidthConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minWidth);
             
             //chat right border - line up with right side of screen
             let chatTrailingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);
@@ -225,7 +228,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             //chat left border - line up with right of stream
             let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: myStreamWebView, attribute: .trailing, multiplier: 1.0, constant: 0);
             //initialize chat height at at least 300
-            let chatWidthConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            let chatWidthConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minWidth);
             
             //remove current constraints so that there's not conflicting constraints
             view.removeConstraints(currentConstraints);
@@ -254,7 +257,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             //stream left border - line up with left side of screen
             let streamLeadingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
             //stream height - initialize it to at least 300 so both stream and chat show up
-            let streamHeightConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            let streamHeightConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minHeight);
             
             //chat right border - line up with right side of screen
             let chatTrailingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);
@@ -265,7 +268,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             //chat left border - line up with left side of screen
             let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1.0, constant: 0);
             //initialize chat height to at least 300, so both stream and chat show up
-            let chatHeightConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 300);
+            let chatHeightConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .height, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minHeight);
             
             //remove all constraints so no conflicts
             view.removeConstraints(currentConstraints);
