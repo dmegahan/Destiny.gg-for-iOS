@@ -125,7 +125,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
                     width: myChatWebView.frame.width, height: ceil(myChatWebView.frame.height - distanceY))
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
-                if(myChatWebView.frame.origin.y + distanceY >= 0 &&
+                if(myChatWebView.frame.origin.y + distanceY >= UIApplication.shared.statusBarFrame.height &&
                 myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.height){
                     myChatWebView.frame = newChatFrame;
                     chatCurrentPortraitFrame = newChatFrame;
@@ -134,7 +134,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
                 let newStreamFrame = CGRect(x: myStreamWebView.frame.origin.x, y: myStreamWebView.frame.origin.y,
                     width: myStreamWebView.frame.width, height: ceil(myStreamWebView.frame.height + distanceY))
                 //no point in panning the stream if the width + distanceX is smaller than 0 or if the stream > the width of the screen
-                if(myStreamWebView.frame.height + distanceY >= 0 &&
+                if(myStreamWebView.frame.height + distanceY >= UIApplication.shared.statusBarFrame.height &&
                 myStreamWebView.frame.height + distanceY <= UIScreen.main.bounds.height){
                     myStreamWebView.frame = newStreamFrame;
                     streamCurrentPortraitFrame = newStreamFrame;
@@ -205,7 +205,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: myStreamWebView, attribute: .trailing, multiplier: 1.0, constant: 0);
             //initialize chat height at at least 300
             let chatWidthConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minWidth);
-
+        
             //remove current constraints so that there's not conflicting constraints
             view.removeConstraints(currentConstraints);
             currentConstraints.removeAll();
