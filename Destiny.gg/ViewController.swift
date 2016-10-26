@@ -15,8 +15,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
     @IBOutlet var myToolBar: UIToolbar!
-    @IBOutlet var LockFramesButton: UIBarButtonItem!
-    @IBOutlet var TwitchSearchBar: UISearchBar!
+    @IBOutlet var lockFramesButton: UIBarButtonItem!
+    @IBOutlet var twitchSearchBar: UISearchBar!
 
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
@@ -42,7 +42,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         
         self.initializeConstraints();
         
-        self.TwitchSearchBar.delegate = self;
+        self.twitchSearchBar.delegate = self;
         
         //embed chat whether or not stream is online
         embedChat();
@@ -82,31 +82,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         let requestObj = URLRequest(url: url!);
         myChatWebView.loadRequest(requestObj);
     }
-    //when a swipe is detected, resize the webviews depending on direction
-    /*
-    func OnSwipeGesture(gesture: UIGestureRecognizer)
-    {
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer{
-            switch swipeGesture.direction{
-                case UISwipeGestureRecognizerDirection.Right:
-                    //resize the chat web view
-                    //the new frame has a width of 0, everything else stays the same
-                    let newFrame = CGRectMake(chatDefaultFrame.origin.x, chatDefaultFrame.origin.y, 0, chatDefaultFrame.size.height);
-                    myChatWebView.frame = newFrame;
-                    //fill the empty space left by the chat web view
-                    //change the width to match the width of the original frame + the default frame width of the chat
-                    let newStreamFrame = CGRectMake(streamDefaultFrame.origin.x, streamDefaultFrame.origin.y, streamDefaultFrame.size.width + chatDefaultFrame.size.width, streamDefaultFrame.size.height);
-                    myStreamWebView.frame = newStreamFrame;
-                case UISwipeGestureRecognizerDirection.Left:
-                    //set the web view frames back to the defaults
-                    myChatWebView.frame = chatDefaultFrame;
-                    myStreamWebView.frame = streamDefaultFrame;
-                default:
-                    break;
-            }
-        }
-    }
-    */
+
     func OnPanSwipe(_ gesture: UIPanGestureRecognizer){
         if (gesture.state == UIGestureRecognizerState.began){
             //initialize our start location - this is where teh user first started panning from (finger location)
@@ -229,7 +205,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             let chatLeadingConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .leading, relatedBy: .equal, toItem: myStreamWebView, attribute: .trailing, multiplier: 1.0, constant: 0);
             //initialize chat height at at least 300
             let chatWidthConstraint = NSLayoutConstraint(item: myChatWebView, attribute: .width, relatedBy: .greaterThanOrEqual, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: minWidth);
-            
+
             //remove current constraints so that there's not conflicting constraints
             view.removeConstraints(currentConstraints);
             currentConstraints.removeAll();
@@ -322,9 +298,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text;
-        
-        print("Search clicked: " + searchText!);
-        
+
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
             embedStream(searchText!);
         }

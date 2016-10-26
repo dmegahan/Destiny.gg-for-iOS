@@ -14,9 +14,9 @@
 
 import Foundation
 
-class config: NSObject {
-    let clientID = "YOUR CLIENT ID";
-    let clientSecret = "YOUR CLIENT SECRET"
+class Config: NSObject {
+    let clientID = "YOUR CLIENTID HERE";
+    let clientSecret = "YOUR CLIENT SECRET HERE"
     
     func getClientID() -> String{
         return clientID;

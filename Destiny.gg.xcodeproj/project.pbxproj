@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
-		8C8607211DB7136900142D64 /* config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8607201DB7136900142D64 /* config.swift */; };
+		8C8607211DB7136900142D64 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8607201DB7136900142D64 /* Config.swift */; };
 		8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE226B31C625FB700EEA569 /* RestAPIManager.swift */; };
 		8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */; };
 		8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */; };
@@ -38,7 +38,7 @@
 
 /* Begin PBXFileReference section */
 		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
-		8C8607201DB7136900142D64 /* config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = config.swift; sourceTree = "<group>"; };
+		8C8607201DB7136900142D64 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8CE226B31C625FB700EEA569 /* RestAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
 		8CF9C9511C5E79C8007C2CF6 /* Destiny.gg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Destiny.gg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,7 +111,7 @@
 				8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */,
 				8CF9C9601C5E79C8007C2CF6 /* Info.plist */,
 				8CE226B31C625FB700EEA569 /* RestAPIManager.swift */,
-				8C8607201DB7136900142D64 /* config.swift */,
+				8C8607201DB7136900142D64 /* Config.swift */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -273,7 +273,7 @@
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
 				8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */,
 				8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */,
-				8C8607211DB7136900142D64 /* config.swift in Sources */,
+				8C8607211DB7136900142D64 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

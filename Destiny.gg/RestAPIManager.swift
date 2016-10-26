@@ -9,15 +9,15 @@
 import Foundation
 
 enum JSONError: String, Error {
-    case NoData = "ERROR: no data"
-    case ConversionFailed = "ERROR: conversion from JSON failed"
+    case noData = "ERROR: no data"
+    case conversionFailed = "ERROR: conversion from JSON failed"
 }
 
 class RestAPIManager: NSObject {
     static let sharedInstance = RestAPIManager();
     let baseURL = "https://api.twitch.tv/kraken/";
     
-    let clientID = config().getClientID()
+    let clientID = Config().getClientID()
     
     func isStreamOnline(_ streamer: String) -> (Bool){
         //construct REST api url
@@ -85,8 +85,8 @@ class RestAPIManager: NSObject {
         let request = URLRequest(url: URL(string: path)!);
         URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             do {
-                guard let dat = data else { throw JSONError.NoData }
-                guard let json = try JSONSerialization.jsonObject(with: dat, options: []) as? NSDictionary else {throw JSONError.ConversionFailed }
+                guard let dat = data else { throw JSONError.noData }
+                guard let json = try JSONSerialization.jsonObject(with: dat, options: []) as? NSDictionary else {throw JSONError.conversionFailed }
                 completionHandler(json);
             }catch let error as JSONError {
                 print(error.rawValue)
