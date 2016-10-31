@@ -46,7 +46,7 @@ class RestAPIManager: NSObject {
             semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        //semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.distantFuture)
         return isOnline;
     }
     
@@ -77,7 +77,7 @@ class RestAPIManager: NSObject {
             semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        //semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.distantFuture)
         return doesExist;
     }
     

@@ -279,12 +279,14 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             if(isLocked){
                 //remove all recognized gestures (currently only a pan swipe is used, so effectively only removing that)
                 self.view.gestureRecognizers?.removeAll();
+                lockFramesButton.title = "Unlock";
             }else{
                 //if there are no current gesture recognizers (if there is then we shouldn't do anything)
                 if(self.view.gestureRecognizers != nil){
                     //recreate the original panswipe and add it back like we do when the view loads
                     let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
                     self.view.addGestureRecognizer(panSwipe);
+                    lockFramesButton.title = "Lock";
                     
                     myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
                     myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
@@ -298,9 +300,10 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let searchText = searchBar.text;
+        let searchText = searchBar.text?.lowercased();
 
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
+            print("Found");
             embedStream(searchText!);
         }
     }
