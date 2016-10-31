@@ -40,6 +40,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
         
+        myToolBar.barTintColor = UIColor.black;
+        
         self.initializeConstraints();
         
         self.twitchSearchBar.delegate = self;
@@ -49,7 +51,6 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         
         let streamer = "Destiny";
         
-        //let streamOnline = RestAPIManager.sharedInstance.isStreamOnline(streamer);
         embedStream(streamer);
 
         let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));

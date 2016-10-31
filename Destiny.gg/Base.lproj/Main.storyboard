@@ -31,9 +31,7 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
                                 </connections>
                             </webView>
-                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
-                                <frame key="frameInset" minY="20" width="769" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <items>
                                     <barButtonItem width="150" style="plain" id="HTL-DH-58p">
@@ -52,6 +50,11 @@
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="wbc-Yh-wzI" secondAttribute="trailing" id="I7t-c4-nk2"/>
+                            <constraint firstItem="wbc-Yh-wzI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y25-fe-5Hb"/>
+                            <constraint firstItem="wbc-Yh-wzI" firstAttribute="top" secondItem="UcK-g5-NgH" secondAttribute="bottom" id="koj-SX-bzY"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
