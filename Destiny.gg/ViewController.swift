@@ -126,7 +126,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
                     width: myChatWebView.frame.width, height: ceil(myChatWebView.frame.height - distanceY))
                 //we do a check to determine if the chat will go offstream (too far to the left). If it will, we don't move it anymore
                 //also dont move it if the chat is going offscreen to the right. Stop the origin.x at the bounds of screen
-                if(myChatWebView.frame.origin.y + distanceY >= 0 &&
+                if(myChatWebView.frame.origin.y + distanceY >= myToolBar.frame.maxY &&
                 myChatWebView.frame.origin.y + distanceY <= UIScreen.main.bounds.height){
                     myChatWebView.frame = newChatFrame;
                     chatCurrentPortraitFrame = newChatFrame;
