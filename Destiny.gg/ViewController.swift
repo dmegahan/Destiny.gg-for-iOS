@@ -304,7 +304,6 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         let searchText = searchBar.text?.lowercased();
 
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
-            print("Found");
             embedStream(searchText!);
         }
     }
