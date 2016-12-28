@@ -1,9 +1,5 @@
 # Destiny.gg-for-iOS
 
-__11/13/2016 - This app is pretty much ready in its current form. The only things missing is an icon for the app, and a small splash screen when loading it up. I've put off getting these things because one bug in particular is giving me trouble. When Apple released iOS 10, the chat broke, and won't connect properly. It seems like Apple broke websockets in some way, and at this point I am waiting for an update that fixes it from Apple, or a fix on the chat's end.__ 
-
-===================================== 
-
 A small Destiny.gg iOS app, written in Swift 3. 
 
 Features include:
