@@ -12,11 +12,12 @@ import UIKit
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
 class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
-    @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myChatWebView: UIWebView!
+    @IBOutlet var myStreamWebView: UIWebView!
     @IBOutlet var myToolBar: UIToolbar!
     @IBOutlet var lockFramesButton: UIBarButtonItem!
     @IBOutlet var twitchSearchBar: UISearchBar!
+    @IBOutlet var goBackButton: UIButton!
 
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
@@ -27,14 +28,14 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     //startPanLocation keeps track of where the pan started
     var startPanLocation = CGPoint();
-    //these will be used to find the difference between start and 
-    //current pan locations, and modify the chat/stream boxes accordingly
     
     //keeps track of whether the frame (The chat frame and stream frame) should be locked
     //in their current position
     var isLocked = false;
     
     var currentConstraints = [NSLayoutConstraint]();
+    
+    let chatURL : String = "https://www.destiny.gg/embed/chat";
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +61,6 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
         myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
     }
-    
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        print("Web view did finish load");
-        webView.gapBetweenPages = 0;
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,7 +75,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     func embedChat(){
         //chat embed URL
-        let url = URL(string: "https://www.destiny.gg/embed/chat");
+        let url = URL(string: chatURL);
         let requestObj = URLRequest(url: url!);
         myChatWebView.loadRequest(requestObj);
     }
@@ -272,7 +268,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         print("Webview fail with error \(error)");
     }
     
-    @IBAction func buttonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func barButtonPressed(_ sender: UIBarButtonItem) {
         switch sender.tag {
         case 0: //LockFrames button
             isLocked = !isLocked;
@@ -296,7 +292,18 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
                 }
             }
         default:
-            print("Default invoked");
+            break;
+        }
+    }
+    
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            if(myChatWebView.canGoBack){
+                myChatWebView.goBack();
+            }
+        default:
+            break;
         }
     }
     
@@ -305,6 +312,21 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
 
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
             embedStream(searchText!);
+        }
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        //myChatWebview has a tag of 0
+        if(webView.tag == 0){
+            //called when myWebView loads a request (like a link clicked in chat)
+            let currentURL : String = (webView.request?.url?.absoluteString)!;
+            
+            //if the request is not for chat itself, show the go back button so the user can return to chat
+            if(currentURL != chatURL){
+                goBackButton.isHidden = false;
+            }else if(currentURL == chatURL){
+                goBackButton.isHidden = true;
+            }
         }
     }
 }

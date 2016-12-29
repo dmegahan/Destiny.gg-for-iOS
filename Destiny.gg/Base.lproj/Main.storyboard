@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -18,17 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
+                            <webView clipsSubviews="YES" contentMode="redraw" ambiguous="YES" misplaced="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
                                 <frame key="frameInset" minX="20" height="48.81%" maxX="7" maxY="16"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
-                            <webView autoresizesSubviews="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minX="123" minY="191" height="52.70%" maxX="-137"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <dataDetectorType key="dataDetectorTypes"/>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="RMQ-Ue-cuZ"/>
                                 </connections>
                             </webView>
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
@@ -43,15 +38,33 @@
                                     </barButtonItem>
                                     <barButtonItem title="Lock" width="50" id="DCh-o9-EB7">
                                         <connections>
-                                            <action selector="buttonPressed:" destination="BYZ-38-t0r" id="TG9-PG-uba"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="KBo-Y2-fJe"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
+                                <frame key="frameInset" minY="69" height="45.97%" maxX="-14"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
+                                </connections>
+                            </webView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
+                                <frame key="frameInset" minX="580" minY="907" width="152" height="75"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <state key="normal" title="Go Back"/>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oqq-z4-vLx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wbc-Yh-wzI" secondAttribute="trailing" id="I7t-c4-nk2"/>
+                            <constraint firstItem="sgZ-Yb-FgP" firstAttribute="bottom" secondItem="fPX-Ha-yd1" secondAttribute="bottom" id="M8A-pY-1WN"/>
+                            <constraint firstItem="sgZ-Yb-FgP" firstAttribute="trailing" secondItem="fPX-Ha-yd1" secondAttribute="trailing" id="N8S-AX-nEl"/>
                             <constraint firstItem="wbc-Yh-wzI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Y25-fe-5Hb"/>
                             <constraint firstItem="wbc-Yh-wzI" firstAttribute="top" secondItem="UcK-g5-NgH" secondAttribute="bottom" id="koj-SX-bzY"/>
                         </constraints>
@@ -59,6 +72,7 @@
                     <connections>
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
                         <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
+                        <outlet property="goBackButton" destination="sgZ-Yb-FgP" id="m91-kT-e9e"/>
                         <outlet property="lockFramesButton" destination="DCh-o9-EB7" id="6ZW-B7-grX"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
