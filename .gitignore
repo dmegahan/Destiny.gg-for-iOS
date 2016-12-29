@@ -63,4 +63,4 @@ fastlane/report.xml
 fastlane/screenshots
 
 #Dont track changes to twitch API template file
-Destiny.gg/config.swift
+Destiny.gg/Config.swift
