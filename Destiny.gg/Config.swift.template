@@ -1,0 +1,22 @@
+//
+//  Config.swift.template
+//  Destiny.gg
+//
+//  Created by Daniel Megahan on 1/2/17.
+//  Copyright © 2017 Daniel Megahan. All rights reserved.
+//
+
+import Foundation
+
+class Config: NSObject {
+    let clientID = “YOUR ClIENTID HERE”;
+    let clientSecret = “YOUR CLIENT SECRET HERE“
+    
+    func getClientID() -> String{
+        return clientID;
+    }
+    
+    func getClientSecret() -> String{
+        return clientSecret;
+    }
+}
