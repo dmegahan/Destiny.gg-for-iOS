@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
+		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
+		8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B41E1AC5360090B328 /* VODViewController.swift */; };
+		8C8182B71E1AD4DA0090B328 /* TwitchVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */; };
+		8C8182BB1E1AE54B0090B328 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8C8182BA1E1AE54B0090B328 /* Podfile */; };
 		8C8607211DB7136900142D64 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8607201DB7136900142D64 /* Config.swift */; };
 		8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE226B31C625FB700EEA569 /* RestAPIManager.swift */; };
 		8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */; };
@@ -17,6 +22,7 @@
 		8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */; };
 		8CF9C96A1C5E79C8007C2CF6 /* Destiny_ggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9691C5E79C8007C2CF6 /* Destiny_ggTests.swift */; };
 		8CF9C9751C5E79C8007C2CF6 /* Destiny_ggUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9741C5E79C8007C2CF6 /* Destiny_ggUITests.swift */; };
+		B5AD1E972B92583D420B4881 /* Pods_Destiny_gg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +43,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5B77772EDDA912B39DD5E38A /* Pods-Destiny.gg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Destiny.gg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg.release.xcconfig"; sourceTree = "<group>"; };
+		6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Destiny_gg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODTableViewCell.swift; sourceTree = "<group>"; };
+		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		8C8182B41E1AC5360090B328 /* VODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODViewController.swift; sourceTree = "<group>"; };
+		8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitchVideo.swift; sourceTree = "<group>"; };
+		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		8C8607201DB7136900142D64 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8CE226B31C625FB700EEA569 /* RestAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
 		8CF9C9511C5E79C8007C2CF6 /* Destiny.gg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Destiny.gg.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -53,6 +66,7 @@
 		8CF9C9701C5E79C8007C2CF6 /* Destiny.ggUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Destiny.ggUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF9C9741C5E79C8007C2CF6 /* Destiny_ggUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destiny_ggUITests.swift; sourceTree = "<group>"; };
 		8CF9C9761C5E79C8007C2CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F304F3E5E1293CD8FFF61B64 /* Pods-Destiny.gg.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Destiny.gg.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5AD1E972B92583D420B4881 /* Pods_Destiny_gg.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,13 +95,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1073A6E28B6D11C9D6BDA83C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F304F3E5E1293CD8FFF61B64 /* Pods-Destiny.gg.debug.xcconfig */,
+				5B77772EDDA912B39DD5E38A /* Pods-Destiny.gg.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8CF9C9481C5E79C8007C2CF6 = {
 			isa = PBXGroup;
 			children = (
+				8C8182BA1E1AE54B0090B328 /* Podfile */,
 				8CF9C9531C5E79C8007C2CF6 /* Destiny.gg */,
 				8CF9C9681C5E79C8007C2CF6 /* Destiny.ggTests */,
 				8CF9C9731C5E79C8007C2CF6 /* Destiny.ggUITests */,
 				8CF9C9521C5E79C8007C2CF6 /* Products */,
+				1073A6E28B6D11C9D6BDA83C /* Pods */,
+				B38750F8DC9DA76C90052988 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,10 +134,14 @@
 				8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */,
 				8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */,
 				8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */,
+				8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */,
+				8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */,
+				8C8182B41E1AC5360090B328 /* VODViewController.swift */,
 				8CF9C95B1C5E79C8007C2CF6 /* Assets.xcassets */,
 				8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */,
 				8CF9C9601C5E79C8007C2CF6 /* Info.plist */,
 				8CE226B31C625FB700EEA569 /* RestAPIManager.swift */,
+				8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */,
 				8C8607201DB7136900142D64 /* Config.swift */,
 			);
 			path = Destiny.gg;
@@ -134,6 +165,14 @@
 			path = Destiny.ggUITests;
 			sourceTree = "<group>";
 		};
+		B38750F8DC9DA76C90052988 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,9 +180,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CF9C9791C5E79C8007C2CF6 /* Build configuration list for PBXNativeTarget "Destiny.gg" */;
 			buildPhases = (
+				6FED59A2A0E276297DA6FD76 /* [CP] Check Pods Manifest.lock */,
 				8CF9C94D1C5E79C8007C2CF6 /* Sources */,
 				8CF9C94E1C5E79C8007C2CF6 /* Frameworks */,
 				8CF9C94F1C5E79C8007C2CF6 /* Resources */,
+				211248CF48A9BC101A493F7F /* [CP] Embed Pods Frameworks */,
+				F94B08C9E0FEEF6D0B910532 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -218,7 +260,7 @@
 				};
 			};
 			buildConfigurationList = 8CF9C94C1C5E79C8007C2CF6 /* Build configuration list for PBXProject "Destiny.gg" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -242,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8182BB1E1AE54B0090B328 /* Podfile in Resources */,
 				8C3B08B51DB998C000AE9E88 /* images in Resources */,
 				8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */,
 				8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */,
@@ -265,15 +308,67 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		211248CF48A9BC101A493F7F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6FED59A2A0E276297DA6FD76 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F94B08C9E0FEEF6D0B910532 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8CF9C94D1C5E79C8007C2CF6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */,
+				8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */,
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
+				8C8182B71E1AD4DA0090B328 /* TwitchVideo.swift in Sources */,
 				8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */,
 				8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */,
 				8C8607211DB7136900142D64 /* Config.swift in Sources */,
+				8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,7 +516,9 @@
 		};
 		8CF9C97A1C5E79C8007C2CF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F304F3E5E1293CD8FFF61B64 /* Pods-Destiny.gg.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -436,7 +533,9 @@
 		};
 		8CF9C97B1C5E79C8007C2CF6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B77772EDDA912B39DD5E38A /* Pods-Destiny.gg.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

@@ -81,6 +81,30 @@ class RestAPIManager: NSObject {
         return doesExist;
     }
     
+    func getTwitchVODs(_ streamer: String) -> ([TwitchVideo]){
+        let clientIDQueryString = "?client_id=" + clientID;
+        
+        let channelVideosURL = baseURL + "channels/" + streamer + "/" + "videos" + clientIDQueryString;
+        
+        print("DEE: " + channelVideosURL);
+        
+        let semaphore = DispatchSemaphore(value: 0);
+        var videoList: [TwitchVideo] = [];
+        
+        makeHTTPGetRequest(channelVideosURL) { json in
+            if(json.object(forKey: "videos") != nil){
+                for video in json.object(forKey: "videos") as! [Dictionary<String, AnyObject>] {
+                    print(video);
+                    videoList.append(TwitchVideo(_title: video["title"] as! String,
+                                                 _videoType: video["broadcast_type"] as! String,_previewURL: video["preview"] as! String, _length: video["length"] as! NSNumber, _recordedAt: video["recorded_at"] as! String, _views: video["views"] as! NSNumber));
+                }
+            }
+            semaphore.signal();
+        }
+        semaphore.wait(timeout: DispatchTime.distantFuture);
+        return videoList;
+    }
+    
     func makeHTTPGetRequest(_ path: String, completionHandler: @escaping (_ myJson: NSDictionary) -> ()){
         let request = URLRequest(url: URL(string: path)!);
         URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in

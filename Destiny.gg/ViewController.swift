@@ -68,6 +68,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     }
     
     func embedStream(_ streamer: String){
+        //url implementation
         let url = URL(string: "http://player.twitch.tv/?channel=" + streamer);
         let requestObj = URLRequest(url: url!);
         myStreamWebView.loadRequest(requestObj);
