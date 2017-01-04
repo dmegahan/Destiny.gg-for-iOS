@@ -140,6 +140,11 @@
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="X9w-dj-khm"/>
                                             </constraints>
                                         </imageView>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZ0-hd-dZc">
+                                            <rect key="frame" x="700" y="98" width="60" height="51"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <state key="normal" title="Play"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="HbP-fY-BSE" firstAttribute="top" secondItem="MgJ-Jn-4FZ" secondAttribute="bottom" constant="-1" id="AqN-h4-H3Z"/>
@@ -148,18 +153,22 @@
                                         <constraint firstItem="eWB-qB-ZOh" firstAttribute="top" secondItem="HbP-fY-BSE" secondAttribute="bottom" constant="-1" id="Dvt-pK-gfA"/>
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="top" secondItem="zoa-nK-w50" secondAttribute="topMargin" constant="-8" id="N0x-YV-4ou"/>
                                         <constraint firstAttribute="leadingMargin" secondItem="Vog-Hr-xQy" secondAttribute="leading" id="NXb-iS-diw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="mZ0-hd-dZc" secondAttribute="trailing" id="QQN-6x-3gf"/>
+                                        <constraint firstItem="mZ0-hd-dZc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="COn-38-rYn" secondAttribute="bottom" id="Sbw-mp-lKR"/>
                                         <constraint firstItem="Vog-Hr-xQy" firstAttribute="top" secondItem="zoa-nK-w50" secondAttribute="topMargin" constant="-8" id="aDa-nX-Wmi"/>
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="leading" secondItem="Vog-Hr-xQy" secondAttribute="trailing" constant="8" id="aVh-Sb-wxI"/>
                                         <constraint firstItem="COn-38-rYn" firstAttribute="leading" secondItem="eWB-qB-ZOh" secondAttribute="trailing" id="bvx-5c-Eds"/>
                                         <constraint firstItem="eWB-qB-ZOh" firstAttribute="leading" secondItem="Vog-Hr-xQy" secondAttribute="trailing" constant="8" id="dXV-GE-hRy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="HbP-fY-BSE" secondAttribute="trailing" id="e2w-P2-T0q"/>
                                         <constraint firstItem="COn-38-rYn" firstAttribute="top" secondItem="HbP-fY-BSE" secondAttribute="bottom" constant="-1" id="kfy-hp-z77"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mZ0-hd-dZc" secondAttribute="bottom" constant="-7" id="xqc-t6-wsa"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="COn-38-rYn" secondAttribute="trailing" id="ziy-gx-cFN"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
                                     <outlet property="lengthLabel" destination="eWB-qB-ZOh" id="TVR-FN-ZC9"/>
+                                    <outlet property="playButton" destination="mZ0-hd-dZc" id="V8Y-uL-2lX"/>
                                     <outlet property="previewImage" destination="Vog-Hr-xQy" id="Hmj-dr-d1U"/>
                                     <outlet property="recordedAtLabel" destination="HbP-fY-BSE" id="Gof-1C-jiS"/>
                                     <outlet property="titleLabel" destination="MgJ-Jn-4FZ" id="wd2-Q0-Vnq"/>

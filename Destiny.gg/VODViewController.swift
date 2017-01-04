@@ -57,6 +57,22 @@ class VODViewController: UITableViewController {
         return twitchVideos.count;
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //show button when row is selected
+        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
+
+        selectedCell.playButton.isEnabled = true;
+        selectedCell.playButton.isHidden = false;
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        //hide the play button when a row is deselected
+        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
+        
+        selectedCell.playButton.isEnabled = false;
+        selectedCell.playButton.isHidden = true;
+    }
+    
     @IBAction func dropDownButtonPressed(_ sender: UIBarButtonItem) {
         //Drop down button tag is 1
         if(sender.tag == 1){
