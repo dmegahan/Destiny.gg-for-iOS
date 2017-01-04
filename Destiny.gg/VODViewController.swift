@@ -31,9 +31,13 @@ class VODViewController: UITableViewController {
         
         dropDownList.selectionAction = { (index: Int, item: String) in
             //when an item is selected in the list, change the title of the drop down button to the selected item and load a whole new set of vods based on the selected item
-            self.dropDownButton.title = item;
-            self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
-            self.tableView.reloadData();
+            
+            //check if the selected videos are already showing
+            if(self.dropDownButton.title != item){
+                self.dropDownButton.title = item;
+                self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
+                self.tableView.reloadData();
+            }
         }
     }
     
