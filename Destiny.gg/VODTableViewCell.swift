@@ -27,7 +27,5 @@ class VODTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
-        //unhide the button when selected
-        playButton.isEnabled = true;
     }
 }
