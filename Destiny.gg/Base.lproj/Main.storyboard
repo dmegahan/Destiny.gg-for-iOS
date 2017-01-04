@@ -191,7 +191,6 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dropDownButton" destination="IaQ-rw-WSd" id="EoA-hY-QAs"/>
-                        <outlet property="vodsNavigationBar" destination="Xgt-cY-qXu" id="qTY-d0-H9K"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Foz-cb-9cn" userLabel="First Responder" sceneMemberID="firstResponder"/>
