@@ -12,10 +12,29 @@ import AlamofireImage
 import DropDown
 
 class VODViewController: UITableViewController {
+    @IBOutlet var dropDownButton: UIBarButtonItem!
+    
     var twitchVideos: [TwitchVideo] = [];
+    let dropDownList = DropDown()
     
     override func viewDidLoad() {
-        twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny");
+        twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", dropDownButton.title!);
+        
+        setupDropDown();
+    }
+    
+    //A drop down list for selecting the different types of VODS or twitch videos (Highlight, video, livestream vod)
+    func setupDropDown(){
+        dropDownList.anchorView = dropDownButton
+        
+        dropDownList.dataSource = ["Highlights", "Broadcasts"];
+        
+        dropDownList.selectionAction = { (index: Int, item: String) in
+            //when an item is selected in the list, change the title of the drop down button to the selected item and load a whole new set of vods based on the selected item
+            self.dropDownButton.title = item;
+            self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
+            self.tableView.reloadData();
+        }
     }
     
     //function to populate our table
@@ -36,5 +55,12 @@ class VODViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return twitchVideos.count;
+    }
+    
+    @IBAction func dropDownButtonPressed(_ sender: UIBarButtonItem) {
+        //Drop down button tag is 1
+        if(sender.tag == 1){
+            dropDownList.show();
+        }
     }
 }
