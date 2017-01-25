@@ -29,5 +29,15 @@ class VODTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+        let currentColor: UIColor;
+        if(selected){
+            currentColor = UIColor.black;
+        }else{
+            currentColor = UIColor.white;
+        }
+        titleLabel.textColor = currentColor;
+        recordedAtLabel.textColor = currentColor;
+        lengthLabel.textColor = currentColor;
+        viewsLabel.textColor = currentColor;
     }
 }
