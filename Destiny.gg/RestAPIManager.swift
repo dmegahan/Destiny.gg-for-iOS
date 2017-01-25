@@ -14,6 +14,7 @@ enum JSONError: String, Error {
 }
 
 class RestAPIManager: NSObject {
+    //singleton
     static let sharedInstance = RestAPIManager();
     let baseURL = "https://api.twitch.tv/kraken/";
     
@@ -101,7 +102,12 @@ class RestAPIManager: NSObject {
             if(json.object(forKey: "videos") != nil){
                 for video in json.object(forKey: "videos") as! [Dictionary<String, AnyObject>] {
                     videoList.append(TwitchVideo(_title: video["title"] as! String,
-                                                 _videoType: video["broadcast_type"] as! String,_previewURL: video["preview"] as! String, _length: video["length"] as! NSNumber, _recordedAt: video["recorded_at"] as! String, _views: video["views"] as! NSNumber));
+                                                 _videoType: video["broadcast_type"] as! String,
+                                                 _previewURL: video["preview"] as! String,
+                                                    _length: video["length"] as! NSNumber,
+                                                    _recordedAt: video["recorded_at"] as! String,
+                                                    _views: video["views"] as! NSNumber,
+                                                    _videoURL: video["url"] as! String));
                 }
             }
             semaphore.signal();

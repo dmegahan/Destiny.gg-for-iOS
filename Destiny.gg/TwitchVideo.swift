@@ -15,14 +15,18 @@ class TwitchVideo {
     var length: NSNumber;
     var recordedAt: String;
     var views: NSNumber;
+    var videoURL: String;
     
     init(_title:String, _videoType:String, _previewURL:String, _length:NSNumber,
-         _recordedAt:String, _views:NSNumber) {
+         _recordedAt:String, _views:NSNumber, _videoURL:String) {
         title = _title;
         videoType = _videoType;
         previewURL = _previewURL;
         length = _length;
         recordedAt = _recordedAt;
         views = _views;
+        videoURL = _videoURL;
     }
+    
+    
 }

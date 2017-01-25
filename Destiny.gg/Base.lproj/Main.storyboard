@@ -12,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q7d-zM-DYc"/>
                         <viewControllerLayoutGuide type="bottom" id="Zkt-qS-rgi"/>
@@ -49,7 +49,8 @@
                                     </barButtonItem>
                                     <barButtonItem tag="1" title="VODs" id="26g-kV-dbN">
                                         <connections>
-                                            <segue destination="gDJ-DU-wVM" kind="modal" id="yaL-8i-fEN"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="AbO-PD-6rN"/>
+                                            <segue destination="gDJ-DU-wVM" kind="modal" id="WAV-A6-bYp"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -62,9 +63,8 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
                                 </connections>
                             </webView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
-                                <rect key="frame" x="580" y="907" width="152" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
+                                <rect key="frame" x="612" y="931" width="120" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Go Back"/>
                                 <connections>
@@ -73,6 +73,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sgZ-Yb-FgP" secondAttribute="trailing" constant="16" id="UbX-kf-B3d"/>
+                            <constraint firstItem="Zkt-qS-rgi" firstAttribute="top" secondItem="sgZ-Yb-FgP" secondAttribute="bottom" constant="42" id="xH4-1b-5fS"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
@@ -92,7 +96,7 @@
         <!--VODs-->
         <scene sceneID="4Ed-Z0-IdV">
             <objects>
-                <tableViewController title="VODs" id="y90-Eb-8tV" customClass="VODViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VODViewController" title="VODs" id="y90-Eb-8tV" customClass="VODViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="9dC-oz-bVk">
                         <rect key="frame" x="0.0" y="44" width="768" height="980"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -144,6 +148,9 @@
                                             <rect key="frame" x="700" y="98" width="60" height="51"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                             <state key="normal" title="Play"/>
+                                            <connections>
+                                                <action selector="playButtonPressed:" destination="y90-Eb-8tV" eventType="touchUpInside" id="RfZ-65-hq8"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -186,7 +193,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="th1-aY-dBa">
                             <color key="tintColor" red="0.050672061189999999" green="0.1190514734" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="modal" id="KhV-tl-WMo"/>
+                                <segue destination="BYZ-38-t0r" kind="modal" identifier="VOD2Display" id="KhV-tl-WMo"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" tag="1" title="Highlights" id="IaQ-rw-WSd">
