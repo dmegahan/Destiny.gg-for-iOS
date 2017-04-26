@@ -11,9 +11,8 @@
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
 		8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B41E1AC5360090B328 /* VODViewController.swift */; };
-		8C8182B71E1AD4DA0090B328 /* TwitchVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */; };
+		8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C8182BB1E1AE54B0090B328 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8C8182BA1E1AE54B0090B328 /* Podfile */; };
-		8C8607211DB7136900142D64 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8607201DB7136900142D64 /* Config.swift */; };
 		8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE226B31C625FB700EEA569 /* RestAPIManager.swift */; };
 		8CE693E21E1B63C000311519 /* Config.swift.template in Resources */ = {isa = PBXBuildFile; fileRef = 8CE693E11E1B63BF00311519 /* Config.swift.template */; };
 		8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */; };
@@ -50,9 +49,8 @@
 		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		8C8182B41E1AC5360090B328 /* VODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODViewController.swift; sourceTree = "<group>"; };
-		8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitchVideo.swift; sourceTree = "<group>"; };
-		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
-		8C8607201DB7136900142D64 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8C8182B61E1AD4DA0090B328 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8CE226B31C625FB700EEA569 /* RestAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
 		8CE693E11E1B63BF00311519 /* Config.swift.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.swift.template; sourceTree = "<group>"; };
 		8CF9C9511C5E79C8007C2CF6 /* Destiny.gg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Destiny.gg.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,8 +142,9 @@
 				8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */,
 				8CF9C9601C5E79C8007C2CF6 /* Info.plist */,
 				8CE226B31C625FB700EEA569 /* RestAPIManager.swift */,
-				8C8182B61E1AD4DA0090B328 /* TwitchVideo.swift */,
-				8C8607201DB7136900142D64 /* Config.swift */,
+				8C8182B61E1AD4DA0090B328 /* Video.swift */,
+				8CE693E91E1C4ED400311519 /* Config.swift */,
+				8CE693E71E1C4DB500311519 /* Config.swift.temp */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -366,12 +365,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */,
+				8CE693E81E1C4DB500311519 /* Config.swift.temp in Sources */,
 				8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */,
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
-				8C8182B71E1AD4DA0090B328 /* TwitchVideo.swift in Sources */,
+				8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */,
 				8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */,
 				8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */,
-				8C8607211DB7136900142D64 /* Config.swift in Sources */,
+				8CE693EA1E1C4ED400311519 /* Config.swift in Sources */,
 				8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,7 +448,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -467,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -509,7 +509,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -554,6 +554,7 @@
 		};
 		8CF9C97D1C5E79C8007C2CF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F304F3E5E1293CD8FFF61B64 /* Pods-Destiny.gg.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = Destiny.ggTests/Info.plist;
@@ -580,6 +581,7 @@
 		};
 		8CF9C9801C5E79C8007C2CF6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F304F3E5E1293CD8FFF61B64 /* Pods-Destiny.gg.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = Destiny.ggUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

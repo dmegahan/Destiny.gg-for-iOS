@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,7 +12,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="ViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="q7d-zM-DYc"/>
                         <viewControllerLayoutGuide type="bottom" id="Zkt-qS-rgi"/>
@@ -20,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1">
-                                <frame key="frameInset" minX="20" height="0.48810000000000003"/>
+                                <rect key="frame" x="20" y="0.0" width="0.0" height="0.48810000000000003"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <dataDetectorType key="dataDetectorTypes"/>
@@ -29,7 +31,7 @@
                                 </connections>
                             </webView>
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
-                                <frame key="frameInset" minY="20" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <items>
@@ -47,22 +49,22 @@
                                     </barButtonItem>
                                     <barButtonItem tag="1" title="VODs" id="26g-kV-dbN">
                                         <connections>
-                                            <segue destination="gDJ-DU-wVM" kind="modal" id="yaL-8i-fEN"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="AbO-PD-6rN"/>
+                                            <segue destination="gDJ-DU-wVM" kind="modal" id="WAV-A6-bYp"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="myWebView">
-                                <frame key="frameInset" minY="69" height="45.97%" maxX="-14"/>
+                                <rect key="frame" x="0.0" y="69" width="782" height="439"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="iMY-4B-rqQ"/>
                                 </connections>
                             </webView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
-                                <frame key="frameInset" minX="580" minY="907" width="152" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
+                                <rect key="frame" x="612" y="931" width="120" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Go Back"/>
                                 <connections>
@@ -71,6 +73,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="sgZ-Yb-FgP" secondAttribute="trailing" constant="16" id="UbX-kf-B3d"/>
+                            <constraint firstItem="Zkt-qS-rgi" firstAttribute="top" secondItem="sgZ-Yb-FgP" secondAttribute="bottom" constant="42" id="xH4-1b-5fS"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
@@ -90,7 +96,7 @@
         <!--VODs-->
         <scene sceneID="4Ed-Z0-IdV">
             <objects>
-                <tableViewController title="VODs" id="y90-Eb-8tV" customClass="VODViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="VODViewController" title="VODs" id="y90-Eb-8tV" customClass="VODViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="150" sectionHeaderHeight="28" sectionFooterHeight="28" id="9dC-oz-bVk">
                         <rect key="frame" x="0.0" y="44" width="768" height="980"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,36 +109,49 @@
                                 <rect key="frame" x="0.0" y="28" width="768" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oY5-sy-01R" id="zoa-nK-w50">
-                                    <frame key="frameInset" width="768" height="150"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="768" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgJ-Jn-4FZ">
+                                            <rect key="frame" x="348" y="0.0" width="412" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="RecordedAt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-fY-BSE">
+                                            <rect key="frame" x="348" y="23" width="412" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWB-qB-ZOh">
+                                            <rect key="frame" x="348" y="42.5" width="53.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COn-38-rYn">
+                                            <rect key="frame" x="401.5" y="42.5" width="358.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vog-Hr-xQy">
+                                            <rect key="frame" x="0.0" y="0.0" width="340" height="149"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="149" id="3Zx-eN-1dG"/>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="332" id="E3R-x0-OO2"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="340" id="E3R-x0-OO2"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="X9w-dj-khm"/>
                                             </constraints>
                                         </imageView>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZ0-hd-dZc">
+                                            <rect key="frame" x="700" y="98" width="60" height="51"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <state key="normal" title="Play"/>
+                                            <connections>
+                                                <action selector="playButtonPressed:" destination="y90-Eb-8tV" eventType="touchUpInside" id="RfZ-65-hq8"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="HbP-fY-BSE" firstAttribute="top" secondItem="MgJ-Jn-4FZ" secondAttribute="bottom" constant="-1" id="AqN-h4-H3Z"/>
@@ -140,19 +159,23 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="MgJ-Jn-4FZ" secondAttribute="trailing" id="CkP-tn-s33"/>
                                         <constraint firstItem="eWB-qB-ZOh" firstAttribute="top" secondItem="HbP-fY-BSE" secondAttribute="bottom" constant="-1" id="Dvt-pK-gfA"/>
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="top" secondItem="zoa-nK-w50" secondAttribute="topMargin" constant="-8" id="N0x-YV-4ou"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="Vog-Hr-xQy" secondAttribute="leading" id="NXb-iS-diw"/>
+                                        <constraint firstAttribute="leadingMargin" secondItem="Vog-Hr-xQy" secondAttribute="leading" constant="8" id="NXb-iS-diw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="mZ0-hd-dZc" secondAttribute="trailing" id="QQN-6x-3gf"/>
+                                        <constraint firstItem="mZ0-hd-dZc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="COn-38-rYn" secondAttribute="bottom" id="Sbw-mp-lKR"/>
                                         <constraint firstItem="Vog-Hr-xQy" firstAttribute="top" secondItem="zoa-nK-w50" secondAttribute="topMargin" constant="-8" id="aDa-nX-Wmi"/>
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="leading" secondItem="Vog-Hr-xQy" secondAttribute="trailing" constant="8" id="aVh-Sb-wxI"/>
                                         <constraint firstItem="COn-38-rYn" firstAttribute="leading" secondItem="eWB-qB-ZOh" secondAttribute="trailing" id="bvx-5c-Eds"/>
                                         <constraint firstItem="eWB-qB-ZOh" firstAttribute="leading" secondItem="Vog-Hr-xQy" secondAttribute="trailing" constant="8" id="dXV-GE-hRy"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="HbP-fY-BSE" secondAttribute="trailing" id="e2w-P2-T0q"/>
                                         <constraint firstItem="COn-38-rYn" firstAttribute="top" secondItem="HbP-fY-BSE" secondAttribute="bottom" constant="-1" id="kfy-hp-z77"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mZ0-hd-dZc" secondAttribute="bottom" constant="-7" id="xqc-t6-wsa"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="COn-38-rYn" secondAttribute="trailing" id="ziy-gx-cFN"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
                                     <outlet property="lengthLabel" destination="eWB-qB-ZOh" id="TVR-FN-ZC9"/>
+                                    <outlet property="playButton" destination="mZ0-hd-dZc" id="V8Y-uL-2lX"/>
                                     <outlet property="previewImage" destination="Vog-Hr-xQy" id="Hmj-dr-d1U"/>
                                     <outlet property="recordedAtLabel" destination="HbP-fY-BSE" id="Gof-1C-jiS"/>
                                     <outlet property="titleLabel" destination="MgJ-Jn-4FZ" id="wd2-Q0-Vnq"/>
@@ -170,13 +193,21 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="th1-aY-dBa">
                             <color key="tintColor" red="0.050672061189999999" green="0.1190514734" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="modal" id="KhV-tl-WMo"/>
+                                <segue destination="BYZ-38-t0r" kind="modal" identifier="VOD2Display" id="KhV-tl-WMo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Highlights" id="IaQ-rw-WSd">
+                            <connections>
+                                <action selector="dropDownButtonPressed:" destination="y90-Eb-8tV" id="r6A-xD-D4E"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="dropDownButton" destination="IaQ-rw-WSd" id="EoA-hY-QAs"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Foz-cb-9cn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

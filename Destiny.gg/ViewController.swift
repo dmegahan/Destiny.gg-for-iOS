@@ -35,24 +35,28 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     var currentConstraints = [NSLayoutConstraint]();
     
+    let twitchStreamPrefix : String = "http://player.twitch.tv/?channel=";
     let chatURL : String = "https://www.destiny.gg/embed/chat";
+    let defaultStream = "destiny";
+    //string variable containing what will be displayed in the stream web view
+    var videoURL: String?;
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
+        
+        //get our app delegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         
         myToolBar.barTintColor = UIColor.black;
         
         self.initializeConstraints();
         
         self.twitchSearchBar.delegate = self;
-        
         //embed chat whether or not stream is online
         embedChat();
-        
-        let streamer = "Destiny";
-        
-        embedStream(streamer);
+        videoURL = appDelegate.streamToDisplay;
+        embedStream(videoURL!);
 
         let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
         self.view.addGestureRecognizer(panSwipe);
@@ -67,9 +71,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         // Dispose of any resources that can be recreated.
     }
     
-    func embedStream(_ streamer: String){
+    func embedStream(_ videoURL: String){
         //url implementation
-        let url = URL(string: "http://player.twitch.tv/?channel=" + streamer);
+        let url = URL(string: videoURL);
         let requestObj = URLRequest(url: url!);
         myStreamWebView.loadRequest(requestObj);
     }
@@ -312,7 +316,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         let searchText = searchBar.text?.lowercased();
 
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
-            embedStream(searchText!);
+            let stream : String = twitchStreamPrefix + searchText!;
+            embedStream(stream);
         }
     }
     

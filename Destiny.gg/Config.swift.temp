@@ -1,0 +1,37 @@
+//
+//  config.swift.template
+//  Destiny.gg
+//
+//  Created by Daniel Megahan on 10/18/16.
+//  Copyright © 2016 Daniel Megahan. All rights reserved.
+//
+/*
+ Holds our secret stuff that the Twitch API requires us to give
+ Client ID and Client Secret
+ To create your own Client ID and Secret, visit https://www.twitch.tv/settings/connections
+ and register a new application
+ */
+
+//rename/copy this file and name it Config.swift, then add your own twitch clientID/clientSecret
+
+
+import Foundation
+
+class Config: NSObject {
+    private let twitchClientID = "YOUR CLIENTID HERE";
+    private let twitchClientSecret = "YOUR CLIENT SECRET HERE"
+
+    private let youtubeAPIKey = "YOUTUBE API KEY HERE"
+
+    func getClientID() -> String{
+        return clientID;
+    }
+    
+    func getClientSecret() -> String{
+        return clientSecret;
+    }
+
+    func getYoutubeAPIKey() -> String{
+        return youtubeAPIKey;
+    }
+}
