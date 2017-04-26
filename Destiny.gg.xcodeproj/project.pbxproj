@@ -14,7 +14,8 @@
 		8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C8182BB1E1AE54B0090B328 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8C8182BA1E1AE54B0090B328 /* Podfile */; };
 		8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE226B31C625FB700EEA569 /* RestAPIManager.swift */; };
-		8CE693E21E1B63C000311519 /* Config.swift.template in Resources */ = {isa = PBXBuildFile; fileRef = 8CE693E11E1B63BF00311519 /* Config.swift.template */; };
+		8CE693E81E1C4DB500311519 /* Config.swift.temp in Sources */ = {isa = PBXBuildFile; fileRef = 8CE693E71E1C4DB500311519 /* Config.swift.temp */; };
+		8CE693EA1E1C4ED400311519 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE693E91E1C4ED400311519 /* Config.swift */; };
 		8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */; };
 		8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */; };
 		8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */; };
@@ -52,7 +53,8 @@
 		8C8182B61E1AD4DA0090B328 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		8CE226B31C625FB700EEA569 /* RestAPIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIManager.swift; sourceTree = "<group>"; };
-		8CE693E11E1B63BF00311519 /* Config.swift.template */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.swift.template; sourceTree = "<group>"; };
+		8CE693E71E1C4DB500311519 /* Config.swift.temp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Config.swift.temp; sourceTree = "<group>"; };
+		8CE693E91E1C4ED400311519 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		8CF9C9511C5E79C8007C2CF6 /* Destiny.gg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Destiny.gg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +136,6 @@
 				8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */,
 				8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */,
 				8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */,
-				8CE693E11E1B63BF00311519 /* Config.swift.template */,
 				8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */,
 				8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */,
 				8C8182B41E1AC5360090B328 /* VODViewController.swift */,
@@ -290,7 +291,6 @@
 				8C3B08B51DB998C000AE9E88 /* images in Resources */,
 				8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */,
 				8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */,
-				8CE693E21E1B63C000311519 /* Config.swift.template in Resources */,
 				8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
