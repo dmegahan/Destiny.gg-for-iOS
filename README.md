@@ -15,6 +15,6 @@ __All screenshots taken on the Iphone 6s Plus. Layout does not differ for tablet
 
 ![alt-text](https://github.com/dmegahan/Destiny.gg-for-iOS/blob/master/Screen%20Shot%202016-11-13%20at%201.30.40%20PM.png "Portrait mode with the chat panned up, and taking up the full screen")
 
-![alt-text](https://github.com/dmegahan/Destiny.gg-for-iOS/blob/master/Screen%20Shot%202016-11-13%20at%201.31.18%20PM.png "Landscape mode")
+![alt-text](https://cloud.githubusercontent.com/assets/3003191/21535135/cc458308-cd3e-11e6-8c91-3dd33ac83387.png "Landscape mode")
 
-![alt-text](https://github.com/dmegahan/Destiny.gg-for-iOS/blob/master/Screen%20Shot%202016-11-13%20at%201.31.23%20PM.png "Landscape mode with the stream panned right")
+![alt-text](https://cloud.githubusercontent.com/assets/3003191/21535138/d0dd38e8-cd3e-11e6-8ed3-a0e3f69c8953.png "Landscape mode with the stream panned right")
