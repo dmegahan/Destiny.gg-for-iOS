@@ -8,7 +8,7 @@
 
 import Foundation
 
-class TwitchVideo {
+class Video {
     var title: String;
     var videoType: String; //highlight or VOD
     var previewURL: String;

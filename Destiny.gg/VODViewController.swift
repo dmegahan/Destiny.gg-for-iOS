@@ -12,9 +12,13 @@ import AlamofireImage
 import DropDown
 
 class VODViewController: UITableViewController {
+    
+    let twitchDropDowns : [String] = ["Highlights", "Broadcasts"];
+    let youtubeDropDowns : [String] = ["Youtube"];
+    
     @IBOutlet var dropDownButton: UIBarButtonItem!
     
-    var twitchVideos: [TwitchVideo] = [];
+    var twitchVideos: [Video] = [];
     let dropDownList = DropDown()
     
     override func viewDidLoad() {
@@ -27,7 +31,7 @@ class VODViewController: UITableViewController {
     func setupDropDown(){
         dropDownList.anchorView = dropDownButton
         
-        dropDownList.dataSource = ["Highlights", "Broadcasts"];
+        dropDownList.dataSource = twitchDropDowns + youtubeDropDowns;
         
         dropDownList.selectionAction = { (index: Int, item: String) in
             //when an item is selected in the list, change the title of the drop down button to the selected item and load a whole new set of vods based on the selected item
@@ -35,7 +39,11 @@ class VODViewController: UITableViewController {
             //check if the selected videos are already showing
             if(self.dropDownButton.title != item){
                 self.dropDownButton.title = item;
-                self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
+                if(self.twitchDropDowns.contains(item)){
+                    self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
+                }else if(self.youtubeDropDowns.contains(item)){
+                    self.twitchVideos = RestAPIManager.sharedInstance.getYoutubeVideos("Destiny");
+                }
                 self.tableView.reloadData();
             }
         }
@@ -44,17 +52,18 @@ class VODViewController: UITableViewController {
     //function to populate our table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VODCell")! as! VODTableViewCell
-        let twitchVid: TwitchVideo = twitchVideos[indexPath.row];
+        let vid: Video = twitchVideos[indexPath.row];
         
-        cell.titleLabel.text = twitchVid.title;
-        cell.lengthLabel.text = twitchVid.length.stringValue;
-        cell.recordedAtLabel.text = twitchVid.recordedAt;
-        cell.viewsLabel.text = twitchVid.views.stringValue + " views";
-        cell.videoURL = twitchVid.videoURL;
+        //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
+        cell.titleLabel.text = vid.title;
+        cell.lengthLabel.text = vid.length.stringValue;
+        cell.recordedAtLabel.text = vid.recordedAt;
+        cell.viewsLabel.text = vid.views.stringValue + " views";
+        cell.videoURL = vid.videoURL;
         
         cell.playButton.tag = indexPath.row;
         
-        let imageURL = URL(string: twitchVid.previewURL);
+        let imageURL = URL(string: vid.previewURL);
         cell.previewImage.af_setImage(withURL: imageURL!);
         
         return cell;
@@ -120,7 +129,7 @@ class VODViewController: UITableViewController {
             }
             return nil;
         }catch let error {
-            print("invalid regex");
+            print("invalid regex: " + (error as! String));
             return nil;
         }
     }

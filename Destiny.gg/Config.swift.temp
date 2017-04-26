@@ -18,14 +18,20 @@
 import Foundation
 
 class Config: NSObject {
-    let clientID = "YOUR CLIENTID HERE";
-    let clientSecret = "YOUR CLIENT SECRET HERE"
-    
+    private let twitchClientID = "YOUR CLIENTID HERE";
+    private let twitchClientSecret = "YOUR CLIENT SECRET HERE"
+
+    private let youtubeAPIKey = "YOUTUBE API KEY HERE"
+
     func getClientID() -> String{
         return clientID;
     }
     
     func getClientSecret() -> String{
         return clientSecret;
+    }
+
+    func getYoutubeAPIKey() -> String{
+        return youtubeAPIKey;
     }
 }

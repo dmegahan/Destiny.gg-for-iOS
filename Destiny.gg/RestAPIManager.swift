@@ -19,6 +19,7 @@ class RestAPIManager: NSObject {
     let baseURL = "https://api.twitch.tv/kraken/";
     
     let clientID = Config().getClientID()
+    let youtubeAPIKey = Config().getYoutubeAPIKey();
     
     func isStreamOnline(_ streamer: String) -> (Bool){
         //construct REST api url
@@ -82,7 +83,7 @@ class RestAPIManager: NSObject {
         return doesExist;
     }
     
-    func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([TwitchVideo]){
+    func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([Video]){
         let clientIDQueryString = "?client_id=" + clientID;
         
         //twitch will only give 1 type of video in each request. The default
@@ -94,14 +95,13 @@ class RestAPIManager: NSObject {
         
         let channelVideosURL = baseURL + "channels/" + streamer + "/" + "videos" + clientIDQueryString + optionalQueries;
 
-        print("DEE: " + channelVideosURL);
         let semaphore = DispatchSemaphore(value: 0);
-        var videoList: [TwitchVideo] = [];
+        var videoList: [Video] = [];
         
         makeHTTPGetRequest(channelVideosURL) { json in
             if(json.object(forKey: "videos") != nil){
                 for video in json.object(forKey: "videos") as! [Dictionary<String, AnyObject>] {
-                    videoList.append(TwitchVideo(_title: video["title"] as! String,
+                    videoList.append(Video(_title: video["title"] as! String,
                                                  _videoType: video["broadcast_type"] as! String,
                                                  _previewURL: video["preview"] as! String,
                                                     _length: video["length"] as! NSNumber,
@@ -113,6 +113,77 @@ class RestAPIManager: NSObject {
             semaphore.signal();
         }
         semaphore.wait(timeout: DispatchTime.distantFuture);
+        return videoList;
+    }
+    
+    func getYoutubeVideos(_ channel: String) -> [Video] {
+        let playlistID = RestAPIManager.sharedInstance.getYoutubePlaylist(channel);
+        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(playlistID)
+        
+        return videos;
+    }
+    
+    func getYoutubePlaylist(_ channel: String) -> String{
+        let baseURL = "https://www.googleapis.com/youtube/v3"
+        
+        //get the channel object
+        let channelRequest = baseURL + "/channels?part=contentDetails&forUsername=" + channel + "&key=" + youtubeAPIKey
+        var channelID : String = "";
+        let semaphore = DispatchSemaphore(value: 0);
+        
+        makeHTTPGetRequest(channelRequest) { json in
+            if(json.object(forKey: "items") != nil){
+                let items = json.object(forKey: "items") as! Array<Dictionary<String, Any>>
+                let item = items[0] as Dictionary<String, Any>;
+                
+                channelID = item["id"] as! String;
+                
+                //let details = item["contentDetails"] as! Dictionary<String, Any>
+                //let playlists = details["relatedPlaylists"] as! Dictionary<String, Any>
+                //playlistID = playlists["uploads"] as! String;
+            }
+            semaphore.signal()
+        }
+        semaphore.wait(timeout: DispatchTime.distantFuture)
+        return channelID;
+    }
+    
+    func getYoutubeVideosList(_ channelID: String) -> [Video]{
+        let baseURL = "https://www.googleapis.com/youtube/v3"
+
+        //get list of most recent videos
+        
+        let playlistRequest = baseURL + "/search?key=" + youtubeAPIKey + "&channelId=" + channelID + "&part=snippet&order=date&maxResults=20"
+        let semaphore = DispatchSemaphore(value: 0);
+        
+        var videoList: [Video] = [];
+        
+        makeHTTPGetRequest(playlistRequest) { json in
+            if(json.object(forKey: "items") != nil){
+                for item in json.object(forKey: "items") as! [Dictionary<String, Any>]{
+                    //extract our data, google has a bunch of nested variables we need, so its messy
+                    //snippet holds everything ,but has sublists
+                    let snippet = item["snippet"] as! Dictionary<String, Any>
+                    
+                    let title = snippet["title"] as! String;
+                    let publishedAt = snippet["publishedAt"] as! String
+                    let type = "Youtube"
+                    
+                    //enter a nested json - get preview image
+                    let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>
+                    let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
+                    let defaultThumbnailURL = defaultThumbnail["url"] as! String
+                    
+                    //get video id
+                    let id = item["id"] as! Dictionary<String, Any>
+                    let videoID = id["videoId"] as! String
+                    
+                    videoList.append(Video(_title: title, _videoType: type, _previewURL: defaultThumbnailURL, _length: 0, _recordedAt: publishedAt, _views: 0, _videoURL: videoID))
+                }
+            }
+            semaphore.signal()
+        }
+        semaphore.wait(timeout: DispatchTime.distantFuture)
         return videoList;
     }
     
