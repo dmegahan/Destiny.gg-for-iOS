@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C0EA4631EB139640067DDEC /* GeneralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0EA4621EB139640067DDEC /* GeneralTests.swift */; };
+		8C0EA4641EB13D310067DDEC /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
@@ -21,7 +23,7 @@
 		8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */; };
 		8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C95B1C5E79C8007C2CF6 /* Assets.xcassets */; };
 		8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CF9C95D1C5E79C8007C2CF6 /* LaunchScreen.storyboard */; };
-		8CF9C96A1C5E79C8007C2CF6 /* Destiny_ggTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9691C5E79C8007C2CF6 /* Destiny_ggTests.swift */; };
+		8CF9C96A1C5E79C8007C2CF6 /* APIManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9691C5E79C8007C2CF6 /* APIManagerTests.swift */; };
 		8CF9C9751C5E79C8007C2CF6 /* Destiny_ggUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CF9C9741C5E79C8007C2CF6 /* Destiny_ggUITests.swift */; };
 		B5AD1E972B92583D420B4881 /* Pods_Destiny_gg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */; };
 /* End PBXBuildFile section */
@@ -46,6 +48,7 @@
 /* Begin PBXFileReference section */
 		5B77772EDDA912B39DD5E38A /* Pods-Destiny.gg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Destiny.gg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg.release.xcconfig"; sourceTree = "<group>"; };
 		6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Destiny_gg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C0EA4621EB139640067DDEC /* GeneralTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralTests.swift; sourceTree = "<group>"; };
 		8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODTableViewCell.swift; sourceTree = "<group>"; };
 		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
@@ -63,7 +66,7 @@
 		8CF9C95E1C5E79C8007C2CF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CF9C9601C5E79C8007C2CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CF9C9651C5E79C8007C2CF6 /* Destiny.ggTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Destiny.ggTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CF9C9691C5E79C8007C2CF6 /* Destiny_ggTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destiny_ggTests.swift; sourceTree = "<group>"; };
+		8CF9C9691C5E79C8007C2CF6 /* APIManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerTests.swift; sourceTree = "<group>"; };
 		8CF9C96B1C5E79C8007C2CF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CF9C9701C5E79C8007C2CF6 /* Destiny.ggUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Destiny.ggUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CF9C9741C5E79C8007C2CF6 /* Destiny_ggUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Destiny_ggUITests.swift; sourceTree = "<group>"; };
@@ -153,8 +156,9 @@
 		8CF9C9681C5E79C8007C2CF6 /* Destiny.ggTests */ = {
 			isa = PBXGroup;
 			children = (
-				8CF9C9691C5E79C8007C2CF6 /* Destiny_ggTests.swift */,
+				8CF9C9691C5E79C8007C2CF6 /* APIManagerTests.swift */,
 				8CF9C96B1C5E79C8007C2CF6 /* Info.plist */,
+				8C0EA4621EB139640067DDEC /* GeneralTests.swift */,
 			);
 			path = Destiny.ggTests;
 			sourceTree = "<group>";
@@ -380,7 +384,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF9C96A1C5E79C8007C2CF6 /* Destiny_ggTests.swift in Sources */,
+				8C0EA4631EB139640067DDEC /* GeneralTests.swift in Sources */,
+				8C0EA4641EB13D310067DDEC /* Video.swift in Sources */,
+				8CF9C96A1C5E79C8007C2CF6 /* APIManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

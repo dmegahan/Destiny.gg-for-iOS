@@ -26,7 +26,7 @@ class RestAPIManager: NSObject {
         let clientIDQueryString = "?client_id=" + clientID;
         
         let isOnlineURL = baseURL + "streams/" + streamer + clientIDQueryString;
-        var isOnline = false;
+        var isOnline:Bool? = nil;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
         let semaphore = DispatchSemaphore(value: 0);
 
@@ -49,7 +49,7 @@ class RestAPIManager: NSObject {
         }
         //we wait forever, should put a 30 second timer here or something
         semaphore.wait(timeout: DispatchTime.distantFuture)
-        return isOnline;
+        return isOnline!;
     }
     
     func doesStreamExist(_ streamer: String) -> (Bool){
@@ -57,7 +57,7 @@ class RestAPIManager: NSObject {
         let clientIDQueryString = "?client_id=" + clientID;
         
         let isOnlineURL = baseURL + "streams/" + streamer + clientIDQueryString;
-        var doesExist = false;
+        var doesExist:Bool? = nil;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
         let semaphore = DispatchSemaphore(value: 0);
         
@@ -80,7 +80,7 @@ class RestAPIManager: NSObject {
         }
         //we wait forever, should put a 30 second timer here or something
         semaphore.wait(timeout: DispatchTime.distantFuture)
-        return doesExist;
+        return doesExist!;
     }
     
     func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([Video]){
@@ -117,13 +117,13 @@ class RestAPIManager: NSObject {
     }
     
     func getYoutubeVideos(_ channel: String) -> [Video] {
-        let playlistID = RestAPIManager.sharedInstance.getYoutubePlaylist(channel);
-        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(playlistID)
+        let channelID = RestAPIManager.sharedInstance.getYoutubeChannelID(channel);
+        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID)
         
         return videos;
     }
     
-    func getYoutubePlaylist(_ channel: String) -> String{
+    func getYoutubeChannelID(_ channel: String) -> String{
         let baseURL = "https://www.googleapis.com/youtube/v3"
         
         //get the channel object
