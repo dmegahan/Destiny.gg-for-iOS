@@ -18,6 +18,7 @@ class VODTableViewCell: UITableViewCell {
     @IBOutlet var playButton: UIButton!
     
     var videoURL: String = "";
+    var videoType: String = "";
     
     override func awakeFromNib() {
         super.awakeFromNib()

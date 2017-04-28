@@ -10,7 +10,7 @@ import Foundation
 
 class Video {
     var title: String;
-    var videoType: String; //highlight or VOD
+    var videoType: String; //highlight, VOD, or Youtube
     var previewURL: String;
     var length: NSNumber;
     var recordedAt: String;

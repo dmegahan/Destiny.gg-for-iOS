@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8C0EA4631EB139640067DDEC /* GeneralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0EA4621EB139640067DDEC /* GeneralTests.swift */; };
-		8C0EA4641EB13D310067DDEC /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
@@ -385,7 +384,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C0EA4631EB139640067DDEC /* GeneralTests.swift in Sources */,
-				8C0EA4641EB13D310067DDEC /* Video.swift in Sources */,
 				8CF9C96A1C5E79C8007C2CF6 /* APIManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

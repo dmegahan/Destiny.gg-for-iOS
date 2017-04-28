@@ -60,6 +60,7 @@ class VODViewController: UITableViewController {
         cell.recordedAtLabel.text = vid.recordedAt;
         cell.viewsLabel.text = vid.views.stringValue + " views";
         cell.videoURL = vid.videoURL;
+        cell.videoType = vid.videoType;
         
         cell.playButton.tag = indexPath.row;
         
@@ -100,20 +101,27 @@ class VODViewController: UITableViewController {
         let index: IndexPath = IndexPath(row: sender.tag, section: 0);
         let cell = self.tableView.cellForRow(at: index) as! VODTableViewCell;
         
-        //need to extract numbers from videoURL and append to the end of this prefix to get the player url
-        let twitchVideoPrefix: String = "https://player.twitch.tv/?video=v";
+        if(cell.videoType != "Youtube"){
+            //need to extract numbers from videoURL and append to the end of this prefix to get the player url
+            let twitchVideoPrefix: String = "https://player.twitch.tv/?video=v";
         
-        //regex searchs for digits with any length at the end of our string
-        let match: String? = getMatchFromRegex(regex: "[\\d]*$", text: cell.videoURL)
+            //regex searchs for digits with any length at the end of our string
+            let match: String? = getMatchFromRegex(regex: "[\\d]*$", text: cell.videoURL)
         
-        if(match != nil){
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-            appDelegate.streamToDisplay = twitchVideoPrefix + match!;
+            if(match != nil){
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+                appDelegate.streamToDisplay = twitchVideoPrefix + match!;
             
-            //return to home screen (stream and chat)
+                //return to home screen (stream and chat)
+                performSegue(withIdentifier: "VOD2Display", sender: nil);
+            }else{
+                //perform notification and dont switch views
+            }
+        }else if(cell.videoType == "Youtube"){
+            let youtubePrefix: String = "https://www.youtube.com/embed/";
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate;
+            appDelegate.streamToDisplay = youtubePrefix + cell.videoURL;
             performSegue(withIdentifier: "VOD2Display", sender: nil);
-        }else{
-            //perform notification and dont switch views
         }
     }
     

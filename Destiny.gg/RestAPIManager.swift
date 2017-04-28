@@ -167,7 +167,7 @@ class RestAPIManager: NSObject {
                     
                     let title = snippet["title"] as! String;
                     let publishedAt = snippet["publishedAt"] as! String
-                    let type = "Youtube"
+                    let type = "Youtube";
                     
                     //enter a nested json - get preview image
                     let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>

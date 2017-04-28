@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Foundation
+@testable import Destiny_gg
 class GeneralTests: XCTestCase {
     
     override func setUp() {

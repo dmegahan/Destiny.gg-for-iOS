@@ -145,7 +145,6 @@ class APIManagerTests: XCTestCase {
                 let item = items[0] as Dictionary<String, Any>?;
                 XCTAssert(item != nil);
                 XCTAssert(item?["id"] != nil);
-                channelID = item?["id"] as! String;
             }
             semaphore.signal()
         }
