@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8C0EA4631EB139640067DDEC /* GeneralTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0EA4621EB139640067DDEC /* GeneralTests.swift */; };
+		8C0EA4661EB3CFF60067DDEC /* Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0EA4651EB3CFF60067DDEC /* Definitions.swift */; };
 		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
@@ -48,6 +49,7 @@
 		5B77772EDDA912B39DD5E38A /* Pods-Destiny.gg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Destiny.gg.release.xcconfig"; path = "Pods/Target Support Files/Pods-Destiny.gg/Pods-Destiny.gg.release.xcconfig"; sourceTree = "<group>"; };
 		6C2306CA3222B1C2BB4F8EC9 /* Pods_Destiny_gg.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Destiny_gg.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C0EA4621EB139640067DDEC /* GeneralTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralTests.swift; sourceTree = "<group>"; };
+		8C0EA4651EB3CFF60067DDEC /* Definitions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Definitions.swift; sourceTree = "<group>"; };
 		8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODTableViewCell.swift; sourceTree = "<group>"; };
 		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				8C8182B61E1AD4DA0090B328 /* Video.swift */,
 				8CE693E91E1C4ED400311519 /* Config.swift */,
 				8CE693E71E1C4DB500311519 /* Config.swift.temp */,
+				8C0EA4651EB3CFF60067DDEC /* Definitions.swift */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				8CE226B41C625FB700EEA569 /* RestAPIManager.swift in Sources */,
 				8CF9C9551C5E79C8007C2CF6 /* AppDelegate.swift in Sources */,
 				8CE693EA1E1C4ED400311519 /* Config.swift in Sources */,
+				8C0EA4661EB3CFF60067DDEC /* Definitions.swift in Sources */,
 				8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

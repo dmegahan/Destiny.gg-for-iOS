@@ -1,3 +1,4 @@
+
 //
 //  Destiny_ggUITests.swift
 //  Destiny.ggUITests
@@ -31,6 +32,11 @@ class Destiny_ggUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element
+        element.swipeLeft()
+        element.swipeUp()
+        
     }
     
 }

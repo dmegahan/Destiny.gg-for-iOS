@@ -13,8 +13,8 @@ import DropDown
 
 class VODViewController: UITableViewController {
     
-    let twitchDropDowns : [String] = ["Highlights", "Broadcasts"];
-    let youtubeDropDowns : [String] = ["Youtube"];
+    let twitchDropDowns : [String] = [VideoType.Highlight.rawValue, VideoType.Broadcast.rawValue];
+    let youtubeDropDowns : [String] = [VideoType.Youtube.rawValue];
     
     @IBOutlet var dropDownButton: UIBarButtonItem!
     
@@ -22,7 +22,7 @@ class VODViewController: UITableViewController {
     let dropDownList = DropDown()
     
     override func viewDidLoad() {
-        twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", dropDownButton.title!);
+        twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
         
         setupDropDown();
     }
@@ -40,9 +40,9 @@ class VODViewController: UITableViewController {
             if(self.dropDownButton.title != item){
                 self.dropDownButton.title = item;
                 if(self.twitchDropDowns.contains(item)){
-                    self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs("destiny", item);
+                    self.twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, item);
                 }else if(self.youtubeDropDowns.contains(item)){
-                    self.twitchVideos = RestAPIManager.sharedInstance.getYoutubeVideos("Destiny");
+                    self.twitchVideos = RestAPIManager.sharedInstance.getYoutubeVideos(destinyYoutubeName);
                 }
                 self.tableView.reloadData();
             }
@@ -101,26 +101,24 @@ class VODViewController: UITableViewController {
         let index: IndexPath = IndexPath(row: sender.tag, section: 0);
         let cell = self.tableView.cellForRow(at: index) as! VODTableViewCell;
         
-        if(cell.videoType != "Youtube"){
-            //need to extract numbers from videoURL and append to the end of this prefix to get the player url
-            let twitchVideoPrefix: String = "https://player.twitch.tv/?video=v";
+        if(cell.videoType != VideoType.Youtube.rawValue){
+            //need to extract numbers from videoURL and append to the end of the twitch video prefix to get the player url
         
             //regex searchs for digits with any length at the end of our string
             let match: String? = getMatchFromRegex(regex: "[\\d]*$", text: cell.videoURL)
         
             if(match != nil){
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-                appDelegate.streamToDisplay = twitchVideoPrefix + match!;
+                appDelegate.streamToDisplay = twitchVideoPlayerPrefix + match!;
             
                 //return to home screen (stream and chat)
                 performSegue(withIdentifier: "VOD2Display", sender: nil);
             }else{
                 //perform notification and dont switch views
             }
-        }else if(cell.videoType == "Youtube"){
-            let youtubePrefix: String = "https://www.youtube.com/embed/";
+        }else if(cell.videoType == VideoType.Youtube.rawValue){
             let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-            appDelegate.streamToDisplay = youtubePrefix + cell.videoURL;
+            appDelegate.streamToDisplay = youtubeVideoPlayerPrefix + cell.videoURL;
             performSegue(withIdentifier: "VOD2Display", sender: nil);
         }
     }

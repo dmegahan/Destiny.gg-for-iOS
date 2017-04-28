@@ -89,7 +89,7 @@ class RestAPIManager: NSObject {
         //twitch will only give 1 type of video in each request. The default
         //video given is highlights, so we don't need to add anything if that's the case.
         var optionalQueries: String = "";
-        if(vodType == "Broadcasts"){
+        if(vodType == VideoType.Broadcast.rawValue){
             optionalQueries = "&broadcasts=true";
         }
         
@@ -167,7 +167,7 @@ class RestAPIManager: NSObject {
                     
                     let title = snippet["title"] as! String;
                     let publishedAt = snippet["publishedAt"] as! String
-                    let type = "Youtube";
+                    let type = VideoType.Youtube.rawValue;
                     
                     //enter a nested json - get preview image
                     let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>

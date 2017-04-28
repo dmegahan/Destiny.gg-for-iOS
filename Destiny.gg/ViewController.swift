@@ -35,9 +35,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     var currentConstraints = [NSLayoutConstraint]();
     
-    let twitchStreamPrefix : String = "http://player.twitch.tv/?channel=";
-    let chatURL : String = "https://www.destiny.gg/embed/chat";
-    let defaultStream = "destiny";
+    let defaultStream = destinyTwitchName;
     //string variable containing what will be displayed in the stream web view
     var videoURL: String?;
     
@@ -80,7 +78,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     
     func embedChat(){
         //chat embed URL
-        let url = URL(string: chatURL);
+        let url = URL(string: destinyChatURL);
         let requestObj = URLRequest(url: url!);
         myChatWebView.loadRequest(requestObj);
     }
@@ -316,7 +314,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         let searchText = searchBar.text?.lowercased();
 
         if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
-            let stream : String = twitchStreamPrefix + searchText!;
+            let stream : String = twitchChannelPrefix + searchText!;
             embedStream(stream);
         }
     }
@@ -328,9 +326,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
             let currentURL : String = (webView.request?.url?.absoluteString)!;
             
             //if the request is not for chat itself, show the go back button so the user can return to chat
-            if(currentURL != chatURL){
+            if(currentURL != destinyChatURL){
                 goBackButton.isHidden = false;
-            }else if(currentURL == chatURL){
+            }else if(currentURL == destinyChatURL){
                 goBackButton.isHidden = true;
             }
         }

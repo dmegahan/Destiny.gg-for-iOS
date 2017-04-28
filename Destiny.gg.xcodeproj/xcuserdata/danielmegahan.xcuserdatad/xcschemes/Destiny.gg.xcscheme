@@ -38,6 +38,11 @@
                BlueprintName = "Destiny.ggTests"
                ReferencedContainer = "container:Destiny.gg.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "Destiny_ggTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
