@@ -26,7 +26,7 @@ class RestAPIManager: NSObject {
         let clientIDQueryString = "?client_id=" + clientID;
         
         let isOnlineURL = baseURL + "streams/" + streamer + clientIDQueryString;
-        var isOnline:Bool? = nil;
+        var isOnline:Bool = false;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
         let semaphore = DispatchSemaphore(value: 0);
 
@@ -48,8 +48,8 @@ class RestAPIManager: NSObject {
             semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        semaphore.wait(timeout: DispatchTime.distantFuture)
-        return isOnline!;
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
+        return isOnline;
     }
     
     func doesStreamExist(_ streamer: String) -> (Bool){
@@ -57,7 +57,7 @@ class RestAPIManager: NSObject {
         let clientIDQueryString = "?client_id=" + clientID;
         
         let isOnlineURL = baseURL + "streams/" + streamer + clientIDQueryString;
-        var doesExist:Bool? = nil;
+        var doesExist:Bool = false;
         //create semaphore so we wait for the request to finish before reporting if stream is online or not
         let semaphore = DispatchSemaphore(value: 0);
         
@@ -79,8 +79,8 @@ class RestAPIManager: NSObject {
             semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        semaphore.wait(timeout: DispatchTime.distantFuture)
-        return doesExist!;
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
+        return doesExist;
     }
     
     func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([Video]){
@@ -112,7 +112,7 @@ class RestAPIManager: NSObject {
             }
             semaphore.signal();
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture);
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength);
         return videoList;
     }
     
@@ -144,7 +144,7 @@ class RestAPIManager: NSObject {
             }
             semaphore.signal()
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
         return channelID;
     }
     
@@ -161,29 +161,33 @@ class RestAPIManager: NSObject {
         makeHTTPGetRequest(playlistRequest) { json in
             if(json.object(forKey: "items") != nil){
                 for item in json.object(forKey: "items") as! [Dictionary<String, Any>]{
-                    //extract our data, google has a bunch of nested variables we need, so its messy
-                    //snippet holds everything ,but has sublists
-                    let snippet = item["snippet"] as! Dictionary<String, Any>
-                    
-                    let title = snippet["title"] as! String;
-                    let publishedAt = snippet["publishedAt"] as! String
-                    let type = VideoType.Youtube.rawValue;
-                    
-                    //enter a nested json - get preview image
-                    let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>
-                    let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
-                    let defaultThumbnailURL = defaultThumbnail["url"] as! String
-                    
+                    //check what kind of result this is: playlist or video
                     //get video id
                     let id = item["id"] as! Dictionary<String, Any>
-                    let videoID = id["videoId"] as! String
-                    
-                    videoList.append(Video(_title: title, _videoType: type, _previewURL: defaultThumbnailURL, _length: 0, _recordedAt: publishedAt, _views: 0, _videoURL: videoID))
+                    let resultType = id["kind"] as! String
+                    if (resultType == kindVideo) {
+                        let videoID = id["videoId"] as! String
+                        
+                        //extract our data, google has a bunch of nested variables we need, so its messy
+                        //snippet holds everything ,but has sublists
+                        let snippet = item["snippet"] as! Dictionary<String, Any>
+                        
+                        let title = snippet["title"] as! String;
+                        let publishedAt = snippet["publishedAt"] as! String
+                        let type = VideoType.Youtube.rawValue;
+                        
+                        //enter a nested json - get preview image
+                        let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>
+                        let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
+                        let defaultThumbnailURL = defaultThumbnail["url"] as! String
+                        
+                        videoList.append(Video(_title: title, _videoType: type, _previewURL: defaultThumbnailURL, _length: 0, _recordedAt: publishedAt, _views: 0, _videoURL: videoID))
+                    }
                 }
             }
             semaphore.signal()
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
         return videoList;
     }
     

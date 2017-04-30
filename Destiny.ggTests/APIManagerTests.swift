@@ -40,7 +40,7 @@ class APIManagerTests: XCTestCase {
             semaphore.signal();
         }
         //we wait forever, should put a 30 second timer here or something
-        semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
     }
     
     func testIsStreamOnlineValidReturn(){
@@ -82,7 +82,7 @@ class APIManagerTests: XCTestCase {
             }
             semaphore.signal();
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture);
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength);
     }
     
     func testGetTwitchBroadcastsValidJSON(){
@@ -115,7 +115,7 @@ class APIManagerTests: XCTestCase {
             }
             semaphore.signal();
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture);
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength);
     }
     
     func testValidYoutubeAPIKey(){
@@ -148,7 +148,7 @@ class APIManagerTests: XCTestCase {
             }
             semaphore.signal()
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
     }
     
     func testGetYoutubeVideoListValidJSON(){
@@ -165,29 +165,31 @@ class APIManagerTests: XCTestCase {
             XCTAssertNotNil(json.object(forKey:"items"));
             if(json.object(forKey: "items") != nil){
                 for item in json.object(forKey: "items") as! [Dictionary<String, Any>]{
-                    XCTAssertNotNil(item["snippet"]);
-                    let snippet = item["snippet"] as! Dictionary<String, Any>
-                    
-                    XCTAssertNotNil(snippet["title"]);
-                    XCTAssertNotNil(snippet["publishedAt"]);
-
-                    //enter a nested json - get preview image
-                    XCTAssertNotNil(snippet["thumbnails"]);
-                    let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>
-                    XCTAssertNotNil(thumbnails["default"]);
-                    let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
-                    XCTAssertNotNil(defaultThumbnail["url"]);
-                    
                     //get video id
                     XCTAssertNotNil(item["id"]);
                     let id = item["id"] as! Dictionary<String, Any>
-                    XCTAssertNotNil(id["videoId"]);
+                    XCTAssertNotNil(id["kind"]);
+                    let resultType = id["kind"] as! String
+                    if (resultType == kindVideo){
+                        XCTAssertNotNil(id["videoId"], playlistRequest);
+                    
+                        XCTAssertNotNil(item["snippet"]);
+                        let snippet = item["snippet"] as! Dictionary<String, Any>
+                    
+                        XCTAssertNotNil(snippet["title"]);
+                        XCTAssertNotNil(snippet["publishedAt"]);
+
+                        //enter a nested json - get preview image
+                        XCTAssertNotNil(snippet["thumbnails"]);
+                        let thumbnails = snippet["thumbnails"] as! Dictionary<String, Any>
+                        XCTAssertNotNil(thumbnails["default"]);
+                        let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
+                        XCTAssertNotNil(defaultThumbnail["url"]);
+                    }
                 }
             }
             semaphore.signal()
         }
-        semaphore.wait(timeout: DispatchTime.distantFuture)
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
     }
-    
-    
 }

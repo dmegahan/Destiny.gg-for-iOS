@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0820"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -48,7 +48,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8CF9C96F1C5E79C8007C2CF6"
+               BlueprintIdentifier = "8C0EA46A1EB404580067DDEC"
                BuildableName = "Destiny.ggUITests.xctest"
                BlueprintName = "Destiny.ggUITests"
                ReferencedContainer = "container:Destiny.gg.xcodeproj">

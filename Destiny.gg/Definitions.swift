@@ -29,3 +29,10 @@ let twitchChannelPrefix: String = "http://player.twitch.tv/?channel=";
 let twitchVideoPlayerPrefix: String = "https://player.twitch.tv/?video=v";
 
 let youtubeVideoPlayerPrefix: String = "https://www.youtube.com/embed/";
+
+//how google describes the kind of result we get from their API
+let kindVideo = "youtube#video"
+let kindPlaylist = "youtube#playlist"
+
+//How long we wait until timeout for our RestAPIManager calls
+let timeoutLength: Double = 30;

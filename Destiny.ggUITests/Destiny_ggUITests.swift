@@ -1,10 +1,9 @@
-
 //
 //  Destiny_ggUITests.swift
 //  Destiny.ggUITests
 //
-//  Created by Daniel Megahan on 1/31/16.
-//  Copyright © 2016 Daniel Megahan. All rights reserved.
+//  Created by Daniel Megahan on 4/28/17.
+//  Copyright © 2017 Daniel Megahan. All rights reserved.
 //
 
 import XCTest
@@ -17,7 +16,7 @@ class Destiny_ggUITests: XCTestCase {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
+        continueAfterFailure = true
         // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
         XCUIApplication().launch()
 
@@ -29,14 +28,36 @@ class Destiny_ggUITests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        
-        let element = XCUIApplication().children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element(boundBy: 1).children(matching: .other).element.children(matching: .other).element
-        element.swipeLeft()
-        element.swipeUp()
+    func testLockUnlock() {
+        let app = XCUIApplication();
+        app.toolbars.buttons["Lock"].tap();
+        XCTAssertNotNil(app.toolbars.buttons["Unlock"]);
+        app.toolbars.buttons["Unlock"].tap();
+        XCTAssertNotNil(app.toolbars.buttons["Lock"]);
+    }
+    
+    func testSearchBarFunction(){
         
     }
     
+    func testSwitchOrientationLandscape(){
+        XCUIDevice.shared().orientation = .portrait
+        XCUIDevice.shared().orientation = .landscapeLeft
+        
+        XCTAssert(XCUIDevice.shared().orientation == .landscapeLeft);
+        //need to also assert that the constraints are correct (how do i do this)
+    }
+    
+    func testSwitchOrientationPortrait(){
+        XCUIDevice.shared().orientation = .landscapeLeft;
+        XCUIDevice.shared().orientation = .portrait;
+        XCTAssert(XCUIDevice.shared().orientation == .portrait);
+    }
+    
+    func testVODsButtonPressed(){
+        let app = XCUIApplication();
+        app.toolbars.buttons["VODs"].tap();
+        //assert that view controller is correctly navigated to, and that a tableView
+        //displays with relevant content
+    }
 }
