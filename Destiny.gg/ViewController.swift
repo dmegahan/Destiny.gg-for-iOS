@@ -313,10 +313,12 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let searchText = searchBar.text?.lowercased();
 
-        if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
-            let stream : String = twitchChannelPrefix + searchText!;
-            embedStream(stream);
-        }
+        //commented out because doesStreamExist doesnt work. Twitch no longer
+        //differentiates endpoint wise between a invalid stream and an offline one
+        //if(RestAPIManager.sharedInstance.doesStreamExist(searchText!)){
+        let stream : String = twitchChannelPrefix + searchText!;
+        embedStream(stream);
+        //}
     }
     
     func webViewDidFinishLoad(_ webView: UIWebView) {

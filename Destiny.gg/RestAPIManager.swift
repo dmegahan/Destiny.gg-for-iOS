@@ -52,6 +52,7 @@ class RestAPIManager: NSObject {
         return isOnline;
     }
     
+    /*
     func doesStreamExist(_ streamer: String) -> (Bool){
         //construct REST api url
         let clientIDQueryString = "?client_id=" + clientID;
@@ -82,6 +83,7 @@ class RestAPIManager: NSObject {
         semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
         return doesExist;
     }
+    */
     
     func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([Video]){
         let clientIDQueryString = "?client_id=" + clientID;

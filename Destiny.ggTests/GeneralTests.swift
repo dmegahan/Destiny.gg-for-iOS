@@ -39,4 +39,16 @@ class GeneralTests: XCTestCase {
         XCTAssertEqual(videoURL, video.videoURL);
     }
     
+    func testGetAPIKeys(){
+        let configFile = Config();
+        XCTAssertNotNil(configFile)
+        let clientID:String = configFile.getClientID();
+        let clientSecret:String = configFile.getClientSecret();
+        let youtubeKey:String = configFile.getYoutubeAPIKey();
+        
+        XCTAssertNotNil(clientID);
+        XCTAssertNotNil(clientSecret);
+        XCTAssertNotNil(youtubeKey);
+    }
+    
 }

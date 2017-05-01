@@ -55,9 +55,15 @@ class Destiny_ggUITests: XCTestCase {
     }
     
     func testVODsButtonPressed(){
-        let app = XCUIApplication();
-        app.toolbars.buttons["VODs"].tap();
-        //assert that view controller is correctly navigated to, and that a tableView
-        //displays with relevant content
+        let app = XCUIApplication()
+        app.toolbars.buttons["VODs"].tap()
+        
+        let tablesQuery = app.tables;
+        let table = tablesQuery.element;
+        XCTAssertNotNil(table);
+        var cells = table.cells.allElementsBoundByIndex;
+        XCTAssertNotNil(cells);
+        //test selection
+        cells[0].tap();
     }
 }

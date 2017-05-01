@@ -48,11 +48,23 @@ class APIManagerTests: XCTestCase {
         XCTAssert(isOnlineResult == true || isOnlineResult == false);
     }
     
+    /*
     func testDoesStreamExistValidReturn(){
         let doesStreamExist:Bool = RestAPIManager.sharedInstance.doesStreamExist(testStreamer);
         XCTAssert(doesStreamExist == true || doesStreamExist == false);
     }
+    */
+    func testIsStreamOnlineInvalidStream(){
+        let isOnlineResult:Bool = RestAPIManager.sharedInstance.isStreamOnline("ThisIsAnInvalidStream");
+        XCTAssert(isOnlineResult == false);
+    }
     
+    /*
+    func testDoesStreamExistWithInvalidStream(){
+        let doesStreamExist:Bool = RestAPIManager.sharedInstance.doesStreamExist("ThisIsAnInvalidStream");
+        XCTAssert(doesStreamExist == false);
+    }
+    */
     func testGetTwitchHighlightsValidJSON(){
         let clientIDQueryString = "?client_id=" + twitchAPIClientID;
         
@@ -191,5 +203,30 @@ class APIManagerTests: XCTestCase {
             semaphore.signal()
         }
         semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
+    }
+    
+    //validate results of the actual RestAPIManager calls
+    func testGetYoutubeVideos(){
+        let videos:[Video] = RestAPIManager.sharedInstance.getYoutubeVideos(destinyYoutubeName);
+        XCTAssertNotNil(videos);
+        for video in videos {
+            XCTAssertNotNil(video);
+        }
+    }
+    
+    func testGetTwitchHighlights(){
+        let videos:[Video] = RestAPIManager.sharedInstance.getTwitchVODs(destinyYoutubeName, VideoType.Highlight.rawValue);
+        XCTAssertNotNil(videos);
+        for video in videos {
+            XCTAssertNotNil(video);
+        }
+    }
+    
+    func testGetTwitchBroadcasts(){
+        let videos:[Video] = RestAPIManager.sharedInstance.getTwitchVODs(destinyYoutubeName, VideoType.Broadcast.rawValue);
+        XCTAssertNotNil(videos);
+        for video in videos {
+            XCTAssertNotNil(video);
+        }
     }
 }
