@@ -56,7 +56,11 @@ class Destiny_ggUITests: XCTestCase {
     
     func testVODsButtonPressed(){
         let app = XCUIApplication()
+        XCTAssert(app.toolbars.buttons["VODs"].exists);
         app.toolbars.buttons["VODs"].tap()
+        
+        //test if we're in the VODs view controller
+        XCTAssert(app.navigationBars["VODs"].exists);
         
         let tablesQuery = app.tables;
         let table = tablesQuery.element;
@@ -66,5 +70,21 @@ class Destiny_ggUITests: XCTestCase {
         //test selection
         cells[0].tap();
         cells[1].tap();
+    }
+    
+    func testVODsPressedThenBack(){
+        //there and back again
+        
+        let app = XCUIApplication()
+        app.toolbars.buttons["VODs"].tap();
+        
+        //test that we're in the VODs view controller
+        XCTAssert(app.navigationBars["VODs"].exists);
+        
+        XCTAssert(app.toolbars.buttons["Back"].exists);
+        app.toolbars.buttons["Back"].tap();
+        
+        //test that we're back on the homepage
+        XCTAssert(app.navigationBars["Homepage"].exists);
     }
 }
