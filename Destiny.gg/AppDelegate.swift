@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     //set to a default stream - AKA destinys
-    var streamToDisplay: String = twitchVideoPlayerPrefix + destinyTwitchName;
+    var streamToDisplay: String = twitchChannelPrefix + destinyTwitchName;
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

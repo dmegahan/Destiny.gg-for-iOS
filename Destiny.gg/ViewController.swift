@@ -300,6 +300,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     }
     
     @IBAction func buttonPressed(_ sender: UIButton) {
+        //go back button - that shows up when a link is clicked in the chat
         switch sender.tag {
         case 0:
             if(myChatWebView.canGoBack){

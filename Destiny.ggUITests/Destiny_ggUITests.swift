@@ -65,5 +65,6 @@ class Destiny_ggUITests: XCTestCase {
         XCTAssertNotNil(cells);
         //test selection
         cells[0].tap();
+        cells[1].tap();
     }
 }
