@@ -23,7 +23,8 @@ class VODTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        playButton.isEnabled = false;
+        playButton.isEnabled = true;
+        playButton.isHidden = false
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
