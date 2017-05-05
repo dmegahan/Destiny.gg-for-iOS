@@ -73,26 +73,6 @@ class VODViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return twitchVideos.count;
     }
-    /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //show button when row is selected
-        let indexValue: String = String(format: "%d", indexPath.row)
-        print("DEE: " + indexValue);
-        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
-
-        selectedCell.playButton.isEnabled = true;
-        selectedCell.playButton.isHidden = false;
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        //hide the play button when a row is deselected
-        let indexValue: String = String(format: "%d", indexPath.row)
-        print("DEESelect: " + indexValue);
-        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
-        
-        selectedCell.playButton.isEnabled = false;
-        selectedCell.playButton.isHidden = true;
-    }
     
     @IBAction func dropDownButtonPressed(_ sender: UIBarButtonItem) {
         //Drop down button tag is 1
@@ -100,7 +80,7 @@ class VODViewController: UITableViewController {
             dropDownList.show();
         }
     }
-    */
+
     @IBAction func playButtonPressed(_ sender: UIButton) {
         let index: IndexPath = IndexPath(row: sender.tag, section: 0);
         let cell = self.tableView.cellForRow(at: index) as! VODTableViewCell;

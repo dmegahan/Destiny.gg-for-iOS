@@ -23,8 +23,8 @@ class VODTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        playButton.isEnabled = true;
-        playButton.isHidden = false
+        playButton.isEnabled = false;
+        playButton.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -34,8 +34,12 @@ class VODTableViewCell: UITableViewCell {
         let currentColor: UIColor;
         if(selected){
             currentColor = UIColor.black;
+            playButton.isHidden = false
+            playButton.isEnabled = true
         }else{
             currentColor = UIColor.white;
+            playButton.isHidden = true
+            playButton.isEnabled = false
         }
         titleLabel.textColor = currentColor;
         recordedAtLabel.textColor = currentColor;
