@@ -36,3 +36,13 @@ let kindPlaylist = "youtube#playlist"
 
 //How long we wait until timeout for our RestAPIManager calls
 let timeoutLength: Double = 30;
+
+//what twitch gives us as a date
+let twitchDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+let youtubeDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.000'Z'"
+//what we want as a date (aka readable)
+let ourDateFormat: String = "dd 'of' MMMM yyyy, hh:mm a zzz";
+
+//how to present the length of the video
+//as far as I know, youtube doesnt give us the length of a video when querying the api
+let lengthFormat: String = "length: %02d:%02d:%02d";

@@ -104,7 +104,7 @@ class RestAPIManager: NSObject {
             if(json.object(forKey: "videos") != nil){
                 for video in json.object(forKey: "videos") as! [Dictionary<String, AnyObject>] {
                     videoList.append(Video(_title: video["title"] as! String,
-                                                 _videoType: video["broadcast_type"] as! String,
+                                                 _videoType: (video["broadcast_type"] as! String).capitalized,
                                                  _previewURL: video["preview"] as! String,
                                                     _length: video["length"] as! NSNumber,
                                                     _recordedAt: video["recorded_at"] as! String,

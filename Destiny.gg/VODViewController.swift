@@ -54,10 +54,43 @@ class VODViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VODCell")! as! VODTableViewCell
         let vid: Video = twitchVideos[indexPath.row];
         
-        //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
+        //check if its a twitch video or youtube vid
+        print("DEE: " + vid.videoType);
+        if(vid.videoType == VideoType.Broadcast.rawValue || vid.videoType == VideoType.Highlight.rawValue){
+            //twitch vid
+            //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: vid.length.intValue);
+            let lengthString: String = String(format: lengthFormat, h, m, s);
+            cell.lengthLabel.text = lengthString;
+            
+            //date stuff
+            let dateFormat = DateFormatter();
+            //take the format we get from the twitch Video and reformat it, start by extracting the date to a date object
+            dateFormat.dateFormat = twitchDateFormat;
+            let date = dateFormat.date(from: vid.recordedAt);
+            
+            //reformat the date object to a string that is readable
+            let cellDateFormat = DateFormatter();
+            cellDateFormat.dateFormat = ourDateFormat;
+            let ourDate: String = cellDateFormat.string(from: date!);
+            
+            cell.recordedAtLabel.text = ourDate;
+        }else if(vid.videoType == VideoType.Youtube.rawValue){
+            //youtube vid
+            //date stuff
+            let dateFormat = DateFormatter();
+            //take the format we get from the twitch Video and reformat it, start by extracting the date to a date object
+            dateFormat.dateFormat = youtubeDateFormat;
+            let date = dateFormat.date(from: vid.recordedAt);
+            
+            //reformat the date object to a string that is readable
+            let cellDateFormat = DateFormatter();
+            cellDateFormat.dateFormat = ourDateFormat;
+            let ourDate: String = cellDateFormat.string(from: date!);
+            
+            cell.recordedAtLabel.text = ourDate;
+        }
         cell.titleLabel.text = vid.title;
-        cell.lengthLabel.text = vid.length.stringValue;
-        cell.recordedAtLabel.text = vid.recordedAt;
         cell.viewsLabel.text = vid.views.stringValue + " views";
         cell.videoURL = vid.videoURL;
         cell.videoType = vid.videoType;
@@ -122,6 +155,11 @@ class VODViewController: UITableViewController {
             print("invalid regex: " + (error as! String));
             return nil;
         }
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds: Int) -> (Int, Int, Int){
+        //returns (h,m,s)
+        return (seconds/3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
     }
 }
 

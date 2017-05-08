@@ -264,7 +264,6 @@
 					};
 					8CF9C9501C5E79C8007C2CF6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = LFLLRK7EPN;
 						LastSwiftMigration = 0800;
 					};
 					8CF9C9641C5E79C8007C2CF6 = {
@@ -573,6 +572,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LFLLRK7EPN;
 				INFOPLIST_FILE = Destiny.gg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "destiny.Destiny-gg";
@@ -590,6 +590,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LFLLRK7EPN;
 				INFOPLIST_FILE = Destiny.gg/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "destiny.Destiny-gg";
