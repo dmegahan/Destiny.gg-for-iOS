@@ -42,5 +42,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func setVideoToDisplay(video: String){
+        //video: stream or video to display, in URL form
+        streamToDisplay = video;
+        if let rootViewController = window?.rootViewController as? UISplitViewController{
+            if let viewController = rootViewController.viewControllers.last as? ViewController{
+                //the last view controller in rootViewController.viewControllers is the "Homepage" view controller
+                viewController.embedStream(streamToDisplay);
+            }
+        }
+    }
 }
 
+extension AppDelegate: UISplitViewControllerDelegate {
+    func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+        print("DEE");
+        if(svc.isCollapsed){
+            return .allVisible
+        }else{
+            return .primaryHidden
+        }
+    }
+    func splitViewController(_ splitViewController: UISplitViewController, show vc: UIViewController, sender: Any?) -> Bool {
+        print("Dee2");
+        return false;
+    }
+    func splitViewController(_ splitViewController: UISplitViewController, showDetail vc: UIViewController, sender: Any?) -> Bool {
+        print("DEE3")
+        return false
+    }
+}

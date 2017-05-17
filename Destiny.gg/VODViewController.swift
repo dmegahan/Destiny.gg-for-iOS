@@ -11,18 +11,22 @@ import UIKit
 import AlamofireImage
 import DropDown
 
-class VODViewController: UITableViewController {
+class VODViewController: UITableViewController, UISplitViewControllerDelegate {
     
     let twitchDropDowns : [String] = [VideoType.Highlight.rawValue, VideoType.Broadcast.rawValue];
     let youtubeDropDowns : [String] = [VideoType.Youtube.rawValue];
     
     @IBOutlet var dropDownButton: UIBarButtonItem!
+    @IBOutlet var backButton: UIBarButtonItem!
     
     var twitchVideos: [Video] = [];
     let dropDownList = DropDown()
     
     override func viewDidLoad() {
         twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
+        
+        backButton.target = splitViewController?.displayModeButtonItem.target;
+        backButton.action = splitViewController?.displayModeButtonItem.action;
         
         setupDropDown();
     }
@@ -126,17 +130,16 @@ class VODViewController: UITableViewController {
         
             if(match != nil){
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-                appDelegate.streamToDisplay = twitchVideoPlayerPrefix + match!;
+                let videoToDisplay: String = twitchVideoPlayerPrefix + match!;
             
-                //return to home screen (stream and chat)
-                performSegue(withIdentifier: "VOD2Display", sender: nil);
+                appDelegate.setVideoToDisplay(video: videoToDisplay);
             }else{
                 //perform notification and dont switch views
             }
         }else if(cell.videoType == VideoType.Youtube.rawValue){
             let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-            appDelegate.streamToDisplay = youtubeVideoPlayerPrefix + cell.videoURL;
-            performSegue(withIdentifier: "VOD2Display", sender: nil);
+            let videoToDisplay: String = youtubeVideoPlayerPrefix + cell.videoURL;
+            appDelegate.setVideoToDisplay(video: videoToDisplay);
         }
     }
     

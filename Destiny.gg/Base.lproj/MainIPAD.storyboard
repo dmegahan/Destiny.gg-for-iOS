@@ -49,11 +49,7 @@
                                             <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="KBo-Y2-fJe"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem tag="1" title="VODs" id="26g-kV-dbN">
-                                        <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="AbO-PD-6rN"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem title="VODs" id="LAc-sO-iAM"/>
                                 </items>
                             </toolbar>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="streamWebView">
@@ -83,6 +79,7 @@
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
                         <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
                         <outlet property="goBackButton" destination="sgZ-Yb-FgP" id="m91-kT-e9e"/>
+                        <outlet property="item" destination="LAc-sO-iAM" id="eZl-hl-i7c"/>
                         <outlet property="lockFramesButton" destination="DCh-o9-EB7" id="6ZW-B7-grX"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
@@ -113,7 +110,7 @@
         <!--Split View Controller-->
         <scene sceneID="vSI-bN-HgT">
             <objects>
-                <splitViewController id="f4R-XL-9Rw" sceneMemberID="viewController">
+                <splitViewController id="f4R-XL-9Rw" customClass="SplitViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="rsZ-cb-opK" kind="relationship" relationship="masterViewController" id="0sF-JM-VHb"/>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="y2F-Az-eX3"/>
@@ -232,6 +229,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backButton" destination="th1-aY-dBa" id="6pq-fu-NDt"/>
                         <outlet property="dropDownButton" destination="IaQ-rw-WSd" id="EoA-hY-QAs"/>
                     </connections>
                 </tableViewController>

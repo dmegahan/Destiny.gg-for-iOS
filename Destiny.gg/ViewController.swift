@@ -10,7 +10,7 @@
 import UIKit
 
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
-class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
+class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, UISplitViewControllerDelegate{
     
     @IBOutlet var myChatWebView: UIWebView!
     @IBOutlet var myStreamWebView: UIWebView!
@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
     @IBOutlet var twitchSearchBar: UISearchBar!
     @IBOutlet var goBackButton: UIButton!
 
+    @IBOutlet var item: UIBarButtonItem!
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
     var streamCurrentLandscapeFrame = CGRect();
@@ -43,6 +44,10 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate{
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
         
+        //set up the button to open the primary split view controller
+        item.target = splitViewController?.displayModeButtonItem.target;
+        item.action = splitViewController?.displayModeButtonItem.action;
+    
         //get our app delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate;
         
