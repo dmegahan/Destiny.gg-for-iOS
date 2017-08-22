@@ -13,7 +13,6 @@
 		8C0EA4761EB6894D0067DDEC /* AppDelegateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0EA4751EB6894D0067DDEC /* AppDelegateUITests.swift */; };
 		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
-		8C3B08B51DB998C000AE9E88 /* images in Resources */ = {isa = PBXBuildFile; fileRef = 8C3B08B41DB998C000AE9E88 /* images */; };
 		8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B41E1AC5360090B328 /* VODViewController.swift */; };
 		8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C8182BB1E1AE54B0090B328 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8C8182BA1E1AE54B0090B328 /* Podfile */; };
@@ -59,7 +58,6 @@
 		8C0EA4751EB6894D0067DDEC /* AppDelegateUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateUITests.swift; sourceTree = "<group>"; };
 		8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODTableViewCell.swift; sourceTree = "<group>"; };
 		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
-		8C3B08B41DB998C000AE9E88 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		8C8182B41E1AC5360090B328 /* VODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODViewController.swift; sourceTree = "<group>"; };
 		8C8182B61E1AD4DA0090B328 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				8CF78A3F1EC7AAE400EEF3FB /* MainIPAD.storyboard */,
-				8C3B08B41DB998C000AE9E88 /* images */,
 				8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */,
 				8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */,
 				8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */,
@@ -313,7 +310,6 @@
 			files = (
 				8CF78A401EC7AAE400EEF3FB /* MainIPAD.storyboard in Resources */,
 				8C8182BB1E1AE54B0090B328 /* Podfile in Resources */,
-				8C3B08B51DB998C000AE9E88 /* images in Resources */,
 				8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */,
 				8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */,
 				8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */,
