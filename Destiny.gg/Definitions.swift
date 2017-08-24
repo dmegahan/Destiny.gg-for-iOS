@@ -14,11 +14,14 @@ import Foundation
 
 enum VideoType: String {
     case Youtube = "Youtube"
+    //twitch vid types
     case Highlight = "Highlight"
     case Broadcast = "Broadcast"
+    //archive is a "special" vid type, these are the broadcasts but for some reason twitch sets the vid type to archive when we request it
+    case Archive = "Archive"
 }
 //Which type of videos the VODS dropdown button defaults to
-let defaultVideoType: String = VideoType.Broadcast.rawValue;
+let defaultVideoType: String = VideoType.Highlight.rawValue;
 
 //destinys usernames acroess various platforms
 let destinyTwitchName: String = "destiny";

@@ -45,8 +45,10 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         self.automaticallyAdjustsScrollViewInsets = false;
         
         //set up the button to open the primary split view controller
-        item.target = splitViewController?.displayModeButtonItem.target;
-        item.action = splitViewController?.displayModeButtonItem.action;
+        if(UIDevice.current.userInterfaceIdiom == .pad){
+            item.target = splitViewController?.displayModeButtonItem.target;
+            item.action = splitViewController?.displayModeButtonItem.action;
+        }
     
         //get our app delegate
         let appDelegate = UIApplication.shared.delegate as! AppDelegate;

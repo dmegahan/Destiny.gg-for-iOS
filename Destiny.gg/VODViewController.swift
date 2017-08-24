@@ -26,8 +26,10 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
         dropDownButton.title = defaultVideoType;
         twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
         
-        backButton.target = splitViewController?.displayModeButtonItem.target;
-        backButton.action = splitViewController?.displayModeButtonItem.action;
+        if(UIDevice.current.userInterfaceIdiom == .pad){
+            backButton.target = splitViewController?.displayModeButtonItem.target;
+            backButton.action = splitViewController?.displayModeButtonItem.action;
+        }
         
         setupDropDown();
         
@@ -67,7 +69,9 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
         let vid: Video = twitchVideos[indexPath.row];
         
         //check if its a twitch video or youtube vid
-        if(vid.videoType == VideoType.Broadcast.rawValue || vid.videoType == VideoType.Highlight.rawValue){
+        if(vid.videoType == VideoType.Broadcast.rawValue ||
+            vid.videoType == VideoType.Highlight.rawValue ||
+            vid.videoType == VideoType.Archive.rawValue){
             //twitch vid
             //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
             let (h,m,s) = secondsToHoursMinutesSeconds(seconds: vid.length.intValue);
@@ -85,6 +89,7 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             cellDateFormat.dateFormat = ourDateFormat;
             let ourDate: String = cellDateFormat.string(from: date!);
             
+            print("DENNIS: " + ourDate);
             cell.recordedAtLabel.text = ourDate;
         }else if(vid.videoType == VideoType.Youtube.rawValue){
             //youtube vid
