@@ -11,20 +11,34 @@ import UIKit
 import AlamofireImage
 import DropDown
 
-class VODViewController: UITableViewController {
+class VODViewController: UITableViewController, UISplitViewControllerDelegate {
     
     let twitchDropDowns : [String] = [VideoType.Highlight.rawValue, VideoType.Broadcast.rawValue];
     let youtubeDropDowns : [String] = [VideoType.Youtube.rawValue];
     
     @IBOutlet var dropDownButton: UIBarButtonItem!
+    @IBOutlet var backButton: UIBarButtonItem!
     
     var twitchVideos: [Video] = [];
     let dropDownList = DropDown()
     
     override func viewDidLoad() {
+        dropDownButton.title = defaultVideoType;
         twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
         
+        if(UIDevice.current.userInterfaceIdiom == .pad){
+            backButton.target = splitViewController?.displayModeButtonItem.target;
+            backButton.action = splitViewController?.displayModeButtonItem.action;
+        }
+        
         setupDropDown();
+        
+        //point the fresh controller to our refresh function
+        self.refreshControl?.addTarget(self, action: #selector(VODViewController.handleRefresh(refreshControl:)), for: UIControlEvents.valueChanged);
+        //some refresh control customization
+        refreshControl?.tintColor = UIColor.white;
+        refreshControl?.attributedTitle = NSAttributedString(string: "Fetching Destiny VODS");
+        
     }
     
     //A drop down list for selecting the different types of VODS or twitch videos (Highlight, video, livestream vod)
@@ -54,10 +68,45 @@ class VODViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "VODCell")! as! VODTableViewCell
         let vid: Video = twitchVideos[indexPath.row];
         
-        //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
+        //check if its a twitch video or youtube vid
+        if(vid.videoType == VideoType.Broadcast.rawValue ||
+            vid.videoType == VideoType.Highlight.rawValue ||
+            vid.videoType == VideoType.Archive.rawValue){
+            //twitch vid
+            //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: vid.length.intValue);
+            let lengthString: String = String(format: lengthFormat, h, m, s);
+            cell.lengthLabel.text = lengthString;
+            
+            //date stuff
+            let dateFormat = DateFormatter();
+            //take the format we get from the twitch Video and reformat it, start by extracting the date to a date object
+            dateFormat.dateFormat = twitchDateFormat;
+            let date = dateFormat.date(from: vid.recordedAt);
+            
+            //reformat the date object to a string that is readable
+            let cellDateFormat = DateFormatter();
+            cellDateFormat.dateFormat = ourDateFormat;
+            let ourDate: String = cellDateFormat.string(from: date!);
+            
+            print("DENNIS: " + ourDate);
+            cell.recordedAtLabel.text = ourDate;
+        }else if(vid.videoType == VideoType.Youtube.rawValue){
+            //youtube vid
+            //date stuff
+            let dateFormat = DateFormatter();
+            //take the format we get from the twitch Video and reformat it, start by extracting the date to a date object
+            dateFormat.dateFormat = youtubeDateFormat;
+            let date = dateFormat.date(from: vid.recordedAt);
+            
+            //reformat the date object to a string that is readable
+            let cellDateFormat = DateFormatter();
+            cellDateFormat.dateFormat = ourDateFormat;
+            let ourDate: String = cellDateFormat.string(from: date!);
+            
+            cell.recordedAtLabel.text = ourDate;
+        }
         cell.titleLabel.text = vid.title;
-        cell.lengthLabel.text = vid.length.stringValue;
-        cell.recordedAtLabel.text = vid.recordedAt;
         cell.viewsLabel.text = vid.views.stringValue + " views";
         cell.videoURL = vid.videoURL;
         cell.videoType = vid.videoType;
@@ -74,29 +123,13 @@ class VODViewController: UITableViewController {
         return twitchVideos.count;
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //show button when row is selected
-        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
-
-        selectedCell.playButton.isEnabled = true;
-        selectedCell.playButton.isHidden = false;
-    }
-    
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        //hide the play button when a row is deselected
-        let selectedCell = tableView.cellForRow(at: indexPath) as! VODTableViewCell;
-        
-        selectedCell.playButton.isEnabled = false;
-        selectedCell.playButton.isHidden = true;
-    }
-    
     @IBAction func dropDownButtonPressed(_ sender: UIBarButtonItem) {
         //Drop down button tag is 1
         if(sender.tag == 1){
             dropDownList.show();
         }
     }
-    
+
     @IBAction func playButtonPressed(_ sender: UIButton) {
         let index: IndexPath = IndexPath(row: sender.tag, section: 0);
         let cell = self.tableView.cellForRow(at: index) as! VODTableViewCell;
@@ -109,17 +142,16 @@ class VODViewController: UITableViewController {
         
             if(match != nil){
                 let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-                appDelegate.streamToDisplay = twitchVideoPlayerPrefix + match!;
+                let videoToDisplay: String = twitchVideoPlayerPrefix + match!;
             
-                //return to home screen (stream and chat)
-                performSegue(withIdentifier: "VOD2Display", sender: nil);
+                appDelegate.setVideoToDisplay(video: videoToDisplay);
             }else{
                 //perform notification and dont switch views
             }
         }else if(cell.videoType == VideoType.Youtube.rawValue){
             let appDelegate = UIApplication.shared.delegate as! AppDelegate;
-            appDelegate.streamToDisplay = youtubeVideoPlayerPrefix + cell.videoURL;
-            performSegue(withIdentifier: "VOD2Display", sender: nil);
+            let videoToDisplay: String = youtubeVideoPlayerPrefix + cell.videoURL;
+            appDelegate.setVideoToDisplay(video: videoToDisplay);
         }
     }
     
@@ -137,6 +169,64 @@ class VODViewController: UITableViewController {
         }catch let error {
             print("invalid regex: " + (error as! String));
             return nil;
+        }
+    }
+    
+    func secondsToHoursMinutesSeconds (seconds: Int) -> (Int, Int, Int){
+        //returns (h,m,s)
+        return (seconds/3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+    
+    //Does our refresh, handles all the actions when the user does a refresh
+    func handleRefresh(refreshControl: UIRefreshControl){
+        self.tableView.reloadData();
+        refreshControl.endRefreshing();
+    }
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //determine when the user has scrolled through the entire table view list
+        let height = scrollView.frame.size.height;
+        let contentYoffset = scrollView.contentOffset.y;
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if (distanceFromBottom < height){
+            addVideosToTableViewList();
+        }
+    }
+    
+    func addVideosToTableViewList(){
+        let numberOfRows:Int = self.tableView.numberOfRows(inSection: 0);
+        //get the currently selected video type
+        if (dropDownButton.title == VideoType.Highlight.rawValue || dropDownButton.title == VideoType.Broadcast.rawValue){
+            //Send our REST command to get twitch highlights, specify a different offset and limit based on how many are currently in the list
+            //our offset is the current length of the list, and our limit is the current length of the list + the set limit in Definitions.swift
+            //we only have one section, so all the rows in that section is our number
+            let addedVODs = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!, numberOfRows, optionalQuery_limit: limit);
+            
+            twitchVideos.append(contentsOf: addedVODs);
+            //update the table view
+            self.tableView.beginUpdates();
+            for count in 0...addedVODs.count-1 {
+                self.tableView.insertRows(at: [IndexPath(row: numberOfRows + count, section: 0)], with: .automatic);
+            }
+            //self.tableView.insertRows(at: [IndexPath(row:twitchVideos.count-1, section: 0)], with: .automatic);
+            self.tableView.endUpdates();
+        }else if(dropDownButton.title == VideoType.Youtube.rawValue){
+            if(numberOfRows >= youtubeHighestMaxResults){
+                //return if we're at the cap of video requests youtube allows
+                return;
+            }
+            //same thing basically but with youtube
+            let addedVideos = RestAPIManager.sharedInstance.getYoutubeVideos(destinyYoutubeName, numberOfRows + limit);
+            //since youtube doesn't give us an offset, we need to ignore all the videos in the addedVideos list that we already have, so we'll discard all the videos that are at an index less than our number of rows
+            let newVideos = addedVideos.dropFirst(numberOfRows);
+            
+            //update our table
+            twitchVideos.append(contentsOf: newVideos);
+            self.tableView.beginUpdates();
+            for count in 0...newVideos.count-1 {
+                self.tableView.insertRows(at: [IndexPath(row: numberOfRows + count, section: 0)], with: .automatic);
+            }
+            self.tableView.endUpdates();
         }
     }
 }

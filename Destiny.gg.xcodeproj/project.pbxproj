@@ -160,6 +160,7 @@
 				8C488B001F4CCD230045F442 /* Config.swift */,
 				8CE693E71E1C4DB500311519 /* Config.swift.temp */,
 				8C0EA4651EB3CFF60067DDEC /* Definitions.swift */,
+				8CF78A451EC7B07A00EEF3FB /* SplitViewController.swift */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -302,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF78A401EC7AAE400EEF3FB /* MainIPAD.storyboard in Resources */,
 				8C8182BB1E1AE54B0090B328 /* Podfile in Resources */,
 				8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */,
 				8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */,
@@ -392,6 +394,7 @@
 			files = (
 				8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */,
 				8CE693E81E1C4DB500311519 /* Config.swift.temp in Sources */,
+				8CF78A461EC7B07A00EEF3FB /* SplitViewController.swift in Sources */,
 				8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */,
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
 				8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */,
@@ -613,6 +616,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = LFLLRK7EPN;
 				INFOPLIST_FILE = Destiny.ggTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "destiny.Destiny-ggTests";
@@ -626,6 +630,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = LFLLRK7EPN;
 				INFOPLIST_FILE = Destiny.ggTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "destiny.Destiny-ggTests";

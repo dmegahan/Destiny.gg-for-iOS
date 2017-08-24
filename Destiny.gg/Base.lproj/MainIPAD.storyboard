@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="f4R-XL-9Rw">
     <device id="ipad9_7" orientation="portrait">
-        <adaptation id="splitview2_3"/>
+        <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -20,7 +20,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Zkt-qS-rgi"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="438" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1" userLabel="chatWebView">
@@ -49,16 +49,11 @@
                                             <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="KBo-Y2-fJe"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem tag="1" title="VODs" id="26g-kV-dbN">
-                                        <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="AbO-PD-6rN"/>
-                                            <segue destination="gDJ-DU-wVM" kind="modal" id="WAV-A6-bYp"/>
-                                        </connections>
-                                    </barButtonItem>
+                                    <barButtonItem title="VODs" id="LAc-sO-iAM"/>
                                 </items>
                             </toolbar>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="streamWebView">
-                                <rect key="frame" x="0.0" y="69" width="452" height="439"/>
+                                <rect key="frame" x="0.0" y="69" width="782" height="439"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -66,7 +61,7 @@
                                 </connections>
                             </webView>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sgZ-Yb-FgP">
-                                <rect key="frame" x="282" y="931" width="120" height="51"/>
+                                <rect key="frame" x="612" y="931" width="120" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Go Back"/>
                                 <connections>
@@ -84,6 +79,7 @@
                         <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
                         <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
                         <outlet property="goBackButton" destination="sgZ-Yb-FgP" id="m91-kT-e9e"/>
+                        <outlet property="item" destination="LAc-sO-iAM" id="eZl-hl-i7c"/>
                         <outlet property="lockFramesButton" destination="DCh-o9-EB7" id="6ZW-B7-grX"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
@@ -93,55 +89,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="173" y="-213"/>
+            <point key="canvasLocation" x="-962" y="2462"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9C3-pK-VKF">
+            <objects>
+                <navigationController id="rsZ-cb-opK" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0lP-gG-Kce">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="y90-Eb-8tV" kind="relationship" relationship="rootViewController" id="6VJ-BT-qUI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hyt-EJ-NEP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-978" y="1343"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="vSI-bN-HgT">
+            <objects>
+                <splitViewController id="f4R-XL-9Rw" customClass="SplitViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="rsZ-cb-opK" kind="relationship" relationship="masterViewController" id="0sF-JM-VHb"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="detailViewController" id="y2F-Az-eX3"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AuC-op-yby" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1968" y="1885"/>
         </scene>
         <!--VODs-->
         <scene sceneID="4Ed-Z0-IdV">
             <objects>
                 <tableViewController storyboardIdentifier="VODViewController" title="VODs" id="y90-Eb-8tV" customClass="VODViewController" customModule="Destiny_gg" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="464" sectionHeaderHeight="28" sectionFooterHeight="28" id="9dC-oz-bVk">
-                        <rect key="frame" x="0.0" y="44" width="438" height="980"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="406" sectionHeaderHeight="28" sectionFooterHeight="28" id="9dC-oz-bVk">
+                        <rect key="frame" x="0.0" y="44" width="320" height="980"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" red="0.050672061192346955" green="0.11905147342705247" blue="0.99835759401321411" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="sectionIndexBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VODCell" rowHeight="464" id="oY5-sy-01R" customClass="VODTableViewCell" customModule="Destiny_gg" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="438" height="464"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="VODCell" rowHeight="406" id="oY5-sy-01R" customClass="VODTableViewCell" customModule="Destiny_gg" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="406"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oY5-sy-01R" id="zoa-nK-w50">
-                                    <rect key="frame" x="0.0" y="0.0" width="438" height="464"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="406"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MgJ-Jn-4FZ">
-                                            <rect key="frame" x="8" y="325" width="422" height="32"/>
+                                            <rect key="frame" x="8" y="237" width="304" height="66"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" verticalCompressionResistancePriority="751" text="RecordedAt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-fY-BSE">
-                                            <rect key="frame" x="8" y="357" width="422" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="253" text="RecordedAt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HbP-fY-BSE">
+                                            <rect key="frame" x="8" y="303" width="304" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="254" verticalCompressionResistancePriority="752" text="Views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COn-38-rYn">
-                                            <rect key="frame" x="8" y="398" width="422" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="254" verticalCompressionResistancePriority="754" text="Views" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COn-38-rYn">
+                                            <rect key="frame" x="8" y="345" width="304" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vog-Hr-xQy">
-                                            <rect key="frame" x="8" y="8" width="422" height="317"/>
+                                            <rect key="frame" x="8" y="8" width="304" height="228.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="Vog-Hr-xQy" secondAttribute="height" multiplier="4:3" id="3KH-aF-bCI"/>
                                             </constraints>
                                         </imageView>
-                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZ0-hd-dZc">
-                                            <rect key="frame" x="370" y="419" width="60" height="45"/>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mZ0-hd-dZc">
+                                            <rect key="frame" x="252" y="366" width="60" height="32"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="45" id="Wws-R5-jnO"/>
+                                                <constraint firstAttribute="height" constant="32" id="YRg-kM-VTh"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                             <state key="normal" title="Play"/>
@@ -150,7 +175,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Length" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eWB-qB-ZOh">
-                                            <rect key="frame" x="8" y="377.5" width="422" height="20.5"/>
+                                            <rect key="frame" x="8" y="324" width="304" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -171,15 +196,13 @@
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="leading" secondItem="zoa-nK-w50" secondAttribute="leadingMargin" id="am4-2N-MW1"/>
                                         <constraint firstItem="HbP-fY-BSE" firstAttribute="leading" secondItem="zoa-nK-w50" secondAttribute="leadingMargin" id="f6U-Kd-GZE"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="eWB-qB-ZOh" secondAttribute="trailing" id="kqE-65-OAO"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mZ0-hd-dZc" secondAttribute="bottom" id="pEP-3F-Qvd"/>
                                         <constraint firstItem="MgJ-Jn-4FZ" firstAttribute="top" secondItem="Vog-Hr-xQy" secondAttribute="bottom" id="pH6-od-Grw"/>
                                         <constraint firstItem="eWB-qB-ZOh" firstAttribute="top" secondItem="HbP-fY-BSE" secondAttribute="bottom" id="sTQ-Fj-h1p"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Vog-Hr-xQy" secondAttribute="trailing" id="yyM-02-uew"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="mZ0-hd-dZc" secondAttribute="bottom" id="4gg-Ob-wNq"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="lengthLabel" destination="eWB-qB-ZOh" id="TVR-FN-ZC9"/>
                                     <outlet property="playButton" destination="mZ0-hd-dZc" id="V8Y-uL-2lX"/>
@@ -199,11 +222,8 @@
                     <navigationItem key="navigationItem" title="VODs" id="Xgt-cY-qXu">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="th1-aY-dBa">
                             <color key="tintColor" red="0.050672061189999999" green="0.1190514734" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="modal" identifier="VOD2Display" id="KhV-tl-WMo"/>
-                            </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="1" title="Highlights" id="IaQ-rw-WSd">
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Highlight" id="IaQ-rw-WSd">
                             <connections>
                                 <action selector="dropDownButtonPressed:" destination="y90-Eb-8tV" id="r6A-xD-D4E"/>
                             </connections>
@@ -212,40 +232,23 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="BfB-bE-mpt">
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="vjL-jk-bZH">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
+                        <outlet property="backButton" destination="th1-aY-dBa" id="6pq-fu-NDt"/>
                         <outlet property="dropDownButton" destination="IaQ-rw-WSd" id="EoA-hY-QAs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Foz-cb-9cn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3131" y="-790"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4Kf-Dt-V2F">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gDJ-DU-wVM" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nGv-bv-yDz">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="y90-Eb-8tV" kind="relationship" relationship="rootViewController" id="VDh-87-CYI"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f3y-ka-gph" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2151" y="-790"/>
+            <point key="canvasLocation" x="1" y="1343"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="ipad9_7.splitview2_3"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
