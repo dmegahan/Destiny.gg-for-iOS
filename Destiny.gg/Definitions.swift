@@ -17,6 +17,8 @@ enum VideoType: String {
     case Highlight = "Highlight"
     case Broadcast = "Broadcast"
 }
+//Which type of videos the VODS dropdown button defaults to
+let defaultVideoType: String = VideoType.Broadcast.rawValue;
 
 //destinys usernames acroess various platforms
 let destinyTwitchName: String = "destiny";
@@ -46,3 +48,11 @@ let ourDateFormat: String = "dd 'of' MMMM yyyy, hh:mm a zzz";
 //how to present the length of the video
 //as far as I know, youtube doesnt give us the length of a video when querying the api
 let lengthFormat: String = "length: %02d:%02d:%02d";
+
+//Default values for optional queries
+//Default value for optional query - limit, determines how many videos are returned to us when we query youtube or twitch through the REST API Manager
+let limit: Int = 15;
+
+//Highest possible values for the number of videos requested on various platforms
+let twitchHighestLimit: Int = 100;
+let youtubeHighestMaxResults: Int = 50;

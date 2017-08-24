@@ -85,7 +85,7 @@ class RestAPIManager: NSObject {
     }
     */
     
-    func getTwitchVODs(_ streamer: String, _ vodType: String) -> ([Video]){
+    func getTwitchVODs(_ streamer: String, _ vodType: String, _ optionalQuery_offset: Int = 0, optionalQuery_limit: Int = limit) -> ([Video]){
         let clientIDQueryString = "?client_id=" + clientID;
         
         //twitch will only give 1 type of video in each request. The default
@@ -93,6 +93,14 @@ class RestAPIManager: NSObject {
         var optionalQueries: String = "";
         if(vodType == VideoType.Broadcast.rawValue){
             optionalQueries = "&broadcasts=true";
+        }
+        //add limit and offset to our optional queries
+        optionalQueries += "&offset=" + String(optionalQuery_offset);
+        //dont request more than twitch allows 
+        if(optionalQuery_limit > twitchHighestLimit){
+            optionalQueries += "&limit=" + String(twitchHighestLimit);
+        }else{
+            optionalQueries += "&limit=" + String(optionalQuery_limit);
         }
         
         let channelVideosURL = baseURL + "channels/" + streamer + "/" + "videos" + clientIDQueryString + optionalQueries;
@@ -118,9 +126,10 @@ class RestAPIManager: NSObject {
         return videoList;
     }
     
-    func getYoutubeVideos(_ channel: String) -> [Video] {
+    //needed to add the optionalQuery here as well, since this is the view controllers point of access for generating youtube videos
+    func getYoutubeVideos(_ channel: String, _ optionalQuery_maxResults: Int = limit) -> [Video] {
         let channelID = RestAPIManager.sharedInstance.getYoutubeChannelID(channel);
-        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID)
+        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID, optionalQuery_maxResults)
         
         return videos;
     }
@@ -150,12 +159,20 @@ class RestAPIManager: NSObject {
         return channelID;
     }
     
-    func getYoutubeVideosList(_ channelID: String) -> [Video]{
+    func getYoutubeVideosList(_ channelID: String, _ optionalQuery_maxResults: Int = limit) -> [Video]{
         let baseURL = "https://www.googleapis.com/youtube/v3"
 
         //get list of most recent videos
         
-        let playlistRequest = baseURL + "/search?key=" + youtubeAPIKey + "&channelId=" + channelID + "&part=snippet&order=date&maxResults=20"
+        var playlistRequest = baseURL + "/search?key=" + youtubeAPIKey + "&channelId=" + channelID + "&part=snippet&order=date"
+        //add optionalquery_maxResults to the request
+        //if optionalQuery_maxResults is higher than what youtube allows, request the highest possible number of videos
+        if(optionalQuery_maxResults > youtubeHighestMaxResults){
+            playlistRequest += "&maxResults=" + String(youtubeHighestMaxResults);
+        }else{
+            playlistRequest += "&maxResults=" + String(optionalQuery_maxResults);
+        }
+        
         let semaphore = DispatchSemaphore(value: 0);
         
         var videoList: [Video] = [];

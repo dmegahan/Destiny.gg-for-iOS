@@ -223,7 +223,7 @@
                         <barButtonItem key="leftBarButtonItem" title="Back" id="th1-aY-dBa">
                             <color key="tintColor" red="0.050672061189999999" green="0.1190514734" blue="0.99835759400000001" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" tag="1" title="Highlights" id="IaQ-rw-WSd">
+                        <barButtonItem key="rightBarButtonItem" tag="1" title="Highlight" id="IaQ-rw-WSd">
                             <connections>
                                 <action selector="dropDownButtonPressed:" destination="y90-Eb-8tV" id="r6A-xD-D4E"/>
                             </connections>
@@ -232,6 +232,9 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="vjL-jk-bZH">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <outlet property="backButton" destination="th1-aY-dBa" id="6pq-fu-NDt"/>
                         <outlet property="dropDownButton" destination="IaQ-rw-WSd" id="EoA-hY-QAs"/>
