@@ -223,7 +223,6 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             }
             self.tableView.endUpdates();
         }
-        tableViewIsUpdating = false;
     }
 }
 
