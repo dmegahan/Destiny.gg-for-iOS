@@ -72,6 +72,7 @@ class Destiny_ggUITests: XCTestCase {
         cells[1].tap();
     }
     
+    /*
     func testVODsPressedThenBack(){
         //there and back again
         
@@ -87,4 +88,5 @@ class Destiny_ggUITests: XCTestCase {
         //test that we're back on the homepage
         XCTAssert(app.navigationBars["Homepage"].exists);
     }
+    */
 }
