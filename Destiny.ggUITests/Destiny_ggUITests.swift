@@ -74,7 +74,7 @@ class Destiny_ggUITests: XCTestCase {
     
     /*
     func testVODsPressedThenBack(){
-        //there and back again
+        //there and back again 
         
         let app = XCUIApplication()
         app.toolbars.buttons["VODs"].tap();
