@@ -14,6 +14,7 @@
 		8C2628BF1E1B074100295B80 /* VODTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */; };
 		8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */; };
 		8C488B011F4CCD230045F442 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C488B001F4CCD230045F442 /* Config.swift */; };
+		8C57D9BF1F4FA64600A69729 /* MainIPAD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C57D9BD1F4FA64600A69729 /* MainIPAD.storyboard */; };
 		8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B41E1AC5360090B328 /* VODViewController.swift */; };
 		8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8182B61E1AD4DA0090B328 /* Video.swift */; };
 		8C8182BB1E1AE54B0090B328 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 8C8182BA1E1AE54B0090B328 /* Podfile */; };
@@ -57,6 +58,7 @@
 		8C2628BE1E1B074100295B80 /* VODTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODTableViewCell.swift; sourceTree = "<group>"; };
 		8C2628C01E1B4C9400295B80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
 		8C488B001F4CCD230045F442 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8C57D9BE1F4FA64600A69729 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainIPAD.storyboard; sourceTree = "<group>"; };
 		8C8182B41E1AC5360090B328 /* VODViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VODViewController.swift; sourceTree = "<group>"; };
 		8C8182B61E1AD4DA0090B328 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		8C8182BA1E1AE54B0090B328 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 		8CF9C9531C5E79C8007C2CF6 /* Destiny.gg */ = {
 			isa = PBXGroup;
 			children = (
+				8C57D9BD1F4FA64600A69729 /* MainIPAD.storyboard */,
 				8CF9C9541C5E79C8007C2CF6 /* AppDelegate.swift */,
 				8CF9C9561C5E79C8007C2CF6 /* ViewController.swift */,
 				8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */,
@@ -160,7 +163,6 @@
 				8C488B001F4CCD230045F442 /* Config.swift */,
 				8CE693E71E1C4DB500311519 /* Config.swift.temp */,
 				8C0EA4651EB3CFF60067DDEC /* Definitions.swift */,
-				8CF78A451EC7B07A00EEF3FB /* SplitViewController.swift */,
 			);
 			path = Destiny.gg;
 			sourceTree = "<group>";
@@ -303,9 +305,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CF78A401EC7AAE400EEF3FB /* MainIPAD.storyboard in Resources */,
 				8C8182BB1E1AE54B0090B328 /* Podfile in Resources */,
 				8CF9C95F1C5E79C8007C2CF6 /* LaunchScreen.storyboard in Resources */,
+				8C57D9BF1F4FA64600A69729 /* MainIPAD.storyboard in Resources */,
 				8CF9C95C1C5E79C8007C2CF6 /* Assets.xcassets in Resources */,
 				8CF9C95A1C5E79C8007C2CF6 /* Main.storyboard in Resources */,
 			);
@@ -394,7 +396,6 @@
 			files = (
 				8C2628C11E1B4C9400295B80 /* NavigationViewController.swift in Sources */,
 				8CE693E81E1C4DB500311519 /* Config.swift.temp in Sources */,
-				8CF78A461EC7B07A00EEF3FB /* SplitViewController.swift in Sources */,
 				8C8182B51E1AC5360090B328 /* VODViewController.swift in Sources */,
 				8CF9C9571C5E79C8007C2CF6 /* ViewController.swift in Sources */,
 				8C8182B71E1AD4DA0090B328 /* Video.swift in Sources */,
@@ -431,6 +432,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8C57D9BD1F4FA64600A69729 /* MainIPAD.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8C57D9BE1F4FA64600A69729 /* Base */,
+			);
+			name = MainIPAD.storyboard;
+			sourceTree = "<group>";
+		};
 		8CF9C9581C5E79C8007C2CF6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

@@ -187,7 +187,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         myStreamWebView.translatesAutoresizingMaskIntoConstraints = false;
         
         let minWidth = CGFloat(200);
-        let minHeight = CGFloat(200);
+        let minHeight = CGFloat(150);
         
         if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             //constant = space inbetween 2 objects (usually 0 for us)
