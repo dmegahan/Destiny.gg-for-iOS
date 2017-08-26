@@ -66,11 +66,18 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
     //function to populate our table
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: VODTableViewCell;
-        if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
-            cell = tableView.dequeueReusableCell(withIdentifier: "VODCellPortrait")! as! VODTableViewCell
+        
+        //determine what VODCell to show to the user, based on type of device and orientation
+        if(UIDevice.current.userInterfaceIdiom == .phone){
+            if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
+                cell = tableView.dequeueReusableCell(withIdentifier: "VODCellPortrait")! as! VODTableViewCell
+            }else{
+                cell = tableView.dequeueReusableCell(withIdentifier: "VODCellLandscape")! as! VODTableViewCell
+            }
         }else{
-            cell = tableView.dequeueReusableCell(withIdentifier: "VODCellLandscape")! as! VODTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "VODCell")! as! VODTableViewCell
         }
+        
         let vid: Video = twitchVideos[indexPath.row];
         
         //check if its a twitch video or youtube vid

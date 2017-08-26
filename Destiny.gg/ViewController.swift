@@ -8,12 +8,13 @@
 //
 
 import UIKit
+import WebKit
 
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
-class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, UISplitViewControllerDelegate{
+class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, UISplitViewControllerDelegate, WKNavigationDelegate{
     
-    @IBOutlet var myChatWebView: UIWebView!
-    @IBOutlet var myStreamWebView: UIWebView!
+    @IBOutlet var myChatWebView: WKWebView!
+    @IBOutlet var myStreamWebView: WKWebView!
     @IBOutlet var myToolBar: UIToolbar!
     @IBOutlet var lockFramesButton: UIBarButtonItem!
     @IBOutlet var twitchSearchBar: UISearchBar!
@@ -80,14 +81,14 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         //url implementation
         let url = URL(string: videoURL);
         let requestObj = URLRequest(url: url!);
-        myStreamWebView.loadRequest(requestObj);
+        myStreamWebView.load(requestObj);
     }
     
     func embedChat(){
         //chat embed URL
         let url = URL(string: destinyChatURL);
         let requestObj = URLRequest(url: url!);
-        myChatWebView.loadRequest(requestObj);
+        myChatWebView.load(requestObj);
     }
 
     func OnPanSwipe(_ gesture: UIPanGestureRecognizer){
@@ -342,5 +343,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
                 goBackButton.isHidden = true;
             }
         }
+    }
+    
+    func webViewsFinishedInitialLoad() -> Bool{
+        return myStreamWebView.isLoading && myChatWebView.isLoading;
     }
 }
