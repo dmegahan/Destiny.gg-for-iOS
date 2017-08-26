@@ -101,7 +101,6 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             cellDateFormat.dateFormat = ourDateFormat;
             let ourDate: String = cellDateFormat.string(from: date!);
             
-            print("DENNIS: " + ourDate);
             cell.recordedAtLabel.text = ourDate;
         }else if(vid.videoType == VideoType.Youtube.rawValue){
             //youtube vid
