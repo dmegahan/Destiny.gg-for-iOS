@@ -157,6 +157,7 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
                 let videoToDisplay: String = twitchVideoPlayerPrefix + match!;
             
                 appDelegate.setVideoToDisplay(video: videoToDisplay);
+                performSegue(withIdentifier: "VOD2Display", sender: nil);
             }else{
                 //perform notification and dont switch views
             }
@@ -164,6 +165,7 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             let appDelegate = UIApplication.shared.delegate as! AppDelegate;
             let videoToDisplay: String = youtubeVideoPlayerPrefix + cell.videoURL;
             appDelegate.setVideoToDisplay(video: videoToDisplay);
+            performSegue(withIdentifier: "VOD2Display", sender: nil);
         }
     }
     
