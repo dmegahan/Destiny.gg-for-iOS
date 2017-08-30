@@ -133,13 +133,21 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             }
             var lengthLabelString: String = "";
             if(!hours.isEmpty){
-                lengthLabelString += hours + ":";
+                lengthLabelString += hours + "H:";
             }
             if(!minutes.isEmpty){
-                lengthLabelString += minutes + ":";
+                if(minutes.characters.count == 1){
+                    //if there's only 1 character, we need to insert a 0 so that there are 2
+                    minutes.insert("0", at: minutes.startIndex);
+                }
+                lengthLabelString += minutes + "M:";
             }
             if(!seconds.isEmpty){
-                lengthLabelString += seconds;
+                if(seconds.characters.count == 1){
+                    //if there's only 1 character, we need to insert a 0 so that there are 2
+                    seconds.insert("0", at: seconds.startIndex);
+                }
+                lengthLabelString += seconds + "S";
             }
             cell.lengthLabel.text = lengthLabelString;
         }
