@@ -111,10 +111,12 @@ class RestAPIManager: NSObject {
         makeHTTPGetRequest(channelVideosURL) { json in
             if(json.object(forKey: "videos") != nil){
                 for video in json.object(forKey: "videos") as! [Dictionary<String, AnyObject>] {
+                    let length = video["length"] as! NSNumber;
+                    let lengthString = length.stringValue;
                     videoList.append(Video(_title: video["title"] as! String,
                                                  _videoType: (video["broadcast_type"] as! String).capitalized,
                                                  _previewURL: video["preview"] as! String,
-                                                    _length: video["length"] as! NSNumber,
+                                                    _length: lengthString,
                                                     _recordedAt: video["recorded_at"] as! String,
                                                     _views: video["views"] as! NSNumber,
                                                     _videoURL: video["url"] as! String));
@@ -129,9 +131,10 @@ class RestAPIManager: NSObject {
     //needed to add the optionalQuery here as well, since this is the view controllers point of access for generating youtube videos
     func getYoutubeVideos(_ channel: String, _ optionalQuery_maxResults: Int = limit) -> [Video] {
         let channelID = RestAPIManager.sharedInstance.getYoutubeChannelID(channel);
-        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID, optionalQuery_maxResults)
+        var videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID, optionalQuery_maxResults)
+        let updatedVideos = RestAPIManager.sharedInstance.getYoutubeVideosDetails(videoList: videos);
         
-        return videos;
+        return updatedVideos;
     }
     
     func getYoutubeChannelID(_ channel: String) -> String{
@@ -200,7 +203,7 @@ class RestAPIManager: NSObject {
                         let defaultThumbnail = thumbnails["default"] as! Dictionary<String, Any>
                         let defaultThumbnailURL = defaultThumbnail["url"] as! String
                         
-                        videoList.append(Video(_title: title, _videoType: type, _previewURL: defaultThumbnailURL, _length: 0, _recordedAt: publishedAt, _views: 0, _videoURL: videoID))
+                        videoList.append(Video(_title: title, _videoType: type, _previewURL: defaultThumbnailURL, _length: "0", _recordedAt: publishedAt, _views: 0, _videoURL: videoID))
                     }
                 }
             }
@@ -210,7 +213,49 @@ class RestAPIManager: NSObject {
         return videoList;
     }
     
+    func getYoutubeVideosDetails(videoList: [Video], _ optionalQuery_maxResults: Int = limit) -> [Video]{
+        let baseURL = "https://www.googleapis.com/youtube/v3"
+        
+        //append all the video IDs to the requestedVideoIds string, which will be inserted into the videos request later being sent
+        var requestedVideoIDs = "";
+        for video in videoList{
+            requestedVideoIDs += video.videoURL + ","
+        }
+        //remove last comma
+        requestedVideoIDs.remove(at: requestedVideoIDs.index(before: requestedVideoIDs.endIndex));
+        
+        let detailsRequest = baseURL + "/videos?key=" + youtubeAPIKey + "&id=" + requestedVideoIDs + "&part=contentDetails,statistics"
+        
+        let semaphore = DispatchSemaphore(value: 0);
+        
+        makeHTTPGetRequest(detailsRequest) { json in
+            if(json.object(forKey: "items") != nil){
+                var i: Int = 0;
+                for item in json.object(forKey: "items") as! [Dictionary<String, Any>]{
+                    //check what kind of result this is: playlist or video
+                    //get video id
+                    
+                    let statistics = item["statistics"] as! Dictionary<String, Any>
+                    let viewCount = statistics["viewCount"] as! String;
+                    
+                    //get the length of the video
+                    let contentDetails = item["contentDetails"] as! Dictionary<String, Any>
+                    let length = contentDetails["duration"] as! String
+                    
+                    videoList[i].views = Int(viewCount)! as NSNumber; //disgustiny
+                    videoList[i].length = length;
+                    
+                    i=i+1;
+                }
+            }
+            semaphore.signal()
+        }
+        semaphore.wait(timeout: DispatchTime.now() + timeoutLength)
+        return videoList;
+    }
+    
     func makeHTTPGetRequest(_ path: String, completionHandler: @escaping (_ myJson: NSDictionary) -> ()){
+        print("DENNIS: " + path);
         let request = URLRequest(url: URL(string: path)!);
         URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             do {

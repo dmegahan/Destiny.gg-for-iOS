@@ -86,7 +86,7 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             vid.videoType == VideoType.Archive.rawValue){
             //twitch vid
             //this needs to be cleaned up - privatise the labels and have a function that takes a video and populates them
-            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: vid.length.intValue);
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int(vid.length)!);
             let lengthString: String = String(format: lengthFormat, h, m, s);
             cell.lengthLabel.text = lengthString;
             
@@ -116,6 +116,32 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             let ourDate: String = cellDateFormat.string(from: date!);
             
             cell.recordedAtLabel.text = ourDate;
+            
+            //convert the youtube length to a readable length
+            let matches: [String] = getMultipleMatchesFromRegex(regex: "(\\d+[H|M|S])", text: vid.length);
+            //youtube format for length is PT#H#M#S, our regex captures #H, #M, #S
+            var hours = "", minutes = "", seconds = "";
+            for match in matches{
+                if(match.contains("H")){
+                    //remove the last index in this string, which will be H, M, or S
+                    hours = match.substring(to: match.index(before: match.endIndex));
+                }else if(match.contains("M")){
+                    minutes = match.substring(to: match.index(before: match.endIndex));
+                }else if(match.contains("S")){
+                    seconds = match.substring(to: match.index(before: match.endIndex));
+                }
+            }
+            var lengthLabelString: String = "";
+            if(!hours.isEmpty){
+                lengthLabelString += hours + ":";
+            }
+            if(!minutes.isEmpty){
+                lengthLabelString += minutes + ":";
+            }
+            if(!seconds.isEmpty){
+                lengthLabelString += seconds;
+            }
+            cell.lengthLabel.text = lengthLabelString;
         }
         cell.titleLabel.text = vid.title;
         cell.viewsLabel.text = vid.views.stringValue + " views";
@@ -182,6 +208,18 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
         }catch let error {
             print("invalid regex: " + (error as! String));
             return nil;
+        }
+    }
+    
+    func getMultipleMatchesFromRegex(regex: String, text: String) -> [String]{
+        do {
+            let regex = try NSRegularExpression(pattern: regex);
+            let nsStringText = text as NSString;
+            let results = regex.matches(in: text, range: NSRange(location: 0, length: nsStringText.length));
+            return results.map { nsStringText.substring(with: $0.range)};
+        } catch let error {
+            print("invalid regex: " + (error as! String));
+            return [];
         }
     }
     
