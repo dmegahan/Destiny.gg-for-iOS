@@ -23,6 +23,11 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
     let dropDownList = DropDown()
     
     override func viewDidLoad() {
+        if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
+            self.tableView.rowHeight = CGFloat(rowHeightLandscapeIphone);
+        }else if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
+            self.tableView.rowHeight = CGFloat(rowHeightLandscapeIphone);
+        }
         dropDownButton.title = defaultVideoType;
         twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
         

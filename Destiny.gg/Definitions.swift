@@ -21,7 +21,7 @@ enum VideoType: String {
     case Archive = "Archive"
 }
 //Which type of videos the VODS dropdown button defaults to
-let defaultVideoType: String = VideoType.Highlight.rawValue;
+let defaultVideoType: String = VideoType.Youtube.rawValue;
 
 //destinys usernames acroess various platforms
 let destinyTwitchName: String = "destiny";
@@ -64,3 +64,7 @@ let youtubeHighestMaxResults: Int = 50;
 //label for the switch chats button
 let switchToTwitchLabel: String = "Twitch Chat";
 let switchToDGGLabel: String = "d.gg Chat";
+
+//row heights for landscape and portrait on Iphone
+let rowHeightPortraitIphone: Int = 475;
+let rowHeightLandscapeIphone: Int = 325;
