@@ -57,7 +57,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: UISplitViewControllerDelegate {
     func targetDisplayModeForAction(in svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
-        print("DEE");
         if(svc.isCollapsed){
             return .allVisible
         }else{
@@ -65,11 +64,9 @@ extension AppDelegate: UISplitViewControllerDelegate {
         }
     }
     func splitViewController(_ splitViewController: UISplitViewController, show vc: UIViewController, sender: Any?) -> Bool {
-        print("Dee2");
         return false;
     }
     func splitViewController(_ splitViewController: UISplitViewController, showDetail vc: UIViewController, sender: Any?) -> Bool {
-        print("DEE3")
         return false
     }
 }

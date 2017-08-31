@@ -131,7 +131,7 @@ class RestAPIManager: NSObject {
     //needed to add the optionalQuery here as well, since this is the view controllers point of access for generating youtube videos
     func getYoutubeVideos(_ channel: String, _ optionalQuery_maxResults: Int = limit) -> [Video] {
         let channelID = RestAPIManager.sharedInstance.getYoutubeChannelID(channel);
-        var videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID, optionalQuery_maxResults)
+        let videos: [Video] = RestAPIManager.sharedInstance.getYoutubeVideosList(channelID, optionalQuery_maxResults)
         let updatedVideos = RestAPIManager.sharedInstance.getYoutubeVideosDetails(videoList: videos);
         
         return updatedVideos;
@@ -255,7 +255,6 @@ class RestAPIManager: NSObject {
     }
     
     func makeHTTPGetRequest(_ path: String, completionHandler: @escaping (_ myJson: NSDictionary) -> ()){
-        print("DENNIS: " + path);
         let request = URLRequest(url: URL(string: path)!);
         URLSession.shared.dataTask(with: request) { (data, response, error) -> Void in
             do {
