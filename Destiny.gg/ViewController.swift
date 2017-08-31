@@ -19,8 +19,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
     @IBOutlet var lockFramesButton: UIBarButtonItem!
     @IBOutlet var twitchSearchBar: UISearchBar!
     @IBOutlet var goBackButton: UIButton!
+    @IBOutlet var switchChatsButton: UIBarButtonItem!
 
-    @IBOutlet var item: UIBarButtonItem!
+    @IBOutlet var VODsButton: UIBarButtonItem!
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
     var streamCurrentLandscapeFrame = CGRect();
@@ -47,8 +48,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         
         //set up the button to open the primary split view controller
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            item.target = splitViewController?.displayModeButtonItem.target;
-            item.action = splitViewController?.displayModeButtonItem.action;
+            VODsButton.target = splitViewController?.displayModeButtonItem.target;
+            VODsButton.action = splitViewController?.displayModeButtonItem.action;
         }
     
         //get our app delegate
@@ -59,8 +60,12 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         self.initializeConstraints();
         
         self.twitchSearchBar.delegate = self;
+        
+        //initialize the switchChatsButton to our switchToTwitchLabel
+        switchChatsButton.title = switchToTwitchLabel;
+        
         //embed chat whether or not stream is online
-        embedChat();
+        embedChat(destinyChatURL);
         videoURL = appDelegate.streamToDisplay;
         embedStream(videoURL!);
 
@@ -84,9 +89,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         myStreamWebView.load(requestObj);
     }
     
-    func embedChat(){
+    func embedChat(_ chatURL: String){
         //chat embed URL
-        let url = URL(string: destinyChatURL);
+        let url = URL(string: chatURL);
         let requestObj = URLRequest(url: url!);
         myChatWebView.load(requestObj);
     }
@@ -302,6 +307,18 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
                     //this might need another look, there should be a more efficient way to just disable a certain swipe temporarily, without removing it from the view.gestureRecognizers list
                 }
             }
+            break;
+        case 2:
+            //Twitch Chat/DGG Chat button - Switch which chat is displayed
+            if(switchChatsButton.title == switchToTwitchLabel){
+                //switch to twitch chat
+                embedChat(destinyTwitchChatURL);
+                switchChatsButton.title = switchToDGGLabel;
+            }else if(switchChatsButton.title == switchToDGGLabel){
+                embedChat(destinyChatURL);
+                switchChatsButton.title = switchToTwitchLabel;
+            }
+            break;
         default:
             break;
         }
@@ -337,9 +354,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
             let currentURL : String = (webView.request?.url?.absoluteString)!;
             
             //if the request is not for chat itself, show the go back button so the user can return to chat
-            if(currentURL != destinyChatURL){
+            if(currentURL != destinyChatURL && currentURL != destinyTwitchChatURL){
                 goBackButton.isHidden = false;
-            }else if(currentURL == destinyChatURL){
+            }else if(currentURL == destinyChatURL && currentURL == destinyTwitchChatURL){
                 goBackButton.isHidden = true;
             }
         }

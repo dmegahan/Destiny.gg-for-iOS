@@ -50,6 +50,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem title="VODs" id="LAc-sO-iAM"/>
+                                    <barButtonItem title="Twitch Chat" id="aPL-6P-2u1">
+                                        <connections>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="Yaw-kz-QqL"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="streamWebView">
@@ -84,6 +89,7 @@
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
                         <outlet property="myToolBar" destination="wbc-Yh-wzI" id="xcQ-tX-OGA"/>
+                        <outlet property="switchChatsButton" destination="aPL-6P-2u1" id="BRu-4f-NOI"/>
                         <outlet property="twitchSearchBar" destination="Ljx-bf-wNV" id="VkD-Mc-qHi"/>
                     </connections>
                 </viewController>

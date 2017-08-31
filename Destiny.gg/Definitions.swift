@@ -29,6 +29,7 @@ let destinyYoutubeName: String = "destiny";
 //--
 
 let destinyChatURL: String = "https://www.destiny.gg/embed/chat";
+let destinyTwitchChatURL: String = "https://www.twitch.tv/destiny/chat?no-mobile-redirect=true";
 
 let twitchChannelPrefix: String = "http://player.twitch.tv/?channel=";
 let twitchVideoPlayerPrefix: String = "https://player.twitch.tv/?video=v";
@@ -59,3 +60,7 @@ let limit: Int = 15;
 //Highest possible values for the number of videos requested on various platforms
 let twitchHighestLimit: Int = 100;
 let youtubeHighestMaxResults: Int = 50;
+
+//label for the switch chats button
+let switchToTwitchLabel: String = "Twitch Chat";
+let switchToDGGLabel: String = "d.gg Chat";

@@ -55,6 +55,11 @@
                                             <segue destination="gDJ-DU-wVM" kind="modal" id="WAV-A6-bYp"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem tag="2" title="Twitch Chat" id="Sce-WI-ArV">
+                                        <connections>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="8a6-Hb-xkC"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <webView autoresizesSubviews="NO" clipsSubviews="YES" tag="1" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" suppressesIncrementalRendering="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pge-yQ-1Sh" userLabel="streamWebView">
@@ -88,6 +93,7 @@
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
                         <outlet property="myToolBar" destination="wbc-Yh-wzI" id="xcQ-tX-OGA"/>
+                        <outlet property="switchChatsButton" destination="Sce-WI-ArV" id="fgx-BH-xfa"/>
                         <outlet property="twitchSearchBar" destination="Ljx-bf-wNV" id="VkD-Mc-qHi"/>
                     </connections>
                 </viewController>
