@@ -293,5 +293,9 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
             self.tableView.endUpdates();
         }
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.tableView.reloadData();
+    }
 }
 
