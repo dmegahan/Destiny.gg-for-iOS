@@ -24,12 +24,18 @@ class VODViewController: UITableViewController, UISplitViewControllerDelegate {
     
     override func viewDidLoad() {
         if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
-            self.tableView.rowHeight = CGFloat(rowHeightLandscapeIphone);
+            self.tableView.rowHeight = CGFloat(rowHeightPortraitIphone);
         }else if(UIDeviceOrientationIsLandscape(UIDevice.current.orientation)){
             self.tableView.rowHeight = CGFloat(rowHeightLandscapeIphone);
         }
         dropDownButton.title = defaultVideoType;
-        twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
+        
+        //maybe havre a "hub" function that does this for us, that takes in dropDownButton.title?
+        if(dropDownButton.title == VideoType.Youtube.rawValue){
+            twitchVideos = RestAPIManager.sharedInstance.getYoutubeVideos(destinyYoutubeName);
+        }else{
+            twitchVideos = RestAPIManager.sharedInstance.getTwitchVODs(destinyTwitchName, dropDownButton.title!);
+        }
         
         if(UIDevice.current.userInterfaceIdiom == .pad){
             backButton.target = splitViewController?.displayModeButtonItem.target;
