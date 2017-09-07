@@ -33,7 +33,7 @@
                                 </connections>
                             </webView>
                             <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbc-Yh-wzI">
-                                <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="438" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <items>
@@ -44,20 +44,10 @@
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         </searchBar>
                                     </barButtonItem>
-                                    <barButtonItem title="Lock" width="50" id="DCh-o9-EB7">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bwE-k8-Arn"/>
+                                    <barButtonItem tag="3" title="Options" width="93.5" id="obx-UN-yfw">
                                         <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="KBo-Y2-fJe"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem tag="1" title="VODs" id="26g-kV-dbN">
-                                        <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="AbO-PD-6rN"/>
-                                            <segue destination="gDJ-DU-wVM" kind="modal" id="WAV-A6-bYp"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem tag="2" title="Twitch Chat" id="Sce-WI-ArV">
-                                        <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="8a6-Hb-xkC"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="0W3-Jy-Dyi"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -86,14 +76,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
                         <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
                         <outlet property="goBackButton" destination="sgZ-Yb-FgP" id="m91-kT-e9e"/>
-                        <outlet property="lockFramesButton" destination="DCh-o9-EB7" id="6ZW-B7-grX"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
                         <outlet property="myToolBar" destination="wbc-Yh-wzI" id="xcQ-tX-OGA"/>
-                        <outlet property="switchChatsButton" destination="Sce-WI-ArV" id="fgx-BH-xfa"/>
+                        <outlet property="settingsDropDownButton" destination="obx-UN-yfw" id="kfp-db-oEX"/>
                         <outlet property="twitchSearchBar" destination="Ljx-bf-wNV" id="VkD-Mc-qHi"/>
                     </connections>
                 </viewController>

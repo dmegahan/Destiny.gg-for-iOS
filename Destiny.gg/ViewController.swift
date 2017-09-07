@@ -9,6 +9,7 @@
 
 import UIKit
 import WebKit
+import DropDown
 
 //inherit from UIWebViewDelegate so we can track when the webviews have loaded/not loaded
 class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, UISplitViewControllerDelegate, WKNavigationDelegate{
@@ -22,6 +23,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
     @IBOutlet var switchChatsButton: UIBarButtonItem!
 
     @IBOutlet var VODsButton: UIBarButtonItem!
+    @IBOutlet var settingsDropDownButton: UIBarButtonItem!
     //variables (intialized in initializeCurrentFrames) for saving frame layout after a user pans the frames
     var chatCurrentLandscapeFrame = CGRect();
     var streamCurrentLandscapeFrame = CGRect();
@@ -42,6 +44,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
     //string variable containing what will be displayed in the stream web view
     var videoURL: String?;
     
+    let settingsDropDown = DropDown();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false;
@@ -61,6 +65,8 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         
         self.twitchSearchBar.delegate = self;
         
+        setupDropDown();
+        
         //initialize the switchChatsButton to our switchToTwitchLabel
         switchChatsButton.title = switchToTwitchLabel;
         
@@ -76,7 +82,43 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
         myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
     }
-
+    
+    func setupDropDown(){
+        settingsDropDown.anchorView = settingsDropDownButton
+        settingsDropDown.dataSource = settings;
+        
+        settingsDropDown.selectionAction = { (index: Int, item: String) in
+            if(item == Setting.VODs.rawValue){
+                //if VODs selected from dropdown, perform segue
+                self.performSegue(withIdentifier: "SegueToVODs", sender: nil);
+            }else if(item == Setting.Lock.rawValue || item == Setting.UnlockFrames.rawValue){
+                self.toggleLockedFrames();
+                if(self.isLocked){
+                    //if now locked (it should be), change data source to include setting "Unlock Frames"
+                    self.replaceSettingInDropdown(toRemove: Setting.Lock.rawValue, toAdd: Setting.UnlockFrames.rawValue)
+                }else{
+                    self.replaceSettingInDropdown(toRemove: Setting.UnlockFrames.rawValue, toAdd: Setting.Lock.rawValue);
+                }
+                //if Lock Frames selected from dropdown, lock or unlock the frames
+            }else if(item == Setting.TwitchChat.rawValue){
+                //Twitch Chat/DGG Chat button - Switch which chat is displayed
+                self.embedChat(destinyTwitchChatURL);
+                self.replaceSettingInDropdown(toRemove: Setting.TwitchChat.rawValue, toAdd: Setting.DggChat.rawValue)
+            }else if(item == Setting.DggChat.rawValue){
+                self.embedChat(destinyChatURL);
+                self.replaceSettingInDropdown(toRemove: Setting.DggChat.rawValue, toAdd: Setting.TwitchChat.rawValue)
+            }
+        }
+    }
+    
+    //this function swaps out a setting in the dropdown list. toRemove is swapped with toAdd,
+    //and uses the same index
+    func replaceSettingInDropdown(toRemove: String, toAdd: String){
+        //find what index toRemove is at
+        let indexToInsert: Int = settingsDropDown.dataSource.index(of: toRemove)!;
+        settingsDropDown.dataSource.replaceSubrange(indexToInsert...indexToInsert, with: [toAdd]);
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -286,39 +328,9 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
     
     @IBAction func barButtonPressed(_ sender: UIBarButtonItem) {
         switch sender.tag {
-        case 0: //LockFrames button
-            isLocked = !isLocked;
-            
-            if(isLocked){
-                //remove all recognized gestures (currently only a pan swipe is used, so effectively only removing that)
-                self.view.gestureRecognizers?.removeAll();
-                lockFramesButton.title = "Unlock";
-            }else{
-                //if there are no current gesture recognizers (if there is then we shouldn't do anything)
-                if(self.view.gestureRecognizers != nil){
-                    //recreate the original panswipe and add it back like we do when the view loads
-                    let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
-                    self.view.addGestureRecognizer(panSwipe);
-                    lockFramesButton.title = "Lock";
-                    
-                    myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
-                    myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
-                    
-                    //this might need another look, there should be a more efficient way to just disable a certain swipe temporarily, without removing it from the view.gestureRecognizers list
-                }
-            }
-            break;
-        case 2:
-            //Twitch Chat/DGG Chat button - Switch which chat is displayed
-            if(switchChatsButton.title == switchToTwitchLabel){
-                //switch to twitch chat
-                embedChat(destinyTwitchChatURL);
-                switchChatsButton.title = switchToDGGLabel;
-            }else if(switchChatsButton.title == switchToDGGLabel){
-                embedChat(destinyChatURL);
-                switchChatsButton.title = switchToTwitchLabel;
-            }
-            break;
+        //settings drop down tag is 3
+        case 3:
+            settingsDropDown.show()
         default:
             break;
         }

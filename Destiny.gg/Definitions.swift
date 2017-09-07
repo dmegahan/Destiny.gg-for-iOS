@@ -20,6 +20,17 @@ enum VideoType: String {
     //archive is a "special" vid type, these are the broadcasts but for some reason twitch sets the vid type to archive when we request it
     case Archive = "Archive"
 }
+
+enum Setting: String {
+    case VODs = "VODs"
+    case Lock = "Lock Frames"
+    case UnlockFrames = "Unlock Frames"
+    case TwitchChat = "Twitch Chat"
+    case DggChat = "D.gg Chat"
+}
+//list of settings available in the settings dropd down in View Controller
+let settings: [String] = [Setting.VODs.rawValue, Setting.Lock.rawValue, Setting.TwitchChat.rawValue];
+
 //Which type of videos the VODS dropdown button defaults to
 let defaultVideoType: String = VideoType.Youtube.rawValue;
 
