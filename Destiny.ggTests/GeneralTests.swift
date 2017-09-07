@@ -24,7 +24,7 @@ class GeneralTests: XCTestCase {
         let title:String = "Test Title";
         let videoType:String = "Test Video";
         let previewURL:String = "destiny.gg/bigscreen";
-        let length:NSNumber = 666;
+        let length:String = "666";
         let recordedAt:String = "12/25/2017 00:00:00";
         let views:NSNumber = 667;
         let videoURL:String = "destiny.gg";
