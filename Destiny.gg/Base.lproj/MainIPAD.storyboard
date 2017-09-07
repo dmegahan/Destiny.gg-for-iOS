@@ -44,15 +44,11 @@
                                             <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         </searchBar>
                                     </barButtonItem>
-                                    <barButtonItem title="Lock" width="50" id="DCh-o9-EB7">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="gAL-Fx-Wtm"/>
+                                    <barButtonItem title="VODs" width="62" id="LAc-sO-iAM"/>
+                                    <barButtonItem tag="3" title="Options" id="NZb-zl-rI0">
                                         <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="KBo-Y2-fJe"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="VODs" id="LAc-sO-iAM"/>
-                                    <barButtonItem title="Twitch Chat" id="aPL-6P-2u1">
-                                        <connections>
-                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="Yaw-kz-QqL"/>
+                                            <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="Fk0-9j-yah"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -81,15 +77,13 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="LockFramesButton" destination="DCh-o9-EB7" id="ikP-DU-hbF"/>
                         <outlet property="TwitchSearchBar" destination="Ljx-bf-wNV" id="SYb-Aq-Cu1"/>
+                        <outlet property="VODsButton" destination="LAc-sO-iAM" id="1V2-BL-1Sa"/>
                         <outlet property="goBackButton" destination="sgZ-Yb-FgP" id="m91-kT-e9e"/>
-                        <outlet property="item" destination="LAc-sO-iAM" id="eZl-hl-i7c"/>
-                        <outlet property="lockFramesButton" destination="DCh-o9-EB7" id="6ZW-B7-grX"/>
                         <outlet property="myChatWebView" destination="fPX-Ha-yd1" id="2uc-vQ-KAn"/>
                         <outlet property="myStreamWebView" destination="Pge-yQ-1Sh" id="3go-Vt-Whz"/>
                         <outlet property="myToolBar" destination="wbc-Yh-wzI" id="xcQ-tX-OGA"/>
-                        <outlet property="switchChatsButton" destination="aPL-6P-2u1" id="BRu-4f-NOI"/>
+                        <outlet property="settingsDropDownButton" destination="NZb-zl-rI0" id="LMB-CK-J9Q"/>
                         <outlet property="twitchSearchBar" destination="Ljx-bf-wNV" id="VkD-Mc-qHi"/>
                     </connections>
                 </viewController>

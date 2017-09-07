@@ -66,10 +66,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         self.twitchSearchBar.delegate = self;
         
         setupDropDown();
-        
-        //initialize the switchChatsButton to our switchToTwitchLabel
-        switchChatsButton.title = switchToTwitchLabel;
-        
+
         //embed chat whether or not stream is online
         embedChat(destinyChatURL);
         videoURL = appDelegate.streamToDisplay;
@@ -324,6 +321,27 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
     
     func webView(_ webView: UIWebView, didFailLoadWithError error: Error){
         print("Webview fail with error \(error)");
+    }
+    
+    func toggleLockedFrames(){
+        isLocked = !isLocked;
+        
+        if(isLocked){
+            //remove all recognized gestures (currently only a pan swipe is used, so effectively only removing that)
+            self.view.gestureRecognizers?.removeAll();
+        }else{
+            //if there are no current gesture recognizers (if there is then we shouldn't do anything)
+            if(self.view.gestureRecognizers != nil){
+                //recreate the original panswipe and add it back like we do when the view loads
+                let panSwipe = UIPanGestureRecognizer(target: self, action: #selector(ViewController.OnPanSwipe(_:)));
+                self.view.addGestureRecognizer(panSwipe);
+
+                myChatWebView.scrollView.panGestureRecognizer .require(toFail: panSwipe);
+                myStreamWebView.scrollView.panGestureRecognizer.require(toFail: panSwipe);
+                
+                //this might need another look, there should be a more efficient way to just disable a certain swipe temporarily, without removing it from the view.gestureRecognizers list
+            }
+        }
     }
     
     @IBAction func barButtonPressed(_ sender: UIBarButtonItem) {
