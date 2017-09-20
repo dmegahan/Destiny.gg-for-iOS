@@ -85,6 +85,27 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
         settingsDropDown.dataSource = settings;
         
         settingsDropDown.selectionAction = { (index: Int, item: String) in
+            switch item {
+            case Setting.Lock.rawValue:
+                //if VODs selected from dropdown, perform segue
+                self.performSegue(withIdentifier: "SegueToVODs", sender: nil);
+            case Setting.Lock.rawValue:
+                self.toggleLockedFrames();
+                self.replaceSettingInDropdown(toRemove: Setting.Lock.rawValue, toAdd: Setting.UnlockFrames.rawValue);
+            case Setting.UnlockFrames.rawValue:
+                self.toggleLockedFrames();
+                self.replaceSettingInDropdown(toRemove: Setting.UnlockFrames.rawValue, toAdd: Setting.Lock.rawValue);
+            case Setting.TwitchChat.rawValue:
+                //Twitch Chat/DGG Chat button - Switch which chat is displayed
+                self.embedChat(destinyTwitchChatURL);
+                self.replaceSettingInDropdown(toRemove: Setting.TwitchChat.rawValue, toAdd: Setting.DggChat.rawValue)
+            case Setting.DggChat.rawValue:
+                self.embedChat(destinyChatURL);
+                self.replaceSettingInDropdown(toRemove: Setting.DggChat.rawValue, toAdd: Setting.TwitchChat.rawValue)
+            default:
+                break;
+            }
+            /*
             if(item == Setting.VODs.rawValue){
                 //if VODs selected from dropdown, perform segue
                 self.performSegue(withIdentifier: "SegueToVODs", sender: nil);
@@ -105,6 +126,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
                 self.embedChat(destinyChatURL);
                 self.replaceSettingInDropdown(toRemove: Setting.DggChat.rawValue, toAdd: Setting.TwitchChat.rawValue)
             }
+            */
         }
     }
     
@@ -275,7 +297,7 @@ class ViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, 
             currentConstraints.append(chatBottomConstraint);
             currentConstraints.append(chatLeadingConstraint);
             currentConstraints.append(chatWidthConstraint);
-        }else{
+        }else if(UIDeviceOrientationIsPortrait(UIDevice.current.orientation)){
             
             //stream right border - line up with right side of screen
             let streamTrailingConstraint = NSLayoutConstraint(item: myStreamWebView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1.0, constant: 0);

@@ -23,7 +23,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="438" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1" userLabel="chatWebView">
+                            <webView opaque="NO" clipsSubviews="YES" contentMode="redraw" fixedFrame="YES" scalesPageToFit="YES" mediaPlaybackRequiresUserAction="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fPX-Ha-yd1" userLabel="chatWebView">
                                 <rect key="frame" x="20" y="0.0" width="0.0" height="0.48810000000000003"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -45,7 +45,7 @@
                                         </searchBar>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="bwE-k8-Arn"/>
-                                    <barButtonItem tag="3" title="Options" width="93.5" id="obx-UN-yfw">
+                                    <barButtonItem tag="3" title="Options" width="82.5" id="obx-UN-yfw">
                                         <connections>
                                             <action selector="barButtonPressed:" destination="BYZ-38-t0r" id="0W3-Jy-Dyi"/>
                                         </connections>
